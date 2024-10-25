@@ -8,7 +8,7 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 . "$HERE/utils.sh"
 
 
-cask_apps=(alfred 1password Bartender logseq typora masscode jetbrains-toolbox gimp blender unity-hub)
+cask_apps=(alfred 1password Bartender logseq typora masscode dash gimp blender unity-hub)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

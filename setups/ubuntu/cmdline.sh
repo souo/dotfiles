@@ -18,8 +18,6 @@ apt_packages=(
   git-core
   htop
   jq
-  python3
-  python3-pip
   tree
   bat
   fzf

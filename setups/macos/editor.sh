@@ -15,6 +15,8 @@ print_in_purple "\n   Editors\n"
 # neovim
 brew_install "neovim" "neovim"
 
-
 # Install VSCode
 brew_install "Visual Studio Code" "visual-studio-code" "--cask"
+
+# Install jetbrains-toolbox
+brew_install "jetbrains-toolbox" "jetbrains-toolbox"  --cask
