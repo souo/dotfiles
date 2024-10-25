@@ -1,0 +1,54 @@
+reporting: "off"
+startuppopupversion: 1
+# to skip without creating a new repo
+notARepository: 'skip'
+# If true, don't display introductory popups upon opening Lazygit.
+disableStartupPopups: false
+# Config relating to the Lazygit UI
+gui:
+    mainPanelSplitMode: 'vertical'
+    showFileTree: false
+    nerdFontsVersion: "3"
+    border: rounded
+    mouseEvents: false
+    theme:
+        activeBorderColor:
+            - "#5ef1ff"
+        inactiveBorderColor:
+            - "#7b8496"
+        searchingActiveBorderColor:
+            - "#ff5ef1"
+        optionsTextColor:
+            - "#3c4048"
+        selectedLineBgColor:
+            - "#3c4048"
+        cherryPickedCommitBgColor:
+            - "#3c4048"
+        cherryPickedCommitFgColor:
+            - "#ff5ea0"
+        unstagedChangesColor:
+            - "#ffbd5e"
+        defaultFgColor:
+            - "#ffffff"
+git:
+    parseEmoji: true
+    # See https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
+    paging:
+        colorArg: always
+        useConfig: true
+    branchLogCmd: 'git log --color=always --graph --pretty=format:"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s" {{branchName}}'
+    pull:
+        mode: 'rebase'
+
+
+customCommands:
+  - key: '<c-f>'
+    command: "{{if .SelectedFile.HasUnstagedChanges}} git diff -b {{.SelectedFile.Name}} && read -s -n1 key {{end}}"
+    context: 'files'
+    description: 'diff --ignore-space-change'
+    subprocess: true
+  - key: '<c-l>'
+    command: "git la"
+    context: 'global'
+    description: 'git la'
+    subprocess: true

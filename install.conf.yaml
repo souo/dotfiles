@@ -1,0 +1,70 @@
+# dotbot
+# https://github.com/anishathalye/dotbot
+
+- defaults:
+    link:
+        relink: true
+
+# specify directories that should be checked for dead symbolic links.
+- clean: ["~"]
+
+# Create commands specify empty directories to be created.
+- create:
+    - ~/.local/share # local data
+    - ~/.config # configuration files
+    - ~/.config/htop # htop config
+    - ~/.config/lazygit # lazygit config
+    - ~/.tmux/plugins # tmux plugins
+    - ~/.config/xplr # xplr file manager config
+    - ~/.config/xplr/plugins # xplr file manager plugins dir
+    - ~/.config/nvim #nvim config
+    - ~/.config/fastfetch #fastfetch config
+    - ~/.localrc #local config
+    - ~/.gitconfig.local # git local config
+    - ~/code/projects # my projects
+    - ~/code/clones # read-only git clones
+    - ~/code/Templates # read-only projects boilerplates
+    - ~/code/Workspaces # code-station to try new stuff
+    - ~/.config/wezterm # wezterm config
+
+- link:
+    ~/.fzf.zsh:path: fzf/.fzf.zsh
+    ~/.fzf.bash: fzf/.fzf.bash
+    ~/.config/htop/htoprc:
+        create: true
+        path: htop/htoprc
+    ~/.gitignore:
+        force: true
+        path: git/.gitignore
+    ~/.gitconfig:
+        force: true
+        path: git/.gitconfig
+    ~/.gitattributes:
+        force: true
+        path: git/.gitattributes
+    ~/.editorconfig:
+        path: editorconfig/.editorconfig
+    ~/.config/lazygit/config.yml:
+        path: lazygit/config.yml
+    ~/.config/fastfetch/config.jsonc:
+        create: true
+        path: fastfetch/config.jsonc
+    ~/.config/fastfetch/logos:
+        path: fastfetch/logos
+    ~/.aliases:
+        path: zsh/common/.aliases
+    ~/.zshrc:
+        force: true
+        path: zsh/oh-my-zsh/.zshrc
+    ~/.env:
+        path: zsh/common/.env
+    ~/.config/wezterm:
+        force: true
+        path: terminals/wezterm
+    ~/Library/Application Support/Code/User/settings.json:
+        force: true
+        path: vscode/settings.json
+
+- shell:
+    - [tmux/config.sh, config tmux]
+    - [nvim/config.sh, config nvim]

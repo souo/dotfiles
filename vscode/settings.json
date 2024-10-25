@@ -1,0 +1,127 @@
+{
+  // ============ Visuals ===============
+  "window.zoomLevel": 1,
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.guides.bracketPairs": true,
+  "editor.lineNumbers": "interval",
+  "editor.renderWhitespace": "boundary",
+  "editor.multiCursorModifier": "ctrlCmd",
+  "window.autoDetectColorScheme": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.editor.tabActionLocation": "left",
+  "workbench.list.smoothScrolling": true,
+  "workbench.preferredDarkColorTheme": "Vitesse Dark",
+  "workbench.preferredLightColorTheme": "Vitesse Light",
+  "workbench.productIconTheme": "icons-carbon",
+  "workbench.tree.expandMode": "singleClick",
+  "workbench.tree.indent": 10,
+
+  // ========== Editor ==========
+  "debug.onTaskErrors": "debugAnyway",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.inlineSuggest.enabled": true,
+  "editor.tabSize": 2,
+  "editor.unicodeHighlight.invisibleCharacters": false,
+  "editor.stickyScroll.enabled": true,
+  "editor.hover.sticky": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "never",
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.fontWeight": "300",
+  "terminal.integrated.persistentSessionReviveProcess": "never",
+  "terminal.integrated.tabs.enabled": true,
+  "workbench.editor.closeOnFileDelete": true,
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.perEditorGroup": true,
+  "workbench.editor.limit.value": 5,
+  "search.exclude": {
+    "**/.git": true,
+    "**/.github": false,
+    "**/.output": true,
+    "**/.vscode": true,
+    "**/.idea": true,
+    "**/.yarn": true,
+    "**/dist/**": true,
+    "**/logs": true,
+    "**/node_modules": true,
+    "**/out/**": true,
+    "**/package-lock.json": true,
+    "**/public": true,
+    "**/temp": true,
+    "**/yarn.lock": true,
+    "**/CHANGELOG*": true,
+    "**/LICENSE*": true
+  },
+
+  // ========== Gloabl Level Config
+  "window.dialogStyle": "custom",
+  "window.title": "${rootName}", // this make tabs more readable
+  "window.titleBarStyle": "custom",
+  "extensions.autoUpdate": "onlyEnabledExtensions",
+
+  // ========== Extension configs ==========
+  //gitlens
+  "gitlens.codeLens.authors.enabled": false,
+  "gitlens.codeLens.enabled": false,
+  "gitlens.codeLens.recentChange.enabled": false,
+  "gitlens.menus": {
+    "editor": {
+      "blame": false,
+      "clipboard": true,
+      "compare": true,
+      "history": false,
+      "remote": false
+    },
+    "editorGroup": {
+      "blame": true,
+      "compare": false
+    },
+    "editorTab": {
+      "clipboard": true,
+      "compare": true,
+      "history": true,
+      "remote": true
+    },
+    "explorer": {
+      "clipboard": true,
+      "compare": true,
+      "history": true,
+      "remote": true
+    },
+    "scm": {
+      "authors": true
+    },
+    "scmGroup": {
+      "compare": true,
+      "openClose": true,
+      "stash": true
+    },
+    "scmGroupInline": {
+      "stash": true
+    },
+    "scmItem": {
+      "clipboard": true,
+      "compare": true,
+      "history": true,
+      "remote": false,
+      "stash": true
+    }
+  },
+  "[markdown]": {
+    "diffEditor.ignoreTrimWhitespace": true
+  },
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.fontSize": 14
+
+}
