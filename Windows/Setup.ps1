@@ -123,7 +123,7 @@ foreach ($symlink in $symlinks.GetEnumerator()) {
 }
 
 # VS Code extensions
-powershell  "$dotfilesPath\vscode\vscode_restore_extensions.ps1"
+#powershell  "$dotfilesPath\vscode\vscode_restore_extensions.ps1"
 
 # Install bat themes
 bat cache --clear

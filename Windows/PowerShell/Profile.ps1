@@ -118,7 +118,8 @@ Set-PSReadLineKeyHandler -Function AcceptSuggestion -Key Alt+l
 Import-Module -Name CompletionPredictor
 
 # Skip fastfetch for non-interactive shells
-if ([Environment]::GetCommandLineArgs().Contains("-NonInteractive")) {
-    return
+if (not [Environment]::GetCommandLineArgs().Contains("-NonInteractive")) {
+    fastfetch
 }
-fastfetch
+
+oh-my-posh init pwsh --config "$ENV:DotsLocalRepo/zsh/pure.omp.json" | Invoke-Expression
