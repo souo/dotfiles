@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -e
 
 answer_is_yes() {
   [[ "$REPLY" =~ ^[Yy]$ ]] &&

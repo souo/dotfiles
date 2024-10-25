@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eu
+set -e
 
 HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
@@ -12,9 +12,14 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+print_in_purple "\n   Macos \n"
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+printf "\n"
+
 "$HERE"/xcode.sh
 "$HERE"/homebrew.sh
-"$HERE"/browers.sh
+"$HERE"/browsers.sh
 "$HERE"/editor.sh
 "$HERE"/terminals.sh
 "$HERE"/fonts.sh
@@ -22,4 +27,5 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 "$HERE"/lua.sh
 "$HERE"/fnm.sh
 "$HERE"/cmdline.sh
-"$HERE"/../oh-my-zsh.sh
+"$HERE"/apps.sh
+"$HERE"/zsh.sh
