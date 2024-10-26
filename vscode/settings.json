@@ -118,7 +118,6 @@
   "[markdown]": {
     "diffEditor.ignoreTrimWhitespace": true
   },
-  "diffEditor.hideUnchangedRegions.enabled": true,
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },

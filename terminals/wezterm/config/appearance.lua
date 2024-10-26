@@ -33,24 +33,25 @@ return {
 
    -- tab bar
    enable_tab_bar = true,
-   hide_tab_bar_if_only_one_tab = false,
-   use_fancy_tab_bar = false,
+   hide_tab_bar_if_only_one_tab = true,
    tab_max_width = 25,
    show_tab_index_in_tab_bar = false,
+   show_tabs_in_tab_bar = true,
    switch_to_last_active_tab_when_closing_tab = true,
+   tab_and_split_indices_are_zero_based = false,
+   use_fancy_tab_bar = false,
 
    -- window
    window_padding = {
       left = 0,
       right = 0,
-      top = 10,
+      top = 15,
       bottom = 7.5,
    },
    window_close_confirmation = 'NeverPrompt',
    window_frame = {
-      active_titlebar_bg = '#090909',
-      -- font = fonts.font,
-      -- font_size = fonts.font_size,
+      active_titlebar_bg = '#121212',
+
    },
    -- inactive_pane_hsb = {
    --    saturation = 0.9,
