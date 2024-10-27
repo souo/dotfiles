@@ -1,6 +1,6 @@
 local wezterm = require('wezterm')
 local gpu_adapters = require('utils.gpu_adapter')
-local colors = require('colors.custom')
+local colors = require('colors.vitness_dark')
 
 return {
    animation_fps = 60,

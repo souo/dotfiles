@@ -8,21 +8,22 @@ alias vim=nvim
 alias top=htop
 
 # Pipe my public key to my clipboard.
-alias pubkey="more ~/.ssh/id_ed25519.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+if [ "$(command -v pbcopy)" ]; then
+    alias pubkey="more ~/.ssh/id_ed25519.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+fi
 
 #
 # inline utilities
 #
-
-# on Ubuntu the pkg is called 'batcat'
+# on Ubuntu the bat pkg is called 'batcat'
 if [ "$(command -v batcat)" ]; then alias bat='batcat'; fi
+
 # bat (cat(1) clone with wings)
 if [ "$(command -v bat)" ]; then
-  export BAT_STYLE="changes,header,numbers,snip"
-  unalias -m 'cat'
-  alias cat='bat -p'
+    unalias -m 'cat'
+    alias cat='bat -p'
 fi
 
-if [[ $(command -v dpkg) ]] && [[ $(dpkg --get-selections | grep 'fd-find') ]]; then
-  alias fd=fdfind
+if command -v dpkg && dpkg --get-selections | grep -q 'fd-find'; then
+    alias fd=fdfind
 fi
