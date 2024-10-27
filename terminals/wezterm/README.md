@@ -19,7 +19,7 @@ Show configuration keys:
 
 ```sh
 wezterm show-keys
-
+```
 
 ### All Key Bindings
 

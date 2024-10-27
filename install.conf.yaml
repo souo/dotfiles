@@ -14,6 +14,8 @@
     - ~/.config # configuration files
     - ~/.config/htop # htop config
     - ~/.config/lazygit # lazygit config
+    - ~/.config/bat # bat config
+    - ~/.config/bat/themes # bat themes
     - ~/.tmux/plugins # tmux plugins
     - ~/.config/xplr # xplr file manager config
     - ~/.config/xplr/plugins # xplr file manager plugins dir
@@ -51,6 +53,10 @@
         path: fastfetch/config.jsonc
     ~/.config/fastfetch/logos:
         path: fastfetch/logos
+    ~/.config/bat/config: bat/config
+    ~/.config/bat/themes/:
+        glob: true
+        path: bat/themes/*.tmTheme
     ~/.aliases:
         path: zsh/common/.aliases
     ~/.zshrc:
@@ -68,3 +74,4 @@
 - shell:
     - [tmux/config.sh, config tmux]
     - [nvim/config.sh, config nvim]
+    - [bat cache --build, addings bat themes]
