@@ -98,6 +98,7 @@ $backups = @(
 
 # Linked Files (Destination => Source)
 $symlinks = @{
+    “$HOME\Appdata\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" = "..\terminals\windowsterminal\settings.json"
     "$HOME\Documents\PowerShell\Profile.ps1"    = ".\PowerShell\Profile.ps1"
     "$HOME\.gitconfig"                          = "..\git\.gitconfig"
     "$HOME\.wslconfig"                          = ".\wsl\.wslconfig"
@@ -130,4 +131,4 @@ bat cache --clear
 bat cache --build
 
 # Start AltSnap on logon
-powershell "$dotfilesPath\Windows\Altsnap\createTask.ps1 | Out-Null"
+powershell "$dotfilesPath\Windows\Altsnap\createTask.ps1 >$null"

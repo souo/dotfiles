@@ -121,6 +121,11 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.fontSize": 14
+  "editor.fontSize": 14,
+  "[powershell]": {
+    "debug.saveBeforeStart": "nonUntitledEditorsInActiveGroup",
+    "editor.semanticHighlighting.enabled": false,
+    "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?"
+  }
 
 }

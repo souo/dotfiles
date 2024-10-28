@@ -1,34 +1,18 @@
 # Script for batch installing Visual Studio Code extensions
 
-$extensions = @(
-    "antfu.icons-carbon"
-	"antfu.theme-vitesse"
-	"eamodio.gitlens"
-	"editorconfig.editorconfig"
-	"esbenp.prettier-vscode"
-	"ms-vscode-remote.remote-containers"
-	"ms-vscode-remote.remote-ssh"
-	"ms-vscode-remote.remote-ssh-edit"
-	"ms-vscode-remote.remote-wsl"
-	"ms-vscode-remote.vscode-remote-extensionpack"
-	"ms-vscode.makefile-tools"
-	"ms-vscode.powershell"
-	"ms-vscode.remote-explorer"
-	"ms-vscode.remote-server"
-	"pkief.material-icon-theme"
-	"usernamehw.errorlens"
-
-)
-
-$cmd = "code --list-extensions"
-Invoke-Expression $cmd -OutVariable output | Out-Null
-$installed = $output -split "\s"
+$extensions = Get-Content -Encoding "UTF8" -Path "$PSScriptRoot\backups\vscode_extensions_windows"
+$installed = & "code" --list-extensions | Sort-Object
 
 foreach ($ext in $extensions) {
     if ($installed.Contains($ext)) {
-        Write-Host $ext "already installed." -ForegroundColor Gray
+        Write-Verbose "$ext already installed."
+        Write-Host "   [✔] $ext" -ForegroundColor green
     } else {
-        Write-Host "Installing" $ext "..." -ForegroundColor White
-        code --install-extension $ext
+        try{
+            &"code" --install-extension $ext >$null
+            Write-Host "   [✔] $ext" -ForegroundColor green
+        } catch{
+            Write-Host "   [✖] $ext" -ForegroundColor red
+        }
     }
 }
