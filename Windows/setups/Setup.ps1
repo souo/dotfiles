@@ -6,9 +6,9 @@
 param()
 
 
-Write-Host "------------------------- "
+Write-Host "-------------------------------------------"
 Write-Host "`n   Winget Apps `n" -ForegroundColor Magenta
-Write-Host "------------------------- "
+Write-Host "-------------------------------------------"
 
 & "$PSScriptRoot\scripts\Winget-1Password.ps1"
 & "$PSScriptRoot\scripts\Winget-7zip.ps1"
@@ -31,9 +31,9 @@ Write-Host "------------------------- "
 & "$PSScriptRoot\scripts\Winget-tokei.ps1"
 
 
-Write-Host "------------------------- "
+Write-Host "-------------------------------------------"
 Write-Host "`n  Choco Apps `n" -ForegroundColor Magenta
-Write-Host "------------------------- "
+Write-Host "-------------------------------------------"
 
 
 & "$PSScriptRoot\scripts\Choco-altsnap.ps1"
@@ -76,8 +76,7 @@ Import-Module $PSScriptRoot\functions\Show-Spinner.ps1 -force
 # Install PS Modules
 foreach ($psModule in $psModules) {
     if (!(Get-Module -ListAvailable -Name $psModule)) {
-        $sb = [scriptblock]::Create("Install-Module -Name $psModule -Force -AcceptLicense -Scope AllUsers")
-        Show-Spinner $sb -msg $psModule -color green >$null 2>&1
+        Install-Module -Name $psModule -Force -AcceptLicense -Scope AllUsers &>$null 2>&1
         Write-Host "   [✔] $psModule    " -ForegroundColor green
     } else{
         Write-Host "   [✔] $psModule    " -ForegroundColor green

@@ -12,7 +12,7 @@ My daily drivers currently are `wezterm + zsh + tmux` on:
 ## Install
 ### Setup
 - Mac and Ubuntu: `./setups/setup.sh`
-- Windows: `.\Windows\Setup.ps1`
+- Windows: `.\Windows\setups\Setup.ps1`
 
 ### Install dotfiles
 

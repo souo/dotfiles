@@ -16,5 +16,5 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 ```
 3. run Setup as admin
 ```
-./Setup.ps1
+.setups/Setup.ps1
 ```
