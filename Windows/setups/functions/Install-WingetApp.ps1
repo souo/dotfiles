@@ -1,4 +1,4 @@
-Import-Module $PSScriptRoot\Show-Spinner.ps1 -force
+. $PSScriptRoot\Show-Spinner.ps1
 
 function Install-WingetApp {
     [CmdletBinding()]

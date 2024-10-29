@@ -6,5 +6,5 @@ $ChocoPackage = "lazygit"
 
 $ChocoParams = $null
 
-Import-Module $PSScriptRoot\..\functions\Install-ChocoApp.ps1 -force
+. (Join-Path -Path "$PSScriptRoot\..\" -ChildPath "functions\Install-ChocoApp.ps1")
 Install-ChocoApp $ReadableName $ChocoPackage $ChocoParams

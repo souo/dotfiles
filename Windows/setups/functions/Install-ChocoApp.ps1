@@ -1,5 +1,5 @@
-Import-Module $PSScriptRoot\Show-Spinner.ps1 -force
-Import-Module $PSScriptRoot\Confirm-IsAdmin.ps1 -force
+. $PSScriptRoot\Show-Spinner.ps1
+. $PSScriptRoot\Confirm-IsAdmin.ps1
 
 function Install-ChocoApp {
     [CmdletBinding()]

@@ -6,7 +6,7 @@ Function Remove-MergedBranch {
     Param (
         [Parameter(Position = 0, HelpMessage = "Specify the name of your master branch.")]
         [ValidateNotNullOrEmpty()]
-        [string]$MainBranch = "master",
+        [string]$MainBranch = "main",
         [Parameter(HelpMessage = "Remove all merged branches except current and master with no prompting.")]
         [Switch]$Force
     )

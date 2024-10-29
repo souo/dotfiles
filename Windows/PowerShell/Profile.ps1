@@ -1,6 +1,11 @@
 # Profile.ps1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+# PATH, HELP ☕
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Set Path to DevHome
+Set-Location $env:DEVHOME
+
 
 # Aliases 🔗
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -11,6 +16,7 @@ Set-Alias -Name vi -Value nvim
 Set-Alias -Name vim -Value nvim
 Set-Alias -Name vsc -Value CodeDot
 Set-Alias dk docker
+Set-Alias -Name loc -Value tokei
 
 # Functions 🎉
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -69,6 +75,10 @@ $ENV:DotsLocalRepo = Find-DotsRepository -ProfilePath $PSScriptRoot
 $ENV:BAT_CONFIG_DIR = "$ENV:DotsLocalRepo\bat"
 # $ENV:FZF_DEFAULT_OPTS = '--color=fg:-1,fg+:#ffffff,bg:-1,bg+:#3c4048 --color=hl:#5ea1ff,hl+:#5ef1ff,info:#ffbd5e,marker:#5eff6c --color=prompt:#ff5ef1,spinner:#bd5eff,pointer:#ff5ea0,header:#5eff6c --color=gutter:-1,border:#3c4048,scrollbar:#7b8496,label:#7b8496 --color=query:#ffffff --border="rounded" --border-label="" --preview-window="border-rounded" --height 40% --preview="bat -n --color=always {}"'
 
+
+. (Join-Path -Path $ENV:DotsLocalRepo -ChildPath "PowerShell\functions\Git\Remove-MergedGitBranch.ps1" )
+. (Join-Path -Path $ENV:DotsLocalRepo -ChildPath "PowerShell\functions\Console\Out-Copy.ps1" )
+. (Join-Path -Path $ENV:DotsLocalRepo -ChildPath "PowerShell\functions\General\Get-MyAlias.ps1" )
 
 # Prompt & Shell Configuration 🐚
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -6,5 +6,5 @@ $ReadableName = "7zip"
 $AppId = "7zip.7zip"
 $WingetParams = $null
 
-Import-Module $PSScriptRoot\..\functions\Install-WingetApp.ps1 -force
+. (Join-Path -Path "$PSScriptRoot\..\" -ChildPath "functions\Install-WingetApp.ps1")
 Install-WingetApp $ReadableName $AppId $WingetParams

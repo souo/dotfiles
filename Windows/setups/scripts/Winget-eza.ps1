@@ -7,5 +7,5 @@ $AppId = "eza-community.eza"
 $WingetParams = $null
 
 
-Import-Module $PSScriptRoot\..\functions\Install-WingetApp.ps1 -force
+. (Join-Path -Path "$PSScriptRoot\..\" -ChildPath "functions\Install-WingetApp.ps1")
 Install-WingetApp $ReadableName $AppId $WingetParams
