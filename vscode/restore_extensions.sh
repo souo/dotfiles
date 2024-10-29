@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 
+set -e
+
 BASEDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 # shellcheck disable=SC1091
 . "$BASEDIR"/../setups/utils.sh
 
-extensions_file="$BASEDIR/backupsvscode_extensions_macos"
-installed="$(code --list-extensions | sort -biu)"
+while read -r item; do installed+=("$item");done <<< "$(code --list-extensions | sort )"
 
-
-test_exist(){
-  EXT_NAME="$1"
-  for i in ${installed[@]}; do
-    item=${installed[i]}
-    if [ $item -eq $EXT_NAME ]; then
+confirm_installed(){
+  EXT_NAME=$1
+  for i in "${!installed[@]}"; do
+    item="${installed[$i]}"
+    if [ "$item" = "$EXT_NAME" ]; then
         unset 'installed[i]'
         return 0
     fi
@@ -21,14 +21,16 @@ test_exist(){
   return 1
 }
 
+os=$(get_os)
+extensions_file="$BASEDIR/backups/vscode_extensions_$os"
 
 while read -r line; do
   TO_INSTALL=$line
-  if test_exist $TO_INSTALL; then
-    print_success $TO_INSTALL
+  if confirm_installed "$TO_INSTALL"; then
+    print_success "$TO_INSTALL"
   else
     execute \
       "code --install-extension $TO_INSTALL" \
       "$TO_INSTALL"
   fi
-done < ( cat $extensions_file | sort -biu )
+done  < "$extensions_file"

@@ -5,7 +5,8 @@
 #
 
 alias vim=nvim
-alias top=htop
+alias top=htop``
+alias loc=tokei
 
 # Pipe my public key to my clipboard.
 if [ "$(command -v pbcopy)" ]; then

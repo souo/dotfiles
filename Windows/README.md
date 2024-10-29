@@ -9,12 +9,7 @@ Work with PowerShell 7.x.
 Get-ExecutionPolicy
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 ```
-
-2. install winget
-```
-./winget-install.ps1
-```
-3. run Setup as admin
+2. run Setup as admin
 ```
 .setups/Setup.ps1
 ```

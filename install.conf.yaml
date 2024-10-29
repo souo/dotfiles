@@ -50,7 +50,7 @@
         path: lazygit/config.yml
     ~/.config/fastfetch/config.jsonc:
         create: true
-        path: fastfetch/config.jsonc
+        path: fastfetch/config_mac.jsonc
     ~/.config/fastfetch/logos:
         path: fastfetch/logos
     ~/.config/bat/config: bat/config
