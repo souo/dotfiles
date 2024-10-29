@@ -1,3 +1,8 @@
+<#
+.NOTES
+    MinGW: A native Windows port of the GNU Compiler Collection (GCC)
+#>
+
 [CmdletBinding()]
 param()
 
