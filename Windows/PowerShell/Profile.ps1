@@ -79,6 +79,7 @@ $ENV:BAT_CONFIG_DIR = "$ENV:DotsLocalRepo\bat"
 . (Join-Path -Path $ENV:DotsLocalRepo -ChildPath "PowerShell\functions\Git\Remove-MergedGitBranch.ps1" )
 . (Join-Path -Path $ENV:DotsLocalRepo -ChildPath "PowerShell\functions\Console\Out-Copy.ps1" )
 . (Join-Path -Path $ENV:DotsLocalRepo -ChildPath "PowerShell\functions\General\Get-MyAlias.ps1" )
+. (Join-Path -Path $ENV:DotsLocalRepo -ChildPath "PowerShell\functions\General\ssh-copy-id.ps1" )
 
 # Prompt & Shell Configuration 🐚
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
