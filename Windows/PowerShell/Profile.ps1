@@ -1,10 +1,6 @@
 # Profile.ps1
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-# PATH, HELP ☕
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# Set Path to DevHome
-Set-Location $env:DEVHOME
 
 
 # Aliases 🔗
@@ -14,14 +10,14 @@ Set-Alias -Name touch -Value New-File
 Set-Alias -Name us -Value Update-Software
 Set-Alias -Name vi -Value nvim
 Set-Alias -Name vim -Value nvim
-Set-Alias -Name vsc -Value CodeDot
+Set-Alias -Name vsc -Value CodeOpenCurrent
 Set-Alias dk docker
 Set-Alias -Name loc -Value tokei
 
 # Functions 🎉
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Function CodeDot {code .}
+Function CodeOpenCurrent {code .}
 function Find-DotsRepository {
     <#
     .SYNOPSIS
@@ -107,7 +103,7 @@ function Invoke-Starship-TransientFunction {
 
 Invoke-Expression (&starship init powershell)
 Enable-TransientPrompt
-Invoke-Expression (& { ( zoxide init powershell --cmd cd | Out-String ) })
+Invoke-Expression (& { ( zoxide init powershell| Out-String ) })
 
 #
 fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
@@ -131,7 +127,6 @@ Import-Module -Name CompletionPredictor
 
 oh-my-posh init pwsh --config "$ENV:DotsLocalRepo/zsh/pure.omp.json" | Invoke-Expression
 
-Invoke-Expression (& { (zoxide init powershell | Out-String) })
 
 # Skip fastfetch for non-interactive shells
 if (-Not ([Environment]::GetCommandLineArgs().Contains("-NonInteractive"))) {

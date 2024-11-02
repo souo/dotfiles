@@ -126,6 +126,11 @@
     "debug.saveBeforeStart": "nonUntitledEditorsInActiveGroup",
     "editor.semanticHighlighting.enabled": false,
     "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?"
-  }
+  },
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "files.associations": {
+    "*.uxml": "xml"
+  },
 
 }

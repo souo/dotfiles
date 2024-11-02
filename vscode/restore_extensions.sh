@@ -7,6 +7,9 @@ BASEDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 # shellcheck disable=SC1091
 . "$BASEDIR"/../setups/utils.sh
 
+
+
+declare -a installed
 while read -r item; do installed+=("$item");done <<< "$(code --list-extensions | sort )"
 
 confirm_installed(){
@@ -14,6 +17,7 @@ confirm_installed(){
   for i in "${!installed[@]}"; do
     item="${installed[$i]}"
     if [ "$item" = "$EXT_NAME" ]; then
+        # del from check list
         unset 'installed[i]'
         return 0
     fi
