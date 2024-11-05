@@ -1,24 +1,24 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "palette": {
-    "os": "#ACB0BE",
-    "pink": "#F4B8E4",
     "blue": "#00C5C7",
     "green": "#33FF57",
+    "os": "#ACB0BE",
+    "pink": "#F4B8E4",
     "red": "#FF5733"
   },
   "blocks": [
     {
+      "type": "prompt",
       "alignment": "left",
       "segments": [
         {
-          "foreground": "p:os",
           "style": "plain",
           "template": "{{.Icon}} ",
+          "foreground": "p:os",
           "type": "os"
         },
         {
-          "foreground": "p:blue",
           "properties": {
             "folder_icon": "..\ue5fe..",
             "home_icon": "~",
@@ -26,10 +26,10 @@
           },
           "style": "plain",
           "template": "{{ .Path }} ",
+          "foreground": "p:blue",
           "type": "path"
         },
         {
-          "foreground": "#bab02a",
           "properties": {
             "branch_icon": "\ue725 ",
             "cherry_pick_icon": "\ue29b ",
@@ -42,58 +42,58 @@
             "revert_icon": "\uf0e2 ",
             "tag_icon": "\uf412 "
           },
-          "template": "{{ .HEAD }}{{ if .Working.Changed }}<#9c9c9c>*</>{{ end }} {{ if gt .Ahead 0 }}<#FF0000>\ue353</>{{ end }}{{ if gt .Behind 0 }}<#00FFD0>\ue340</>{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ end }}",
           "style": "plain",
+          "template": "{{ .HEAD }}{{ if .Working.Changed }}<#9c9c9c>*</>{{ end }} {{ if gt .Ahead 0 }}<#FF0000>\ue353</>{{ end }}{{ if gt .Behind 0 }}<#00FFD0>\ue340</>{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ end }}",
+          "foreground": "#bab02a",
           "type": "git"
         }
-      ],
-      "type": "prompt"
+      ]
     },
     {
+      "type": "prompt",
       "alignment": "right",
       "segments": [
         {
-          "foreground": "#bab02a",
           "properties": {
             "threshold": 10
           },
           "style": "plain",
           "template": "took \uf252 {{ .FormattedMs }} ",
+          "foreground": "#bab02a",
           "type": "executiontime"
         },
         {
-          "foreground": "#00C5C7",
           "properties": {
             "time_format": "15:04:05"
           },
           "style": "plain",
           "template": " {{ .CurrentDate | date .Format }} \uf017 ",
+          "foreground": "#00C5C7",
           "type": "time"
         }
-      ],
-      "type": "prompt"
+      ]
     },
     {
+      "type": "prompt",
       "alignment": "left",
-      "newline": true,
       "segments": [
         {
-          "background": "#29315A",
-          "foreground": "#33FF57",
-          "foreground_templates": ["{{ if .Error }}#FF5733{{ end }}"],
-          "leading_diamond": "\ue0b6",
-          "style": "diamond",
-          "template": "\u276f",
-          "trailing_diamond": "\ue0b4",
-          "type": "status",
           "properties": {
             "always_enabled": true
-          }
+          },
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0b4",
+          "template": "❯",
+          "foreground": "#33FF57",
+          "background": "#29315A",
+          "type": "status",
+          "foreground_templates": ["{{ if .Error }}#FF5733{{ end }}"]
         }
       ],
-      "type": "prompt"
+      "newline": true
     }
   ],
-  "final_space": true,
-  "version": 2
+  "version": 3,
+  "final_space": true
 }
