@@ -132,5 +132,8 @@
   "files.associations": {
     "*.uxml": "xml"
   },
-  "[UnityUXML]": {}
+  "[UnityUXML]": {},
+  "files.exclude": {
+    "**/*.meta": true
+  }
 }

@@ -13,8 +13,8 @@ print_in_purple "\n   Command line tools\n"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-cmdline_tools=( wget curl git jq tokei bat fd fzf htop ripgrep zoxide shellcheck lazygit fastfetch)
+cmdline_tools=(wget curl git git-lfs jq tokei bat fd fzf htop ripgrep zoxide shellcheck lazygit fastfetch)
 
 for cmd in "${cmdline_tools[@]}"; do
-    brew_install "$cmd" "$cmd"
+  brew_install "$cmd" "$cmd"
 done
