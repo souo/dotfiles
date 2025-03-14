@@ -17,7 +17,8 @@ Set-Alias -Name loc -Value tokei
 # Functions 🎉
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Function CodeOpenCurrent {code .}
+
+Function CodeOpenCurrent { code . }
 function Find-DotsRepository {
     <#
     .SYNOPSIS
@@ -103,7 +104,7 @@ function Invoke-Starship-TransientFunction {
 
 Invoke-Expression (&starship init powershell)
 Enable-TransientPrompt
-Invoke-Expression (& { ( zoxide init powershell| Out-String ) })
+Invoke-Expression (& { ( zoxide init powershell | Out-String ) })
 
 #
 fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression

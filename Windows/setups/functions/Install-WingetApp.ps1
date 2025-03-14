@@ -20,29 +20,30 @@ function Install-WingetApp {
         Write-Verbose "Starting $($MyInvocation.MyCommand)"
     }
 
-    process{
+    process {
 
-        if (Confirm-Install($AppId)){
+        if (Confirm-Install($AppId)) {
             Write-Verbose  "$AppId already Installed"
             Write-Host "   [✔] $ReadableName" -ForegroundColor green
             Return
         }
         $wingetArgs = "--id $AppId -e --accept-package-agreements --accept-source-agreements -s winget -h $AppArgs"
         $sb = [scriptblock]::Create("winget install $wingetArgs")
-        try{
+        try {
             Show-Spinner $sb -msg $ReadableName -color green >$null 2>&1
 
             #Check if install is ok
-             $IsInstalled = Confirm-Install $AppID
+            $IsInstalled = Confirm-Install $AppID
 
-            if ($IsInstalled){
+            if ($IsInstalled) {
                 Write-Host "   [✔] $ReadableName  " -ForegroundColor green
-             } else{
+            }
+            else {
                 Write-Host "   [✖] $ReadableName  " -ForegroundColor red
-             }
+            }
         }
         catch {
-            $string_err = $_ | Out-String
+            $_ | Out-String
             Write-Host "   [✖] $ReadableName  " -ForegroundColor red
         }
         #endregion Installer
