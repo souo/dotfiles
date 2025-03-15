@@ -2,7 +2,7 @@
 
 HERE
 
-HERE=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 # shellcheck source=/dev/null
 . "$HERE/../utils.sh"
@@ -15,7 +15,7 @@ HERE=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 apt_packages=(
   telnet
   curl
-  git-core
+  git
   htop
   jq
   tree
@@ -23,12 +23,12 @@ apt_packages=(
   fzf
   ripgrep
   tmux
-  lazygit
+  shellcheck
+  xclip
 )
-
 
 print_in_purple "\n   install dev packages \n\n"
 
 for package in "${apt_packages[@]}"; do
-    install_package "install '${package}'" "$package"
+  install_package "install '${package}'" "$package"
 done
