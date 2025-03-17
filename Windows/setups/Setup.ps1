@@ -1,4 +1,3 @@
-#Requires -RunAsAdministrator
 #Requires -Version 7
 
 
@@ -13,9 +12,11 @@ Write-Host "-------------------------------------------"
 & "$PSScriptRoot\scripts\Winget-1Password.ps1"
 & "$PSScriptRoot\scripts\Winget-7zip.ps1"
 & "$PSScriptRoot\scripts\Winget-Chocolatey.ps1"
-
+& "$PSScriptRoot\scripts\Winget-dotnet.ps1"
+& "$PSScriptRoot\scripts\Winget-python.ps1"
 & "$PSScriptRoot\scripts\Winget-cmake.ps1"
 & "$PSScriptRoot\scripts\Winget-DevHome.ps1"
+& "$PSScriptRoot\scripts\Winget-PowerToys.ps1"
 & "$PSScriptRoot\scripts\Winget-eza.ps1"
 & "$PSScriptRoot\scripts\Winget-fnm.ps1"
 & "$PSScriptRoot\scripts\Winget-ghcli.ps1"
@@ -30,6 +31,7 @@ Write-Host "-------------------------------------------"
 & "$PSScriptRoot\scripts\Winget-Typora.ps1"
 & "$PSScriptRoot\scripts\Winget-VisualStudioCode.ps1"
 & "$PSScriptRoot\scripts\Winget-tokei.ps1"
+& "$PSScriptRoot\scripts\Winget-flow.ps1"
 
 
 Write-Host "-------------------------------------------"
@@ -48,14 +50,6 @@ Write-Host "-------------------------------------------"
 & "$PSScriptRoot\scripts\Choco-ripgrep.ps1"
 & "$PSScriptRoot\scripts\Choco-wezterm.ps1"
 & "$PSScriptRoot\scripts\Choco-zoxide.ps1"
-& "$PSScriptRoot\scripts\Choco-pyenv.ps1"
-
-
-& "$PSScriptRoot\scripts\Install-Scoop.ps1"
-
-Write-Host "-------------------------------------------"
-Write-Host "`n   Scoop Apps `n" -ForegroundColor Magenta
-Write-Host "-------------------------------------------"
 
 #vars
 $dotfilesPath = "$PSScriptRoot\..\.." | Convert-Path
@@ -105,9 +99,8 @@ $symlinks = @{
     "$HOME\AppData\Local\lazygit\config.yml"                                                        = "..\..\lazygit\config.yml"
     "$HOME\AppData\Roaming\AltSnap\AltSnap.ini"                                                     = "..\AltSnap\AltSnap.ini"
     "$vs_code_home\settings.json"                                                                   = "..\..\vscode\settings.json"
-    "$ENV:XDG_CONFIG_HOME\WezTerm"                                                                  = "..\..\terminals\wezterm\"
+    "$HOME\.config\wezterm"                                                                         = "..\..\terminals\wezterm\"
 }
-
 
 # Create Symbolic Links
 Write-Host "Creating Symbolic Links..."
@@ -123,11 +116,11 @@ Write-Host "`n  restore vscode extensions `n" -ForegroundColor Magenta
 Write-Host "------------------------------------------- "
 
 # VS Code extensions
-powershell  "$dotfilesPath\vscode\restore_extensions.ps1"
+& "$dotfilesPath\vscode\restore_extensions.ps1"
 
 # Install bat themes
 bat cache --clear
 bat cache --build
 
 # Start AltSnap on logon
-powershell "$dotfilesPath\Windows\Altsnap\createTask.ps1" >$null
+& "$dotfilesPath\Windows\Altsnap\createTask.ps1" >$null

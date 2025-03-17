@@ -2,7 +2,7 @@
 param()
 
 $ReadableName = "fastfetch"
-$AppId = "fastfetch-cli.fastfetch"
+$AppId = "Fastfetch-cli.Fastfetch"
 
 $WingetParams = $null
 

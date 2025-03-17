@@ -2,7 +2,7 @@
 param()
 
 $ReadableName = "cmake"
-$AppId = "kitware.cmake"
+$AppId = "Kitware.CMake"
 
 $WingetParams = $null
 

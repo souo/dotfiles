@@ -6,8 +6,8 @@ param()
 #-----------------------------------------------
 #                 SDK
 #------------------------------------------------
-$ReadableName = ".NET SDK 8"
-$AppId = "Microsoft.DotNet.SDK.8"
+$ReadableName = "Python 3.12"
+$AppId = "Python.Python.3.12"
 $WingetParams = $null
 
 Install-WingetApp $ReadableName $AppId $WingetParams

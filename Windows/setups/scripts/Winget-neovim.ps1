@@ -2,7 +2,7 @@
 param()
 
 $ReadableName = "neovim"
-$AppId = "neovim.neovim"
+$AppId = "Neovim.Neovim"
 
 $WingetParams = $null
 

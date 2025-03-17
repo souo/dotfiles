@@ -4,7 +4,7 @@ $extensions = Get-Content -Encoding "UTF8" -Path "$PSScriptRoot\backups\vscode_e
 $installed = & "code" --list-extensions | Sort-Object
 
 foreach ($ext in $extensions) {
-    if ($installed.Contains($ext)) {
+    if (($null -ne $installed)  -and ($installed.Contains($ext))) {
         Write-Verbose "$ext already installed."
         Write-Host "   [✔] $ext" -ForegroundColor green
     } else {

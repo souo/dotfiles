@@ -2,7 +2,7 @@
 param()
 
 $ReadableName = "Github cli"
-$AppId = "github.cli"
+$AppId = "GitHub.cli"
 
 $WingetParams = $null
 

@@ -3,7 +3,7 @@ param()
 
 
 $ReadableName =  "chocolatey"
-$AppId =  "chocolatey.chocolatey"
+$AppId =  "Chocolatey.Chocolatey"
 $WingetParams = $null
 
 
