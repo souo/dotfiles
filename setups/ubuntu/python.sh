@@ -16,23 +16,16 @@ print_in_purple "\n   Python\n\n"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if [ -z "$PYENV_ROOT" ]; then
-  if [ -z "$HOME" ]; then
-    printf "$0: %s\n" \
-      "Either \$PYENV_ROOT or \$HOME must be set to determine the install location." \
-      >&2
-    exit 1
-  fi
   export PYENV_ROOT="${HOME}/.pyenv"
 fi
 
 # Checks for `.pyenv` file, and suggests to remove it for installing
 if ! [ -d "${PYENV_ROOT}" ]; then
-    execute  "curl -fsSL https://pyenv.run | bash" "pyenv" 
+    execute  "curl -fsSL https://pyenv.run | bash" "pyenv"
 fi
 
 
 python_versions=(3.12.9 3.11.9)
-
 
 pyenv_install() {
 
