@@ -13,7 +13,7 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
     plugins=(git macos brew docker tmux vscode eza)
 fi
 if [[ "$(uname -s)" == 'Linux' ]]; then
-    plugins=(git docker nmap tmux eza)
+    plugins=(git tmux eza vscode)
 fi
 
 ZSH_THEME=""
@@ -32,19 +32,32 @@ unset file
 
 source $ZSH/oh-my-zsh.sh
 
-eval "$(oh-my-posh init zsh --config $DOTFILES/zsh/pure.omp.json)"
-
-eval "$(zoxide init zsh)"
-
-eval "$(fnm env --use-on-cd --shell zsh)"
-
-if brew list "zsh-autosuggestions" &>/dev/null; then
-    source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [ "$(command -v oh-my-posh)" ]; then
+    eval "$(oh-my-posh init zsh --config $DOTFILES/zsh/pure.omp.json)"
+fi
+if [ "$(command -v zoxide)" ]; then
+    eval "$(zoxide init zsh)"
 fi
 
-# https://github.com/zsh-users/zsh-syntax-highlighting?tab=readme-ov-file#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file
-if brew list "zsh-syntax-highlighting" &>/dev/null; then
-    source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ "$(command -v fnm)" ]; then
+    eval "$(fnm env --use-on-cd --shell zsh)"
+fi
+
+if [[ "$(uname -s)" == 'Darwin' ]]; then
+
+    if brew list "zsh-autosuggestions" &>/dev/null; then
+        source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    fi
+
+    # https://github.com/zsh-users/zsh-syntax-highlighting?tab=readme-ov-file#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file
+    if brew list "zsh-syntax-highlighting" &>/dev/null; then
+        source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    fi
+fi
+
+if [[ "$(uname -s)" == 'Linux' ]]; then
+    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 fastfetch

@@ -11,6 +11,10 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-print_in_purple "\n   Miscellaneous\n\n"
+print_in_purple "\n   Flatpak \n\n"
 
-install_package "VLC" "vlc"
+install_package "flatpak" "flatpak"
+
+install_package "GNOME Software Flatpak plugin" "gnome-software-plugin-flatpak"
+
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo

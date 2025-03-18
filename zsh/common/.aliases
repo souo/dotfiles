@@ -5,8 +5,14 @@
 #
 
 alias vim=nvim
-alias top=htop``
+alias top=htop
 alias loc=tokei
+alias vsc="code ."
+
+if [ "$(command -v xclip)" ]; then
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
+fi
 
 # Pipe my public key to my clipboard.
 if [ "$(command -v pbcopy)" ]; then

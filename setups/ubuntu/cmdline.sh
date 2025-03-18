@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-HERE
-
 HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 # shellcheck source=/dev/null

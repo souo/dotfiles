@@ -13,5 +13,11 @@ upgrade
 
 "${HERE}"/build-essentials.sh
 "${HERE}"/cmdline.sh
-
+"${HERE}"/browers.sh
+"${HERE}"/flatpak.sh
+"${HERE}"/dotnet.sh
+"${HERE}"/vscode.sh
+"${HERE}"/misc.sh
+"${HERE}"/terminals.sh
+"${HERE}"/zsh.sh
 "${HERE}"/cleanup.sh

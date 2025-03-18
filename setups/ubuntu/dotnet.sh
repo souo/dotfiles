@@ -11,6 +11,6 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-print_in_purple "\n   Miscellaneous\n\n"
+print_in_purple "\n  .NET SDK\n\n"
 
-install_package "VLC" "vlc"
+install_package ".NET SDK 8" "dotnet-sdk-8.0"

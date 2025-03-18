@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -e
 
 HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
@@ -11,6 +12,13 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-print_in_purple "\n   Miscellaneous\n\n"
+print_in_purple "\n  fastfetch \n\n"
 
-install_package "VLC" "vlc"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+if ! package_is_installed "fastfetch"; then
+  add_ppa "zhangsongcui3371/fastfetch"
+fi
+
+update
+install_package "fastfetch" "fastfetch"

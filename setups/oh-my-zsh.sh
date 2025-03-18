@@ -1,3 +1,4 @@
+
 #!/usr/bin/env bash
 
 
@@ -33,7 +34,7 @@ main(){
     if is_already_installed; then
         print_success "oh-my-zsh."
     else
-        install
+    install
     fi
 }
 
