@@ -53,9 +53,7 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
     if brew list "zsh-syntax-highlighting" &>/dev/null; then
         source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fi
-fi
-
-if [[ "$(uname -s)" == 'Linux' ]]; then
+else
     source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi

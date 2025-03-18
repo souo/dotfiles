@@ -23,21 +23,22 @@ fi
 if ! [ -d "${PYENV_ROOT}" ]; then
     execute  "curl -fsSL https://pyenv.run | bash" "pyenv"
 fi
-
+execute  "$PYENV_ROOT/bin/pyenv update" "pyenv update" 
 
 python_versions=(3.12.9 3.11.9)
-export PYTHON_BUILD_MIRROR_URL="https://registry.npmmirror.com/-/binary/python"
+
 pyenv_install() {
 
   declare -r VERSION="$2"
   declare -r READABLE_NAME="$1"
 
-  execute "export PATH=\"$PYENV_ROOT/bin:$PATH\" && pyenv install $VERSION" "$READABLE_NAME"
+  execute "$PYENV_ROOT/bin/pyenv install $VERSION" "$READABLE_NAME"
 }
 
 for version in "${python_versions[@]}"; do
-  pyenv_install "Pythyon'${version}'" "$version"
+  pyenv_install "Pythyon '${version} (pyenv)'" "$version"
 done
 
+execute "$PYENV_ROOT/bin/pyenv global 3.12.9" "Set global python version (3.12.9)"
 
 install_package "pipx" "pipx"
