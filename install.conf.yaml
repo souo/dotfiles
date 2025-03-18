@@ -25,6 +25,7 @@
     - ~/code/Templates # read-only projects boilerplates
     - ~/code/Workspaces # code-station to try new stuff
     - ~/.config/wezterm # wezterm config
+    - ~/.config/tealdeer # tealdeer config
 
 - link:
     ~/.fzf.zsh:path: fzf/.fzf.zsh
@@ -64,10 +65,16 @@
     ~/.config/wezterm:
       force: true
       path: terminals/wezterm
+    ~/.config/tealdeer/config.toml:
+      path: tealdeer/config.toml
     # ~/Library/Application Support/Code/User/settings.json:
-    ~/.config/Code/User/settings.json:
-      force: true
-      path: vscode/settings.json
+    #   if: '[ `uname` = Darwin ]'
+    #   force: true
+    #   path: vscode/settings.json
+    # ~/.config/Code/User/settings.json:
+    #   if: '[ `uname` = Linux ]'
+    #   force: true
+    #   path: vscode/settings.json
 
 - shell:
     - [tmux/config.sh, config tmux]
