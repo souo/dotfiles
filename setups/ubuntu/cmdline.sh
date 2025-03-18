@@ -23,6 +23,7 @@ apt_packages=(
   tmux
   shellcheck
   xclip
+  unzip
 )
 
 print_in_purple "\n   install dev packages \n\n"

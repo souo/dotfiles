@@ -26,7 +26,7 @@ fi
 
 
 python_versions=(3.12.9 3.11.9)
-
+export PYTHON_BUILD_MIRROR_URL="https://registry.npmmirror.com/-/binary/python"
 pyenv_install() {
 
   declare -r VERSION="$2"

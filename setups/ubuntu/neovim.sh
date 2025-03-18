@@ -16,4 +16,4 @@ print_in_purple "\n   neovim \n\n"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-install_package "neovim" "nvim"
+install_package "neovim" "neovim"
