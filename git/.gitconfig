@@ -37,7 +37,7 @@
     #     by the local ones
 
     path = ~/.gitconfig.local
-[http]
-	proxy = socks5://127.0.0.1:1080
-[https]
-	proxy = socks5://127.0.0.1:1080
+# [http]
+# 	proxy = socks5://127.0.0.1:1080
+# [https]
+# 	proxy = socks5://127.0.0.1:1080

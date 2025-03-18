@@ -82,12 +82,6 @@ $ENV:BAT_CONFIG_DIR = "$ENV:DotsLocalRepo\bat"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 Start-ThreadJob -ScriptBlock {
-    <#
-        This is gross, I know. But there's a noticible lag that manifests in powershell when running the winget and choco commands
-        within the main pwsh process. Running this whole block as an isolated job fails to set the environment variable correctly.
-        The compromise is to run the main logic of this block within a threadjob and get the output of the winget and choco commands
-        via two isolated jobs. This sets the environment variable correctly and doesn't cause any lag (that I've noticed yet).
-    #>
     $wingetUpdatesString = Start-Job -ScriptBlock { winget list --upgrade-available | Out-String } | Wait-Job | Receive-Job
     $chocoUpdatesString = Start-Job -ScriptBlock { choco upgrade all --noop -y | Out-String } | Wait-Job | Receive-Job
     if ($wingetUpdatesString -match "upgrades available" -or $chocoUpdatesString -notmatch "can upgrade 0/") {
