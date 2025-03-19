@@ -24,6 +24,11 @@ apt_packages=(
   shellcheck
   xclip
   unzip
+  ffmpeg
+  7zip
+  poppler-utils
+  fd-find
+  imagemagick
 )
 
 print_in_purple "\n   install dev packages \n\n"

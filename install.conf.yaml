@@ -26,6 +26,7 @@
     - ~/code/Workspaces # code-station to try new stuff
     - ~/.config/wezterm # wezterm config
     - ~/.config/tealdeer # tealdeer config
+    - ~/.config/yazi #yazi config
 
 - link:
     ~/.fzf.zsh:path: fzf/.fzf.zsh
@@ -55,6 +56,10 @@
     ~/.config/bat/themes/:
       glob: true
       path: bat/themes/*.tmTheme
+    ~/.config/yazi/:
+      glob: true
+      force: true
+      path: yazi/*.toml
     ~/.aliases:
       path: zsh/common/.aliases
     ~/.zshrc:
