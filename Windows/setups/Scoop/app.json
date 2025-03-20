@@ -1,0 +1,123 @@
+{
+    "apps": [
+        {
+            "Updated": "2025-03-19T01:50:30.8087424+08:00",
+            "Source": "main",
+            "Name": "7zip",
+            "Version": "24.09",
+            "Info": ""
+        },
+        {
+            "Updated": "2025-03-19T12:21:52.6930437+08:00",
+            "Source": "main",
+            "Name": "bat",
+            "Version": "0.25.0",
+            "Info": ""
+        },
+        {
+            "Updated": "2025-03-19T12:20:08.0313537+08:00",
+            "Source": "main",
+            "Name": "fd",
+            "Version": "10.2.0",
+            "Info": ""
+        },
+        {
+            "Updated": "2025-03-19T01:50:56.051741+08:00",
+            "Source": "main",
+            "Name": "ffmpeg",
+            "Version": "7.1.1",
+            "Info": ""
+        },
+        {
+            "Updated": "2025-03-19T12:20:12.9398957+08:00",
+            "Source": "main",
+            "Name": "fzf",
+            "Version": "0.60.3",
+            "Info": ""
+        },
+        {
+            "Updated": "2025-03-19T01:52:57.5838566+08:00",
+            "Source": "main",
+            "Name": "ghostscript",
+            "Version": "10.04.0",
+            "Info": ""
+        },
+        {
+            "Updated": "2025-03-19T01:51:25.8575296+08:00",
+            "Source": "main",
+            "Name": "imagemagick",
+            "Version": "7.1.1-45",
+            "Info": ""
+        },
+        {
+            "Updated": "2025-03-19T01:51:00.2978567+08:00",
+            "Source": "main",
+            "Name": "innounp",
+            "Version": "2.64.3",
+            "Info": ""
+        },
+        {
+            "Updated": "2025-03-19T12:20:04.7180804+08:00",
+            "Source": "main",
+            "Name": "jq",
+            "Version": "1.7.1",
+            "Info": ""
+        },
+        {
+            "Updated": "2025-03-19T12:22:13.4713406+08:00",
+            "Source": "main",
+            "Name": "less",
+            "Version": "668",
+            "Info": ""
+        },
+        {
+            "Updated": "2025-03-17T13:40:13.539428+08:00",
+            "Source": "main",
+            "Name": "pipx",
+            "Version": "1.7.1",
+            "Info": ""
+        },
+        {
+            "Updated": "2025-03-19T01:47:34.8645533+08:00",
+            "Source": "main",
+            "Name": "poppler",
+            "Version": "24.08.0-0",
+            "Info": ""
+        },
+        {
+            "Updated": "2025-03-19T12:20:10.3946157+08:00",
+            "Source": "main",
+            "Name": "ripgrep",
+            "Version": "14.1.1",
+            "Info": ""
+        },
+        {
+            "Updated": "2025-03-19T12:20:46.0570559+08:00",
+            "Source": "main",
+            "Name": "yazi",
+            "Version": "25.3.2",
+            "Info": ""
+        },
+        {
+            "Updated": "2025-03-19T12:20:24.316241+08:00",
+            "Source": "main",
+            "Name": "zoxide",
+            "Version": "0.9.7",
+            "Info": ""
+        }
+    ],
+    "buckets": [
+        {
+            "Name": "main",
+            "Source": "https://github.com/ScoopInstaller/Main.git",
+            "Updated": "2025-03-19T16:29:46+08:00",
+            "Manifests": 1387
+        },
+        {
+            "Name": "extras",
+            "Source": "~\\scoop\\buckets\\extras",
+            "Updated": null,
+            "Manifests": 0
+        }
+    ]
+}

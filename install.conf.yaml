@@ -65,6 +65,9 @@
     ~/.zshrc:
       force: true
       path: zsh/oh-my-zsh/.zshrc
+    ~/.fzfrc:
+      force: true
+      path: fzf/.fzfrc
     ~/.env:
       path: zsh/common/.env
     ~/.config/wezterm:

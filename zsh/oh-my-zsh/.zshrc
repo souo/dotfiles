@@ -31,6 +31,7 @@ done
 unset file
 
 source $ZSH/oh-my-zsh.sh
+source $DOTFILES/fzf/.fzf.zsh
 
 if [ "$(command -v oh-my-posh)" ]; then
     eval "$(oh-my-posh init zsh --config $DOTFILES/zsh/pure.omp.json)"

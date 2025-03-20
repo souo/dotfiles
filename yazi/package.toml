@@ -1,7 +1,7 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
 rev = "273019910c11"
-hash = "e0d2c8d7e7afe5b82270367098d1a821"
+hash = "8f15ff8b0dd5435cfb4d87db391a7dcf"
 
 [[plugin.deps]]
 use = "Lil-Dank/lazygit"
