@@ -7,6 +7,3 @@
 
 # specify directories that should be checked for dead symbolic links.
 - clean: ["~"]
-
-# Create commands specify empty directories to be created.
-- create:
