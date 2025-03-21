@@ -1,0 +1,7 @@
+- link:
+    ~/.fzf.zsh:
+      path: fzf/.fzf.zsh
+    ~/.fzf.bash: fzf/.fzf.bash
+    ~/.fzfrc:
+      force: true
+      path: fzf/.fzfrc

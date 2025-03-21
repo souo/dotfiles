@@ -1,0 +1,7 @@
+# Create commands specify empty directories to be created.
+- create:
+    - ~/.config/tealdeer # tealdeer config
+
+- link:
+    ~/.config/tealdeer/config.toml:
+      path: tealdeer/config.toml

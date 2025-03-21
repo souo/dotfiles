@@ -1,0 +1,2 @@
+- shell:
+    - [nvim/config.sh, config nvim]
