@@ -34,5 +34,12 @@ My daily drivers currently are `wezterm + zsh + tmux` on:
 Use [dotbot](https://github.com/anishathalye/dotbot) to generate symbolic links. See [install.conf.yaml](./install.conf.yaml).
 
 ```
-./install
+# mac
+./install mac
+#  ubuntu
+./install ubuntu
+# wsl
+./install wsl
+# win
+.install.ps1 all
 ```

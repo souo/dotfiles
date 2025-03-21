@@ -2,6 +2,7 @@
 
 set -e
 
+BASE_CONFIG="base"
 CONFIG_SUFFIX=".yaml"
 
 META_DIR="meta"
@@ -16,5 +17,20 @@ cd "${BASE_DIR}"
 git submodule update --init --recursive --remote
 
 for config in "${@}"; do
-  "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX}"
+  echo -e "\nConfigure $config"
+  # create temporary file
+  configFile="$(mktemp)"
+  suffix="-sudo"
+  echo -e "$(<"${BASE_DIR}/${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}")\n$(<"${BASE_DIR}/${META_DIR}/${CONFIG_DIR}/${config%"$suffix"}${CONFIG_SUFFIX}")" >"$configFile"
+
+  cmd=("${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "$configFile")
+
+  if [[ $config == *"sudo"* ]]; then
+    cmd=(sudo "${cmd[@]}")
+  fi
+
+  "${cmd[@]}"
+  rm -f "$configFile"
 done
+
+cd "${BASE_DIR}"

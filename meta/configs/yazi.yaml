@@ -8,3 +8,6 @@
       glob: true
       force: true
       path: yazi/*.toml
+
+- shell:
+    - [cd ~/.config/yazi && ya pack -i, config nvim]
