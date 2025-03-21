@@ -36,6 +36,7 @@ source $DOTFILES/fzf/.fzf.zsh
 if [ "$(command -v oh-my-posh)" ]; then
     eval "$(oh-my-posh init zsh --config $DOTFILES/zsh/pure.omp.json)"
 fi
+
 if [ "$(command -v zoxide)" ]; then
     eval "$(zoxide init zsh)"
 fi
