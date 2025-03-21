@@ -3,5 +3,5 @@
 if [[ ! "$PATH" == *${HOME}/.fzf/bin* ]]; then
   export PATH="${PATH:+${PATH}:}${HOME}/.fzf/bin"
 fi
-
+export FZF_DEFAULT_OPTS_FILE=~/.fzfrc
 eval "$(fzf --bash)"

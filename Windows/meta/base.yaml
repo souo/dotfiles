@@ -1,0 +1,12 @@
+# dotbot
+# https://github.com/anishathalye/dotbot
+
+- defaults:
+    link:
+      relink: true
+
+# specify directories that should be checked for dead symbolic links.
+- clean: ["~"]
+
+# Create commands specify empty directories to be created.
+- create:

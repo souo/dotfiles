@@ -48,7 +48,7 @@ Write-Host "-------------------------------------------"
 & "$PSScriptRoot\scripts\Choco-mingw.ps1"
 & "$PSScriptRoot\scripts\Choco-ripgrep.ps1"
 & "$PSScriptRoot\scripts\Choco-wezterm.ps1"
-& "$PSScriptRoot\scripts\Choco-zoxide.ps1"
+# & "$PSScriptRoot\scripts\Choco-zoxide.ps1"
 
 #vars
 $dotfilesPath = "$PSScriptRoot\..\.." | Convert-Path
@@ -90,7 +90,8 @@ $vs_code_home = "$env:APPDATA\Code\User"
 $symlinks = @{
     “$HOME\Appdata\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" = "..\..\terminals\windowsterminal\settings.json"
     “$HOME\AppData\Roaming\tealdeer\tealdeer\config.toml"                                           = "..\..\tealdeer\config.toml"
-    “$HOME\AppData\Roaming\yazi\config"                                                             = "..\..\yazi"
+    “$HOME\AppData\Roaming\yazi\config\package.toml"                                                = "..\..\yazi\package.toml"
+    “$HOME\AppData\Roaming\yazi\config\theme.toml"                                                  = "..\..\yazi\theme.toml"
     "$HOME\Documents\PowerShell\Profile.ps1"                                                        = "..\PowerShell\Profile.ps1"
     "$HOME\.gitconfig"                                                                              = "..\..\git\.gitconfig"
     "$HOME\.wslconfig"                                                                              = "..\wsl\.wslconfig"
