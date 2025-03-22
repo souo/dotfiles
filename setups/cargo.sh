@@ -18,7 +18,7 @@ install_cargo_package() {
     print_success "$1"
   else
     execute \
-      "cargo install $2" \
+      "cargo install '$@' $2" \
       "$1"
   fi
 }
@@ -28,9 +28,8 @@ main() {
 
   print_in_purple "\n  cargo\n\n"
 
-  install_cargo_package "yazi" "yazi"
   install_cargo_package "zoxide" "zoxide"
-
+  install_cargo_package "xplr" "yazi"
 }
 
 main
