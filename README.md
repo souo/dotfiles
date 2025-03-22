@@ -35,11 +35,11 @@ Use [dotbot](https://github.com/anishathalye/dotbot) to generate symbolic links.
 
 ```
 # mac
-./install mac
+.install-profile mac
 #  ubuntu
-./install ubuntu
+.install-profile ubuntu
 # wsl
-./install wsl
+.install-profile wsl
 # win
-.install.ps1 all
+.install-profile.ps1  windows
 ```

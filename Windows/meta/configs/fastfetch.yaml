@@ -1,0 +1,7 @@
+- link:
+    ~/Appdata/Local/fastfetch/config.jsonc:
+      force: true
+      path: fastfetch/config.jsonc
+    ~/Appdata/Local/fastfetch/logos:
+      force: true
+      path: fastfetch/logos

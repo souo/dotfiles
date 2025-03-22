@@ -18,7 +18,5 @@ use = "boydaihungst/mediainfo"
 rev = "447fe95239a4"
 hash = "dcaebc8bc261206f6b59e2c67464af5"
 
-[[flavor.deps]]
-use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "68326b4ca4b5"
-hash = "2ac87e1b3a61f5887472899e86535d29"
+[flavor]
+deps = []

@@ -1,46 +1,7 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions":
-    [
-        {
-            "command": "unbound",
-            "keys": "ctrl+c"
-        },
-        {
-            "command": "unbound",
-            "keys": "ctrl+shift+f"
-        },
-        {
-            "command": "unbound",
-            "keys": "ctrl+v"
-        },
-        {
-            "command": "unbound",
-            "keys": "alt+shift+d"
-        },
-        {
-            "command":
-            {
-                "action": "copy",
-                "singleLine": false
-            }
-        },
-        {
-            "command": "paste"
-        },
-        {
-            "command": "find"
-        },
-        {
-            "command":
-            {
-                "action": "splitPane",
-                "split": "auto",
-                "splitMode": "duplicate"
-            }
-        }
-    ],
+    "actions": [],
     "alwaysShowTabs": true,
     "centerOnLaunch": true,
     "copyFormatting": "none",
@@ -49,6 +10,25 @@
     "initialCols": 150,
     "initialPosition": ",",
     "initialRows": 38,
+    "keybindings":
+    [
+        {
+            "id": null,
+            "keys": "ctrl+c"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+v"
+        },
+        {
+            "id": null,
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "id": null,
+            "keys": "alt+shift+d"
+        }
+    ],
     "launchMode": "focus",
     "newTabMenu":
     [

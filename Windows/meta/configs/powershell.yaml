@@ -1,0 +1,4 @@
+- link:
+    ~/Appdata/Documents/PowerShell/Profile.ps1:
+      force: true
+      path: Windows/PowerShell/Profile.ps1

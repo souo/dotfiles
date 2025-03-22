@@ -1,4 +1,3 @@
-
 # Create commands specify empty directories to be created.
 - create:
     - ~/.config/yazi #yazi config
@@ -10,4 +9,4 @@
       path: yazi/*.toml
 
 - shell:
-    - [cd ~/.config/yazi && ya pack -i, config nvim]
+    - [cd ~/.config/yazi && ya pack -i, config yazi]

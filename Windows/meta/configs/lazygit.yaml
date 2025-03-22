@@ -1,0 +1,4 @@
+- link:
+    ~/Appdata/Local/lazygit/config.yml:
+      force: true
+      path: lazygit/config.yml

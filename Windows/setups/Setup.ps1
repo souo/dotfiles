@@ -88,20 +88,7 @@ $vs_code_home = "$env:APPDATA\Code\User"
 
 # Linked Files (Destination => Source)
 $symlinks = @{
-    “$HOME\Appdata\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" = "..\..\terminals\windowsterminal\settings.json"
-    “$HOME\AppData\Roaming\tealdeer\tealdeer\config.toml"                                           = "..\..\tealdeer\config.toml"
-    “$HOME\AppData\Roaming\yazi\config\package.toml"                                                = "..\..\yazi\package.toml"
-    “$HOME\AppData\Roaming\yazi\config\theme.toml"                                                  = "..\..\yazi\theme.toml"
-    "$HOME\Documents\PowerShell\Profile.ps1"                                                        = "..\PowerShell\Profile.ps1"
-    "$HOME\.gitconfig"                                                                              = "..\..\git\.gitconfig"
-    "$HOME\.wslconfig"                                                                              = "..\wsl\.wslconfig"
-    "$HOME\.gitattributes"                                                                          = "..\..\git\.gitattributes"
-    "$HOME\.gitignore"                                                                              = "..\..\git\.gitignore"
-    "$HOME\AppData\Local\fastfetch"                                                                 = "..\..\fastfetch"
-    "$HOME\AppData\Local\lazygit\config.yml"                                                        = "..\..\lazygit\config.yml"
-    "$HOME\AppData\Roaming\AltSnap\AltSnap.ini"                                                     = "..\AltSnap\AltSnap.ini"
-    "$vs_code_home\settings.json"                                                                   = "..\..\vscode\settings.json"
-    "$HOME\.config\wezterm"                                                                         = "..\..\terminals\wezterm\"
+    "$vs_code_home\settings.json" = "..\..\vscode\settings.json"
 }
 
 # Create Symbolic Links

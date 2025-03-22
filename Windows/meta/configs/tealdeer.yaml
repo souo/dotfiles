@@ -1,0 +1,4 @@
+- link:
+    ~/Appdata/Roaming/tealdeer/tealdeer/config.toml:
+      force: true
+      path: tealdeer/config.toml

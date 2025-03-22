@@ -1,0 +1,12 @@
+# Create commands specify empty directories to be created.
+- create:
+    - ~/AppData/Roaming/yazi/config #yazi config
+
+- link:
+    ~/AppData/Roaming/yazi/config/:
+      glob: true
+      force: true
+      path: yazi/*.toml
+
+- shell:
+    - [ya pack -i, install yazi packages]
