@@ -18,7 +18,7 @@ install_cargo_package() {
     print_success "$1"
   else
     execute \
-      "cargo install '$@' $2" \
+      "cargo install $2" \
       "$1"
   fi
 }

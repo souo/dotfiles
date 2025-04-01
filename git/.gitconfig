@@ -1,40 +1,38 @@
 [core]
-    abbrev = 12
-    attributesFile = ~/.gitattributes
-    autocrlf = input
-    editor = vim
-    excludesFile = ~/.gitignore
-
+abbrev = 12
+attributesFile = ~/.gitattributes
+autocrlf = input
+editor = vim
+excludesFile = ~/.gitignore
 
 [color "branch"]
-    current = green bold
-    local = green
-    remote = yellow
-
+current = green bold
+local = green
+remote = yellow
 
 [init]
-    defaultBranch = main
+defaultBranch = main
 
 [user]
 
-    # Do not guess the user's identity.
+# Do not guess the user's identity.
 
-    useConfigOnly = true
+useConfigOnly = true
 
-	name = songzhuozhuo
-	email = souo.ven@gmail.com
-    # [!] DO NOT store sensitive information such as the Git user
-    # credentials (`name` / `email`), or things such as the `signingkey`
-    # in this file, add them in `~/.gitconfig.local`!
+name = songzhuozhuo
+email = souo.ven@gmail.com
+# [!] DO NOT store sensitive information such as the Git user
+# credentials (`name` / `email`), or things such as the `signingkey`
+# in this file, add them in `~/.gitconfig.local`!
 
 [include]
 
-    # Load local configs.
-    # https://git-scm.com/docs/git-config#_includes
-    #
-    # [!] The following needs to remain at the end of this file in
-    #     order to allow any of the above configs to be overwritten
-    #     by the local ones
+# Load local configs.
+# https://git-scm.com/docs/git-config#_includes
+#
+# [!] The following needs to remain at the end of this file in
+#     order to allow any of the above configs to be overwritten
+#     by the local ones
 
     path = ~/.gitconfig.local
 # [http]

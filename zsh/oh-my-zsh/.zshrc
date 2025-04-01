@@ -47,6 +47,8 @@ fi
 
 if [[ "$(uname -s)" == 'Darwin' ]]; then
 
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+
     if brew list "zsh-autosuggestions" &>/dev/null; then
         source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     fi
