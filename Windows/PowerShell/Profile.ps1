@@ -13,6 +13,7 @@ Set-Alias -Name vim -Value nvim
 Set-Alias -Name vsc -Value CodeOpenCurrent
 Set-Alias dk docker
 Set-Alias -Name loc -Value tokei
+Set-Alias -Name which -Value Get-Command
 
 # Functions 🎉
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

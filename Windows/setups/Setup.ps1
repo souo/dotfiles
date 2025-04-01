@@ -84,21 +84,6 @@ foreach ($psModule in $psModules) {
 }
 
 
-$vs_code_home = "$env:APPDATA\Code\User"
-
-# Linked Files (Destination => Source)
-$symlinks = @{
-    "$vs_code_home\settings.json" = "..\..\vscode\settings.json"
-}
-
-# Create Symbolic Links
-Write-Host "Creating Symbolic Links..."
-foreach ($symlink in $symlinks.GetEnumerator()) {
-    Get-Item -Path $symlink.Key -ErrorAction SilentlyContinue | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
-    New-Item -ItemType SymbolicLink -Path $symlink.Key -Target (Resolve-Path $symlink.Value) -Force | Out-Null
-}
-
-
 
 Write-Host "------------------------------------------- "
 Write-Host "`n  restore vscode extensions `n" -ForegroundColor Magenta
