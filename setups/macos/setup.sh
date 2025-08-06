@@ -17,6 +17,9 @@ print_in_purple "\n   Macos \n"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 printf "\n"
 
+export HOMEBREW_API_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/api"
+export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles"
+
 "$HERE"/xcode.sh
 "$HERE"/homebrew.sh
 "$HERE"/browsers.sh

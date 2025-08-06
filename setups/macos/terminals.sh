@@ -14,7 +14,7 @@ print_in_purple "\n   Terminals\n"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # wezterm
-brew_install "wezterm" "wezterm"
+brew_install "wezterm" "wezterm" "--cask"
 
 # tmux
 brew_install "tmux" "tmux"

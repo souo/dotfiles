@@ -19,4 +19,4 @@ brew_install "neovim" "neovim"
 brew_install "Visual Studio Code" "visual-studio-code" "--cask"
 
 # Install jetbrains-toolbox
-brew_install "jetbrains-toolbox" "jetbrains-toolbox" --cask
+brew_install "jetbrains-toolbox" "jetbrains-toolbox" "--cask"

@@ -29,6 +29,6 @@ for config in ${CONFIGS} "${@}"; do
     echo -e "\nConfigure $config"
     configFile="$(mktemp)"
     echo -e "$(<"${BASE_DIR}/${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}")\n$(<"${BASE_DIR}/${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX}")" >"$configFile"
-    "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" --plugin-dir ${META_DIR}/dotbot-brew -c "$configFile"
+    "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "$configFile"
     rm -f "$configFile"
 done

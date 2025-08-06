@@ -31,3 +31,11 @@ pyenv_build_deps=( openssl readline sqlite3 xz zlib tcl-tk )
 for dep in "${pyenv_build_deps[@]}"; do
     brew_install "$dep" "$dep"
 done
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+print_in_purple "\n   pipx \n"
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+brew_install "pipx" "pipx"

@@ -10,7 +10,7 @@ DISABLE_UPDATE_PROMPT=true
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 if [[ "$(uname -s)" == 'Darwin' ]]; then
-    plugins=(git macos brew docker tmux vscode eza)
+    plugins=(git macos brew docker tmux vscode)
 fi
 if [[ "$(uname -s)" == 'Linux' ]]; then
     plugins=(git tmux eza vscode)
