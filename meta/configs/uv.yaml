@@ -1,0 +1,6 @@
+- create:
+    - ~/.config/uv 
+- link:
+    ~/.config/uv/uv.toml:
+      create: true
+      path: uv/uv.toml
