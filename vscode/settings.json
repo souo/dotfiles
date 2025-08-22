@@ -133,7 +133,8 @@
     "*.uxml": "xml"
   },
   "[UnityUXML]": {},
-  "files.exclude": {
-    "**/*.meta": true
-  }
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "python.defaultInterpreterPath": "c:\\Users\\souov\\AppData\\Local\\Programs\\Python\\Python312\\python.exe"
 }

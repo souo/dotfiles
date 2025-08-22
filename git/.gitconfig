@@ -2,7 +2,7 @@
 abbrev = 12
 attributesFile = ~/.gitattributes
 autocrlf = input
-editor = vim
+	editor = vim
 excludesFile = ~/.gitignore
 
 [color "branch"]
@@ -19,8 +19,6 @@ defaultBranch = main
 
 useConfigOnly = true
 
-name = songzhuozhuo
-email = souo.ven@gmail.com
 # [!] DO NOT store sensitive information such as the Git user
 # credentials (`name` / `email`), or things such as the `signingkey`
 # in this file, add them in `~/.gitconfig.local`!
