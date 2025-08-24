@@ -7,7 +7,7 @@ param()
 #                 SDK
 #------------------------------------------------
 $ReadableName = "Flow Launcher"
-$AppId = "Flow-Launcher.Flow-Launcher8"
+$AppId = "Flow-Launcher.Flow-Launcher"
 $WingetParams = $null
 
 Install-WingetApp $ReadableName $AppId $WingetParams

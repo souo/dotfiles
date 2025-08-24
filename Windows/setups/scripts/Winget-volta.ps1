@@ -6,8 +6,8 @@ param()
 #-----------------------------------------------
 #                 SDK
 #------------------------------------------------
-$ReadableName = "Python 3.13"
-$AppId = "Python.Python.3.13"
+$ReadableName = "volta"
+$AppId = " Volta.Volta"
 $WingetParams = $null
 
 Install-WingetApp $ReadableName $AppId $WingetParams

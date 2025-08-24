@@ -14,6 +14,7 @@ Set-Alias -Name vsc -Value CodeOpenCurrent
 Set-Alias dk docker
 Set-Alias -Name loc -Value tokei
 Set-Alias -Name which -Value Get-Command
+Set-Alias -Name grep -Value Select-String
 
 # Functions 🎉
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -65,18 +66,6 @@ function New-File {
 }
 
 
-function y {
-    $tmp = [System.IO.Path]::GetTempFileName()
-    yazi $args --cwd-file="$tmp"
-    $cwd = Get-Content -Path $tmp -Encoding UTF8
-    if (-not [String]::IsNullOrEmpty($cwd) -and $cwd -ne $PWD.Path) {
-        Set-Location -LiteralPath ([System.IO.Path]::GetFullPath($cwd))
-    }
-    Remove-Item -Path $tmp
-}
-
-
-
 # Environment Variables 🌐
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 $ENV:DotsLocalRepo = Find-DotsRepository -ProfilePath $PSScriptRoot
@@ -84,7 +73,9 @@ $ENV:DotsLocalRepo = Find-DotsRepository -ProfilePath $PSScriptRoot
 $ENV:BAT_CONFIG_DIR = "$ENV:DotsLocalRepo\bat"
 $ENV:FZF_DEFAULT_OPTS = '--color=fg:-1,fg+:#ffffff,bg:-1,bg+:#3c4048 --color=hl:#5ea1ff,hl+:#5ef1ff,info:#ffbd5e,marker:#5eff6c --color=prompt:#ff5ef1,spinner:#bd5eff,pointer:#ff5ea0,header:#5eff6c --color=gutter:-1,border:#3c4048,scrollbar:#7b8496,label:#7b8496 --color=query:#ffffff --border="rounded" --border-label="" --preview-window="border-rounded" --height 40% --preview="bat -n --color=always {}"'
 $ENV:_ZO_FZF_OPTS = '--color=fg:-1,fg+:#ffffff,bg:-1,bg+:#3c4048 --color=hl:#5ea1ff,hl+:#5ef1ff,info:#ffbd5e,marker:#5eff6c --color=prompt:#ff5ef1,spinner:#bd5eff,pointer:#ff5ea0,header:#5eff6c --color=gutter:-1,border:#3c4048,scrollbar:#7b8496,label:#7b8496 --color=query:#ffffff --border="rounded" --border-label="" --preview-window="hidden" --height 20%'
-
+$ENV:FNM_NODE_DIST_MIRROR = 'https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/'
+$ENV:NODE_MIRROR = 'https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/'
+$ENV:NVM_NODEJS_ORG_MIRROR = 'https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/'
 
 . (Join-Path -Path $ENV:DotsLocalRepo -ChildPath "PowerShell\functions\Git\Remove-MergedGitBranch.ps1" )
 . (Join-Path -Path $ENV:DotsLocalRepo -ChildPath "PowerShell\functions\Console\Out-Copy.ps1" )
@@ -107,8 +98,7 @@ Start-ThreadJob -ScriptBlock {
 
 Invoke-Expression (& { ( zoxide init powershell  | Out-String ) })
 
-#
-fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
+#fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
 
 $colors = @{
     "Operator"         = "`e[35m" # Purple

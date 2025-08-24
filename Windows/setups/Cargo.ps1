@@ -65,7 +65,7 @@ function CommandExists {
 
 
 # Define the list of apps to be installed
-$apps = @("fnm")
+$apps = @("fnm", "tealdeer")
 
 
 # Check if Cargo is installed

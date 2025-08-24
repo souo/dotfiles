@@ -1,0 +1,4 @@
+- link:
+    ~/.cargo/config.toml:
+      create: true
+      path: cargo/config.toml

@@ -5,6 +5,8 @@
     ~/.gitconfig:
       force: true
       path: git/.gitconfig
+    ~/.gitconfig.local:
+      path: git/windows/.gitconfig.local
     ~/.gitattributes:
       force: true
       path: git/.gitattributes

@@ -39,14 +39,17 @@ see [https://learn.microsoft.com/zh-cn/windows/dev-drive/](https://learn.microso
 
 ```
 # npm
-setx /M npm_config_cache C:\Users\souov\WorkSpace\Packages\npm
+setx /M npm_config_cache C:\Users\2z\dev\Packages\npm
 
 # nuget
-setx /M NUGET_PACKAGES C:\Users\souov\WorkSpace\.nuget\packages
+setx /M NUGET_PACKAGES C:\Users\2z\dev\.nuget\packages
+
+# upm
+setx /M UPM_CACHE_ROOT  C:\Users\2z\dev\Packages\upm
 
 # Pip cache (Python)
-setx /M PIP_CACHE_DIR C:\Users\souov\WorkSpace\Packages\pip
+setx /M PIP_CACHE_DIR C:\Users\2z\dev\Packages\pip
 
 # Cargo cache (Rust)
-setx /M CARGO_HOME C:\Users\souov\WorkSpace\Packages\cargo
+setx /M CARGO_HOME C:\Users\2z\dev\Packages\cargo
 ```

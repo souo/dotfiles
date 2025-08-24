@@ -1,8 +1,8 @@
 [CmdletBinding()]
 param()
 
-$ReadableName = "DevHome"
-$AppId = "Microsoft.DevHome"
+$ReadableName = "zoxide"
+$AppId = "ajeetdsouza.zoxide"
 
 $WingetParams = $null
 

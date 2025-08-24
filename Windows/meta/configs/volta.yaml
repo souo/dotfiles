@@ -1,0 +1,4 @@
+- link:
+    ~/Appdata/Local/volta/hooks.json:
+      force: true
+      path: volta/hooks.json

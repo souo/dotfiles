@@ -1,0 +1,45 @@
+[core]
+  sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
+
+
+[user]
+	name = souo
+	email = souo.ven@gmail.com
+
+
+[merge]
+	tool = unityyamlmerge
+
+[mergetool "unityyamlmerge"]
+	path = "C:\\Program Files\\Unity 6000.0.55f1\\Editor\\Data\\Tools\\UnityYAMLMerge.exe"
+    cmd = "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+    keepBackup = false
+
+[merge "unityyamlmerge"]
+    driver = "C:\\Program Files\\Unity 6000.0.55f1\\Editor\\Data\\Tools\\UnityYAMLMerge.exe" merge -p "%O" "%A" "%B" "%L" "%P"
+	recursive = binary
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
