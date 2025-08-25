@@ -4,5 +4,5 @@
     - ~/.config # configuration files
     - ~/code/projects # my projects
     - ~/code/clones # read-only git clones
-    - ~/code/Templates # read-only projects boilerplates
-    - ~/code/Workspaces # code-station to try new stuff
+    - ~/code/templates # read-only projects boilerplates
+    - ~/code/workspaces # code-station to try new stuff

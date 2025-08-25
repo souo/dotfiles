@@ -1,11 +1,10 @@
 [core]
-  sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
-
+    sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
 
 [user]
 	name = souo
 	email = souo.ven@gmail.com
-
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIeZztoOKpsxK/QIthOb4fivTKFsHNQFVc9h0SWNuN4E
 
 [merge]
 	tool = unityyamlmerge
@@ -19,8 +18,14 @@
     driver = "C:\\Program Files\\Unity 6000.0.55f1\\Editor\\Data\\Tools\\UnityYAMLMerge.exe" merge -p "%O" "%A" "%B" "%L" "%P"
 	recursive = binary
 
+[gpg]
+  format = ssh
 
+[gpg "ssh"]
+  program = "C:/Users/2z/AppData/Local/Microsoft/WindowsApps/op-ssh-sign.exe"
 
+[commit]
+  gpgsign = true
 
 
 

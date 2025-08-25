@@ -8,9 +8,9 @@ return {
     -- ref: https://wezfurlong.org/wezterm/config/lua/WslDomain.html
     wsl_domains = {{
         name = 'WSL:Ubuntu',
-        distribution = 'Ubuntu-24.04',
+        distribution = 'Ubuntu',
         username = 'souo',
         default_cwd = '/home/souo',
-        default_prog = {'zsh', '-l'}
+        default_prog = {'bash', '-l'}
     }}
 }
