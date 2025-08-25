@@ -11,6 +11,6 @@ return {
         distribution = 'Ubuntu',
         username = 'souo',
         default_cwd = '/home/souo',
-        default_prog = {'bash', '-l'}
+        default_prog = {'zsh', '-l'}
     }}
 }
