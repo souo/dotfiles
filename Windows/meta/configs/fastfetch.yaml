@@ -1,5 +1,5 @@
-- create:
-    - ~/Appdata/Local/fastfetch/
+---
+- create: [~/Appdata/Local/fastfetch/]
 - link:
     ~/Appdata/Local/fastfetch/config.jsonc:
       force: true

@@ -1,3 +1,4 @@
+---
 - link:
     ~/.wslconfig:
       force: true

@@ -1,3 +1,4 @@
+---
 # Create commands specify empty directories to be created.
 - create:
     - ~/.local/share # local data

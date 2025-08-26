@@ -1,5 +1,5 @@
-- create:
-    - ~/.config/uv 
+---
+- create: [~/.config/uv]
 - link:
     ~/.config/uv/uv.toml:
       create: true

@@ -1,6 +1,7 @@
+---
 # Create commands specify empty directories to be created.
 - create:
-    - ~/.config/fastfetch #fastfetch config
+    - ~/.config/fastfetch  # fastfetch config
 - link:
     ~/.config/fastfetch/config.jsonc:
       create: true

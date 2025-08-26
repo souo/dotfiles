@@ -1,3 +1,4 @@
+---
 - link:
     ~/.gitignore:
       force: true

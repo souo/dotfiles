@@ -1,3 +1,4 @@
+---
 - create:
     - ~/.config/lazygit # lazygit config
 - link:

@@ -1,3 +1,4 @@
+---
 - link:
     ~/.ideavimrc:
       path: config/JetBrainIDEs/ideavim/.ideavimrc

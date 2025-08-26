@@ -1,3 +1,4 @@
+---
 - link:
     ~/.fzf.zsh: config/fzf/.fzf.zsh
     ~/.fzf.bash: config/fzf/.fzf.bash

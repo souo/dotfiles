@@ -1,3 +1,4 @@
+---
 - link:
     ~/Appdata/Local/volta/hooks.json:
       force: true

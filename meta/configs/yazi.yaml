@@ -1,6 +1,7 @@
+---
 # Create commands specify empty directories to be created.
 - create:
-    - ~/.config/yazi #yazi config
+    - ~/.config/yazi # yazi config
 
 - link:
     ~/.config/yazi/:

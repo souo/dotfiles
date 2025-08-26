@@ -1,3 +1,4 @@
+---
 - link:
     ~/.cargo/config.toml:
       path: config/cargo/config.toml

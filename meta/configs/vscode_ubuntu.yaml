@@ -1,4 +1,4 @@
-
+---
 - link:
     ~/.config/Code/User/settings.json:
       force: true

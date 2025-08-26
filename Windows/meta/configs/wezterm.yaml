@@ -1,8 +1,4 @@
-# Create commands specify empty directories to be created.
-- create:
-      - ~/.config/wezterm # wezterm config
-
+---
 - link:
-      ~/.config/wezterm:
-          force: true
-          path: config/terminals/wezterm
+    ~/.config/wezterm:
+      path: config/terminals/wezterm
