@@ -31,10 +31,10 @@ done
 unset file
 
 source $ZSH/oh-my-zsh.sh
-source $DOTFILES/fzf/.fzf.zsh
+source $DOTFILES/config/fzf/.fzf.zsh
 
 if [ "$(command -v oh-my-posh)" ]; then
-    eval "$(oh-my-posh init zsh --config $DOTFILES/zsh/pure.omp.json)"
+    eval "$(oh-my-posh init zsh --config $DOTFILES/config/zsh/pure.omp.json)"
 fi
 
 if [ "$(command -v zoxide)" ]; then

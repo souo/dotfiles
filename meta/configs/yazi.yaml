@@ -6,7 +6,7 @@
     ~/.config/yazi/:
       glob: true
       force: true
-      path: yazi/*.toml
+      path: config/yazi/*.toml
 
 - shell:
     - [cd ~/.config/yazi && ya pack -i, config yazi]

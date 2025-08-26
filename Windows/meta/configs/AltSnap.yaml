@@ -1,5 +1,4 @@
 - link:
     ~/AppData/Roaming/AltSnap/AltSnap.ini:
       glob: true
-      force: true
-      path: AltSnap/AltSnap.ini
+      path: Windows/AltSnap/AltSnap.ini

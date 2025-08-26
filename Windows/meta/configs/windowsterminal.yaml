@@ -1,4 +1,4 @@
 - link:
     ~/Appdata/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState\settings.json:
       force: true
-      path: terminals/windowsterminal/settings.json
+      path: config/terminals/windowsterminal/settings.json

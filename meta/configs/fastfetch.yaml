@@ -4,6 +4,6 @@
 - link:
     ~/.config/fastfetch/config.jsonc:
       create: true
-      path: fastfetch/config_mac.jsonc
+      path: config/fastfetch/config_mac.jsonc
     ~/.config/fastfetch/logos:
-      path: fastfetch/logos
+      path: config/fastfetch/logos

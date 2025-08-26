@@ -2,4 +2,4 @@
 - create:
     - ~/.tmux/plugins # tmux plugins
 - shell:
-    - [tmux/config.sh, config tmux]
+    - [config/tmux/config.sh, config tmux]

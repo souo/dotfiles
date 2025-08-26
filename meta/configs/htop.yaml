@@ -2,5 +2,5 @@
     - ~/.config/htop # htop config
 - link:
     ~/.config/htop/htoprc:
-      create: true
-      path: htop/htoprc
+      force: true
+      path: config/htop/htoprc

@@ -1,7 +1,6 @@
 - link:
-    ~/.fzf.zsh:
-      path: fzf/.fzf.zsh
-    ~/.fzf.bash: fzf/.fzf.bash
+    ~/.fzf.zsh: config/fzf/.fzf.zsh
+    ~/.fzf.bash: config/fzf/.fzf.bash
     ~/.fzfrc:
       force: true
-      path: fzf/.fzfrc
+      path: config/fzf/.fzfrc

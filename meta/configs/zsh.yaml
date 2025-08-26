@@ -1,8 +1,8 @@
 - link:
     ~/.aliases:
-      path: zsh/common/.aliases
+      path: config/zsh/common/.aliases
     ~/.zshrc:
       force: true
-      path: zsh/oh-my-zsh/.zshrc
+      path: config/zsh/oh-my-zsh/.zshrc
     ~/.env:
-      path: zsh/common/.env
+      path: config/zsh/common/.env

@@ -3,4 +3,4 @@
 - link:
     ~/.config/uv/uv.toml:
       create: true
-      path: uv/uv.toml
+      path: config/uv/uv.toml

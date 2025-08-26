@@ -5,10 +5,12 @@
 
 - link:
     ~/.config/bat/config:
-      path: bat/config
+      force: true
+      path: config/bat/config
     ~/.config/bat/themes/:
+      force: true
       glob: true
-      path: bat/themes/*.tmTheme
+      path: config/bat/themes/*.tmTheme
 
 - shell:
     - [bat cache --build, addings bat themes]

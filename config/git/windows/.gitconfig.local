@@ -4,7 +4,7 @@
 [user]
 	name = souo
 	email = souo.ven@gmail.com
-    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIeZztoOKpsxK/QIthOb4fivTKFsHNQFVc9h0SWNuN4E
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIeZztoOKpsxK/QIthOb4fivTKFsHNQFVc9h0SWNuN4E
 
 [merge]
 	tool = unityyamlmerge

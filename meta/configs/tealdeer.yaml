@@ -4,4 +4,5 @@
 
 - link:
     ~/.config/tealdeer/config.toml:
-      path: tealdeer/config.toml
+      force: true
+      path: config/tealdeer/config.toml

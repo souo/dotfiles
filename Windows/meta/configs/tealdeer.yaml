@@ -1,6 +1,5 @@
 - create:
-    - ~/Appdata/Roaming/tealdeer/tealdeer/
+      - ~/Appdata/Roaming/tealdeer/tealdeer/
 - link:
-    ~/Appdata/Roaming/tealdeer/tealdeer/config.toml:
-      force: true
-      path: tealdeer/config.toml
+      ~/Appdata/Roaming/tealdeer/tealdeer/config.toml:
+          path: config/tealdeer/config.toml

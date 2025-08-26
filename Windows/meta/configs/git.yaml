@@ -1,12 +1,12 @@
 - link:
     ~/.gitignore:
       force: true
-      path: git/.gitignore
+      path: config/git/.gitignore
     ~/.gitconfig:
       force: true
-      path: git/.gitconfig
+      path: config/git/.gitconfig
     ~/.gitconfig.local:
-      path: git/windows/.gitconfig.local
+      path: config/git/windows/.gitconfig.local
     ~/.gitattributes:
       force: true
-      path: git/.gitattributes
+      path: config/git/.gitattributes
