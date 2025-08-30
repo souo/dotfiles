@@ -2,3 +2,5 @@
 
 terminals/wezterm/backdrops/yf*.jpg
 .yarn
+node_modules
+.venv/

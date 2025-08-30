@@ -1,6 +1,6 @@
 ---
 - create:
-    - ~/.config/lazygit # lazygit config
+    - ~/.config/lazygit  # lazygit config
 - link:
     ~/.config/lazygit/config.yml:
       path: config/lazygit/config.yml

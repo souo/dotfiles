@@ -1,0 +1,12 @@
+---
+extends:
+  # helps write useful commit messages.
+  - hooks/commitizen/lefthook.yaml
+  # lint commit messages based by the conventional commits
+  - hooks/commitlint/lefthook.yaml
+  # lint shell scripts
+  - hooks/shellcheck/lefthook.yaml
+  # lint markdown files
+  - hooks/markdown-lint/lefthook.yaml
+  # lint yaml files
+  - hooks/yamllint/lefthook.yaml

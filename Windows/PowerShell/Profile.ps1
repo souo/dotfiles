@@ -66,6 +66,7 @@ function New-File {
 }
 
 
+
 # Environment Variables 🌐
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 $ENV:DotsLocalRepo = Find-DotsRepository -ProfilePath $PSScriptRoot
@@ -75,6 +76,8 @@ $ENV:_ZO_FZF_OPTS = '--color=fg:-1,fg+:#ffffff,bg:-1,bg+:#3c4048 --color=hl:#5ea
 $ENV:FNM_NODE_DIST_MIRROR = 'https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/'
 $ENV:NODE_MIRROR = 'https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/'
 $ENV:NVM_NODEJS_ORG_MIRROR = 'https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/'
+$ENV:GO111MODULE = "on"
+$ENV:GOPROXY = "https://mirrors.aliyun.com/goproxy/,direct"
 
 . (Join-Path -Path $ENV:DotsLocalRepo -ChildPath "PowerShell\functions\Git\Remove-MergedGitBranch.ps1" )
 . (Join-Path -Path $ENV:DotsLocalRepo -ChildPath "PowerShell\functions\Console\Out-Copy.ps1" )

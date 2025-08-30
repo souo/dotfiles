@@ -1,9 +1,8 @@
 ---
 # Create commands specify empty directories to be created.
 - create:
-    - ~/.config/bat # bat config
-    - ~/.config/bat/themes # bat themes
-
+    - ~/.config/bat  # bat config
+    - ~/.config/bat/themes  # bat themes
 - link:
     ~/.config/bat/config:
       force: true
@@ -12,6 +11,5 @@
       force: true
       glob: true
       path: config/bat/themes/*.tmTheme
-
 - shell:
     - [bat cache --build, addings bat themes]

@@ -1,9 +1,9 @@
 ---
 # Create commands specify empty directories to be created.
 - create:
-    - ~/.local/share # local data
-    - ~/.config # configuration files
-    - ~/code/projects # my projects
-    - ~/code/clones # read-only git clones
-    - ~/code/templates # read-only projects boilerplates
-    - ~/code/workspaces # code-station to try new stuff
+    - ~/.local/share  # local data
+    - ~/.config  # configuration files
+    - ~/code/projects  # my projects
+    - ~/code/clones  # read-only git clones
+    - ~/code/templates  # read-only projects boilerplates
+    - ~/code/workspaces  # code-station to try new stuff

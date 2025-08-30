@@ -1,3 +1,4 @@
+---
 - link:
     ~/Appdata/Roaming/bat/config:
       create: true
@@ -6,6 +7,5 @@
       create: true
       glob: true
       path: config/bat/themes/*.tmTheme
-
 - shell:
     - [bat cache --build, addings bat themes]
