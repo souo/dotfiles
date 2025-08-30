@@ -11,6 +11,7 @@ Work with PowerShell 7.x.
 Get-ExecutionPolicy
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 ```
+
 ### 2. run Setup as admin
 
 ```shell
