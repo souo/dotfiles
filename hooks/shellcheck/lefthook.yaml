@@ -5,4 +5,7 @@ pre-commit:
     shellcheck:
       glob: '*.sh'
       # https://github.com/koalaman/shellcheck/wiki
-      run: shellcheck {staged_files}
+      run: |
+        docker run --rm -v "${PWD}:/mnt" koalaman/shellcheck:stable {staged_files}
+      env:
+        LEFTHOOK_VERBOSE: true
