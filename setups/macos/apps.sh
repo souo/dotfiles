@@ -8,7 +8,7 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 . "$HERE/utils.sh"
 
 
-cask_apps=(1password Bartender dash ab-download-manager logseq notion obsidian raycast)
+cask_apps=(1password alfred bartender hazeover dash logseq notion obsidian tencent-lemon)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

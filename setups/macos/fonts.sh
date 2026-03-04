@@ -7,6 +7,12 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 . "$HERE/utils.sh"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+print_in_purple "\n   Fonts \n"
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 # JetBrainsMono Nerd Font
 brew_install "JetBrainsMono Nerd Font" "font-jetbrains-mono-nerd-font"
 brew_install "font-lxgw-wenkai" "font-lxgw-wenkai"

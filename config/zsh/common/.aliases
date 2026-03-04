@@ -3,7 +3,7 @@
 # common aliases
 #
 alias vim=nvim
-alias top=htop
+alias top=btm
 alias loc=tokei
 alias vsc="code ."
 

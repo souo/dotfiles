@@ -1,5 +1,6 @@
 - link:
     ~/.volta/hooks.json:
+      create: true
       force: true
       path: config/volta/hooks.json
 - shell:
