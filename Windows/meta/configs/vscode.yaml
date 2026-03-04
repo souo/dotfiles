@@ -1,0 +1,4 @@
+- link:
+    ~/AppData/Roaming/Code/User/settings.json:
+      force: true
+      path: vscode/settings.json

@@ -1,0 +1,8 @@
+---
+pre-commit:
+  commands:
+    # for a full documentation of the markdownlint-cli see
+    # https://github.com/DavidAnson/markdownlint
+    markdown lint:
+      glob: '*.md'
+      run: npx markdownlint --fix --dot {staged_files}

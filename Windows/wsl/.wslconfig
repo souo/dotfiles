@@ -1,0 +1,10 @@
+# Settings apply across all Linux distros running on WSL 2
+[wsl2]
+processors=2
+# Limits VM memory to use no more than 4 GB, this can be set as whole numbers using GB or MB
+memory=16GB
+
+# Turns on mirrored networking mod
+networkingMode=mirrored
+ipv6 = false
+dhcp = true

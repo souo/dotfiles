@@ -1,0 +1,24 @@
+{
+  "default": true,
+  // 规则 MD004：unordered-list-marker-style（无序列表符号样式）
+  // 控制无序列表的项目符号是 - 还是 * 或 +
+  // 可选值: "dash", "asterisk", "plus", "sublist"（混合）
+  // 这里我们强制使用短横线 `-` 作为无序列表符号
+  "MD004": {
+    "style": "dash"
+  },
+  // 规则 MD013：line-length（行长度限制）
+  // 默认：不允许超过 80 个字符的行
+  "MD013": false, // 关闭：不限制每行最大长度
+  // 规则 MD029：ordered-list-marker-value（有序列表起始数字风格）
+  // 控制有序列表是从 1 开始，还是允许任意数字
+  // "ordered": 强制从 1 开始
+  // "one_or_ordered": 允许任意，但同一列表内要一致
+  "MD029": {
+    "style": "one_or_ordered"
+  },
+  // 规则 MD033：no-inline-html（不允许行内 HTML 标签）
+  "MD033": false, // 关闭：允许行内 HTML 标签（比如 <br>）
+  // 规则 MD041：first-line-heading / first-line-h1
+  "MD041": false // 关闭： 不强制要求文档的第一个块是 H1 标题（# 标题）
+}

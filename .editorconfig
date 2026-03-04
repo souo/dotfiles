@@ -1,0 +1,50 @@
+# EditorConfig is awesome: https://editorconfig.org
+# top-most root editorconfig file
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+end_of_line = lf
+max_line_length = 100
+
+# Json files
+[*.json]
+indent_size = 2
+
+# Markdown files
+[*.{md,mkd,mkdn,mdwn,mdown,markdown,litcoffee}]
+indent_size = 4
+max_line_length = 80
+
+# Shell
+# ref:  https://google.github.io/styleguide/shellguide.html#s5-formatting
+[*.{bash,sh,zsh}]
+indent_size = 2
+max_line_length = 80
+
+
+[Makefile]
+indent_size = 8
+indent_style = tab
+
+# Python
+# ref:  https://www.python.org/dev/peps/pep-0008/
+[*.py]
+indent_style = space
+indent_size = 4
+trim_trailing_spaces = true
+max_line_length = 79
+
+
+# Visual Studio Solution Files
+[*.sln]
+indent_style = tab
+
+# Visual Studio XML Project Files
+[*.{csproj,vbproj,vcxproj.filters,proj,projitems,shproj}]
+indent_size = 2
+

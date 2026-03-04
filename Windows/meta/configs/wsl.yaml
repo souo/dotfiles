@@ -1,0 +1,4 @@
+- link:
+    ~/.wslconfig:
+      force: true
+      path: Windows/wsl/.wslconfig

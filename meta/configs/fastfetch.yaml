@@ -1,0 +1,9 @@
+#  Create commands specify empty directories to be created.
+- create:
+    - ~/.config/fastfetch # fastfetch config
+- link:
+    ~/.config/fastfetch/config.jsonc:
+      create: true
+      path: config/fastfetch/config_mac.jsonc
+    ~/.config/fastfetch/logos:
+      path: config/fastfetch/logos

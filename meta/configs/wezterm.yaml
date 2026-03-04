@@ -1,0 +1,4 @@
+- link:
+    ~/.config/wezterm:
+      force: true
+      path: config/terminals/wezterm

@@ -1,0 +1,67 @@
+{
+    "buckets": [
+        {
+            "Name": "main",
+            "Source": "https://gitee.com/scoop-installer/Main",
+            "Updated": "2026-01-25T04:29:36+08:00",
+            "Manifests": 1422
+        },
+        {
+            "Name": "extras",
+            "Source": "https://github.com/ScoopInstaller/Extras",
+            "Updated": "2026-01-25T08:49:46+08:00",
+            "Manifests": 2257
+        }
+    ],
+    "apps": [
+        {
+            "Info": "",
+            "Source": "main",
+            "Updated": "2025-12-18T14:52:18.6734072+08:00",
+            "Name": "7zip",
+            "Version": "25.01"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Updated": "2025-12-18T14:51:47.3761156+08:00",
+            "Name": "aria2",
+            "Version": "1.37.0-1"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Updated": "2025-12-18T14:56:37.5049723+08:00",
+            "Name": "curl",
+            "Version": "8.17.0_5"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Updated": "2025-12-18T15:15:23.1733019+08:00",
+            "Name": "gradle",
+            "Version": "9.2.1"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Updated": "2025-12-18T14:47:46.3555268+08:00",
+            "Name": "maven",
+            "Version": "3.9.12"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Updated": "2025-12-18T14:56:39.8979793+08:00",
+            "Name": "touch",
+            "Version": "0.2018.07.25"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Updated": "2026-01-25T11:41:54.6383188+08:00",
+            "Name": "zeal",
+            "Version": "0.7.2"
+        }
+    ]
+}

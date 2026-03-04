@@ -1,0 +1,7 @@
+---
+pre-commit:
+  # for a full documentation of the yamllint see
+  commands:
+    yamllint:
+      glob: '*.{yml,yaml}'
+      run: uv run yamllint {staged_files}

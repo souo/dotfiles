@@ -1,0 +1,3 @@
+- link:
+    ~/Appdata/Roaming/uv/uv.toml:
+      path: config/uv/uv.toml

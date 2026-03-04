@@ -1,0 +1,38 @@
+# Shell aliases only in this file.
+#
+# common aliases
+#
+alias vim=nvim
+alias top=htop
+alias loc=tokei
+alias vsc="code ."
+
+if [ "$(command -v xclip)" ]; then
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
+fi
+
+# Pipe my public key to my clipboard.
+if [ "$(command -v pbcopy)" ]; then
+    alias pubkey="more ~/.ssh/id_ed25519.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+fi
+
+#
+# inline utilities
+#
+# on Ubuntu the bat pkg is called 'batcat'
+if [[ -n "$(command -v batcat)" ]]; then alias bat='batcat'; fi
+
+# bat (cat(1) clone with wings)
+if [[ -n "$(command -v bat)" ]]; then
+    if alias cat >/dev/null 2>&1; then
+        unalias cat
+    fi
+    alias cat='bat -p'
+fi
+
+if command -v dpkg && dpkg --get-selections | grep -q 'fd-find'; then
+    alias fd=fdfind
+fi
+
+alias vibe='zellij --layout vibe'

@@ -1,0 +1,5 @@
+# Create commands specify empty directories to be created.
+- create:
+          - ~/.tmux/plugins # tmux plugins
+- shell:
+          - [config/tmux/config.sh, config tmux]

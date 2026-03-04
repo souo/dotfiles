@@ -1,0 +1,10 @@
+- link:
+    ~/.volta/hooks.json:
+      force: true
+      path: config/volta/hooks.json
+- shell:
+    - volta install node
+    - volta install npm
+    - volta install yarn
+    - volta install pnpm
+    - volta install bun

@@ -1,0 +1,105 @@
+[core]
+    abbrev = 12
+    attributesFile = ~/.gitattributes
+    autocrlf = input
+    editor = vim
+    excludesFile = ~/.gitignore
+
+[color "branch"]
+    current = green bold
+    local = green
+    remote = yellow
+
+[init]
+    defaultBranch = main
+
+[user]
+    # Do not guess the user's identity.
+    useConfigOnly = true
+
+[diff]
+	# Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
+	# https://blog.github.com/2018-04-05-git-217-released/
+	colorMoved = plain  # plain seems just _barely_ better than default.
+	# Detect copies in addition to renames
+	renames = copies
+	# A la `git submodule summary`
+	submodule = log
+	# Histogram is best. https://blog.gitbutler.com/how-git-core-devs-configure-git/
+	algorithm = histogram
+	tool = vscode
+
+[difftool "vscode"]
+	cmd = code --wait --diff \"$LOCAL\" \"$REMOTE\"
+
+[log]
+	# https://github.com/git/git/commit/acdd37769de8b0fe37a74bfc0475b63bdc55e9dc
+	date = human
+
+[merge]
+	tool = vscode
+
+[mergetool "vscode"]
+	cmd = code --wait --merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+
+[mergetool]
+	prompt = false
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+
+# push easily. http://stackoverflow.com/a/23918418/89484
+[push]
+	default = simple 
+	followTags = true # push annotated tags that are reachable from the pushed commits
+	autoSetupRemote = true
+[pull]
+	# ff if possible, otherwise, merge commit. I prefer merge commits vs rebase on pull.
+	ff = true
+	default = current
+	defaultRemote = origin
+
+# [!] DO NOT store sensitive information such as the Git user
+# credentials (`name` / `email`), or things such as the `signingkey`
+# in this file, add them in `~/.gitconfig.local`!
+
+[include]
+
+# Load local configs.
+# https://git-scm.com/docs/git-config#_includes
+#
+# [!] The following needs to remain at the end of this file in
+#     order to allow any of the above configs to be overwritten
+#     by the local ones
+
+    path = ~/.gitconfig.local
+    path = ~/.dotfiles/config/delta/delta.gitconfig
+		path = ~/.dotfiles/config/difftastic/difftastic.gitconfig
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[submodule]
+	recurse = true
+
+[fetch]
+	# prune stuff locally if it was deleted from the remote
+	prune = true
+	# all = true
+
+[stash]
+	showPatch = true
+
+[commit]
+	# include whole diff in message composition screen
+	verbose = true
+
+[rerere]
+	# remember conflict resolutions
+	enabled = true
+	autoupdate = true
+
+

@@ -1,0 +1,10 @@
+- link:
+    ~/.gitignore:
+      force: true
+      path: config/git/.gitignore
+    ~/.gitconfig:
+      force: true
+      path: config/git/.gitconfig
+    ~/.gitattributes:
+      force: true
+      path: config/git/.gitattributes

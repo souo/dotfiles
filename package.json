@@ -1,0 +1,26 @@
+{
+  "name": "dotfiles",
+  "description": "My dotfile",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "@changesets/cli": "^2.29.8",
+    "@commitlint/cli": "^20.4.0",
+    "@commitlint/config-conventional": "^20.4.0",
+    "@commitlint/cz-commitlint": "^20.4.0",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
+    "inquirer": "9.0.0",
+    "lefthook": "^2.0.16",
+    "markdownlint": "^0.40.0",
+    "markdownlint-cli": "^0.47.0"
+  },
+  "scripts": {
+    "commit": "cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
+  }
+}

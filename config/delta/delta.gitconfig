@@ -1,0 +1,21 @@
+[core]
+    pager = delta
+
+[delta]
+    max-line-length = 1400
+    # navigate = true  # eh. not great with short diffs.
+    dark = true      # or light = true, or omit for auto-detection
+    side-by-side = true
+    hyperlinks = true
+    hyperlinks-file-link-format = "vscode://file/{path}:{line}"
+	file-style = bold yellow ul
+	file-decoration-style = yellow ol ul
+	hunk-header-decoration-style = blue
+	hunk-header-line-number-style = purple bold
+
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+
+[merge]
+    conflictStyle = zdiff3
+

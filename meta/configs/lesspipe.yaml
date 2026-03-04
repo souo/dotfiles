@@ -1,0 +1,4 @@
+- link:
+      ~/.lessfilter:
+          force: true
+          path: config/lesspipe/lessfilter

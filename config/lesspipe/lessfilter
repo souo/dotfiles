@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+##
+# Filter for 'less' to convert input which is understood to be able to output coloured content.
+##
+
+if [[ "$1" = *.gif ]]; then
+  viu "$1"
+  exit 0;
+fi
+
+# let the default lesspipe handle it
+exit 1
+
+
