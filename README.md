@@ -41,7 +41,7 @@ Deploy environment-specific configurations using the smart wrapper:
 .\install-profile.ps1 windows
 ```
 
-> **Pro Tip**: Use `./install-profile.sh --dry-run <profile>` to preview changes without applying them.
+> **Pro Tip**: Use `./install-profile.sh --dry-run <profile>` to preview changes. Run `./bin/doctor.sh` to perform a full system health check.
 
 ---
 
