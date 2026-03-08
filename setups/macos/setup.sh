@@ -22,6 +22,7 @@ export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bot
 
 "$HERE"/set-defaults.sh
 "$HERE"/xcode.sh
+"$HERE"/shell_scripts.sh
 "$HERE"/homebrew.sh
 "$HERE"/browers.sh
 "$HERE"/git.sh

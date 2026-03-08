@@ -53,6 +53,11 @@
             "type": "memory"
         },
         {
+            "key": "│           │\u001b[11D{#38}󰉉 Disk",
+            "type": "disk",
+            "format": "{1} / {2} ({3})"
+        },
+        {
             "key": "│           │\u001b[11D{#39}󰓡 swap",
             "type": "swap"
         },

@@ -12,4 +12,6 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 print_in_purple "\n   lua \n"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+brew_install "lua" "lua"
 brew_install "luarocks" "luarocks"
+brew_install "lua@5.4" "lua@5.4"

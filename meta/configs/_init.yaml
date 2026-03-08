@@ -7,3 +7,4 @@
     - ~/code/clones # read-only git clones
     - ~/code/templates # read-only projects boilerplates
     - ~/code/workspaces # code-station to try new stuff
+    - ~/code/assets_lib # assets_libs for gamedev

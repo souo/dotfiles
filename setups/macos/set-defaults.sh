@@ -6,15 +6,19 @@ sudo -v
 # Save to disk (not to iCloud) by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
+
+
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
 # Disable the sound effects on boot
-sudo nvram SystemAudioVolume=" "
+sudo nvram StartupMute=%01
 
-# Run the screensaver if we're in the bottom-left hot corner.
-defaults write com.apple.dock wvous-bl-corner -int 5
-defaults write com.apple.dock wvous-bl-modifier -int 0
+# Move windows by dragging any part of the window
+defaults write -g NSWindowShouldDragOnGesture -bool true
+
+# Disable windows opening animations
+defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
 
 ###############################################################################
 # Finder                                                                      #
@@ -24,7 +28,7 @@ defaults write com.apple.dock wvous-bl-modifier -int 0
 defaults write com.apple.finder QuitMenuItem -bool true
 
 # Finder: show hidden files by default
-#defaults write com.apple.finder AppleShowAllFiles -bool true
+defaults write com.apple.finder AppleShowAllFiles -bool true
 
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true

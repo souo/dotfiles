@@ -19,3 +19,6 @@ print_in_purple "\n   Bash\n"
 printf "\n"
 
 brew_install "bash" "bash"
+brew_install "zsh" "zsh"
+brew_install "nushell" "nushell"
+brew_install "xonsh" "xonsh"

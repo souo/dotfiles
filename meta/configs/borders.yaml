@@ -1,0 +1,6 @@
+- create:
+    - ~/.config/borders # borders config
+- link:
+    ~/.config/borders/bordersrc:
+      force: true
+      path: config/borders/bordersrc

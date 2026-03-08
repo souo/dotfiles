@@ -1,0 +1,5 @@
+require("items.widgets.brew")
+require("items.widgets.volume")
+require("items.widgets.network")
+require("items.widgets.ram")
+require("items.widgets.cpu")

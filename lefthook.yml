@@ -1,7 +1,7 @@
 ---
 extends:
     # helps write useful commit messages.
-    - .lefthook/commitizen/lefthook.yaml
+    # - .lefthook/commitizen/lefthook.yaml
     # lint commit messages based by the conventional commits
     - .lefthook/commitlint/lefthook.yaml
     # lint shell scripts

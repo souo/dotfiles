@@ -7,14 +7,11 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 # shellcheck source=/dev/null
 . "$HERE/utils.sh"
 
-cask_apps=(1password alfred hazeover dash logseq notion obsidian tencent-lemon nikitabobko/tap/aerospace)
-
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-print_in_purple "\n   Apps \n"
+print_in_purple "\n   sketchybar\n"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-for app in "${cask_apps[@]}"; do
-    brew_install "$app" "$app" --cask
-done
+brew_tap "FelixKratz/formulae"
+brew_install "sketchybar" "sketchybar"
+brew_install "borders" "borders"

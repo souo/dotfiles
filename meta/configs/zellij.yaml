@@ -1,6 +1,7 @@
 - create:
       - ~/.config/zellij # zellij config
       - ~/.config/zellij/layouts # zellij layouts
+      - ~/.config/zellij/plugins # zellij layouts
 - link:
       ~/.config/zellij/config.kdl:
           path: config/zellij/config.kdl
