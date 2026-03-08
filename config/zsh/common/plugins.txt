@@ -16,6 +16,7 @@ ohmyzsh/ohmyzsh path:plugins/macos
 ohmyzsh/ohmyzsh path:plugins/brew
 
 # --- High Performance External Plugins ---
+romkatv/zsh-defer
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-completions

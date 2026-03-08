@@ -1,6 +1,6 @@
 # ==============================================================================
-# 🚀 Zsh Extreme Configuration (Powered by Antidote)
-# Managed by Dotfiles: https://github.com/yourusername/dotfiles
+# 🚀 Zsh Extreme Configuration (Zero-Delay Ready)
+# Optimized with zsh-defer and antidote
 # ==============================================================================
 
 # Fast-path for non-interactive shells
@@ -12,64 +12,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
-# --- 📦 Antidote (Plugin Manager) ---
-ANTIDOTE_DIR="$XDG_DATA_HOME/antidote"
-[[ ! -d "$ANTIDOTE_DIR" ]] && git clone --depth=1 https://github.com/mattmc3/antidote.git "$ANTIDOTE_DIR"
-source "$ANTIDOTE_DIR/antidote.zsh"
-
-# Compile plugins.txt into a static .zsh file for peak performance
-ANTIDOTE_PLUGINS_TXT="$DOTFILES/config/zsh/common/plugins.txt"
-ANTIDOTE_PLUGINS_ZSH="$XDG_CACHE_HOME/antidote/plugins.zsh"
-
-if [[ ! "$ANTIDOTE_PLUGINS_ZSH" -nt "$ANTIDOTE_PLUGINS_TXT" ]]; then
-    mkdir -p "$(dirname "$ANTIDOTE_PLUGINS_ZSH")"
-    antidote bundle < "$ANTIDOTE_PLUGINS_TXT" > "$ANTIDOTE_PLUGINS_ZSH"
-fi
-source "$ANTIDOTE_PLUGINS_ZSH"
-
-# --- 🛠️ Core Environment (Dotbot Managed) ---
-
-# Load exports first so tool-init can use them
-[[ -f ~/.env ]] && source ~/.env
-[[ -f ~/.aliases ]] && source ~/.aliases
-
-# Local/Private overrides (NOT tracked by git)
-for secret in ~/.{zsh_secret,localrc}; do
-    [[ -r "$secret" ]] && source "$secret"
-done
-unset secret
-
-# --- 🔧 Tool Initializations ---
-
-# FZF initialization
-source "$DOTFILES/config/fzf/.fzf.zsh"
-
-# Oh My Posh (Prompt)
-if command -v oh-my-posh >/dev/null; then
-    eval "$(oh-my-posh init zsh --config "$DOTFILES/config/oh-my-posh/custom.omp.json")"
-fi
-
-# Zoxide (Better CD)
-# zoxide
-if command -v zoxide >/dev/null; then
-    eval "$(zoxide init zsh)"
-fi
-
-# Atuin (Magical Shell History)
-if command -v atuin >/dev/null; then
-    # --disable-up-arrow: Keep default zsh up-arrow behavior if you prefer
-    eval "$(atuin init zsh --disable-up-arrow)"
-fi
-
-# Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-if [[ -d "$PYENV_ROOT" ]]; then
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
-fi
-
 # --- ⚡ Optimized Completion (Compinit) ---
-# Check for changes once a day
+# MUST be loaded before plugins that use compdef
 autoload -Uz compinit
 for dump in "$HOME/.zcompdump"(N.m-1); do
   compinit -C
@@ -79,7 +23,55 @@ if [[ -z "$dump" ]]; then
 fi
 unset dump
 
-# --- ✨ System Info (Interactive only) ---
-if [[ -o interactive ]] && command -v fastfetch >/dev/null; then
-    fastfetch
+# --- 📦 Antidote (Plugin Manager) ---
+ANTIDOTE_DIR="$XDG_DATA_HOME/antidote"
+[[ ! -d "$ANTIDOTE_DIR" ]] && git clone --depth=1 https://github.com/mattmc3/antidote.git "$ANTIDOTE_DIR"
+source "$ANTIDOTE_DIR/antidote.zsh"
+
+# Compile plugins.txt into a static .zsh file
+ANTIDOTE_PLUGINS_TXT="$DOTFILES/config/zsh/common/plugins.txt"
+ANTIDOTE_PLUGINS_ZSH="$XDG_CACHE_HOME/antidote/plugins.zsh"
+
+if [[ ! "$ANTIDOTE_PLUGINS_ZSH" -nt "$ANTIDOTE_PLUGINS_TXT" ]]; then
+    mkdir -p "$(dirname "$ANTIDOTE_PLUGINS_ZSH")"
+    antidote bundle < "$ANTIDOTE_PLUGINS_TXT" > "$ANTIDOTE_PLUGINS_ZSH"
+fi
+source "$ANTIDOTE_PLUGINS_ZSH"
+
+# --- 🛠️ Core Environment (Immediate Load) ---
+[[ -f ~/.env ]] && source ~/.env
+[[ -f ~/.aliases ]] && source ~/.aliases
+for secret in ~/.{zsh_secret,localrc}; do
+    [[ -r "$secret" ]] && source "$secret"
+done
+unset secret
+
+# --- 🔧 Tool Initializations (DEFERRED for zero delay) ---
+# We use zsh-defer to keep the initial prompt appearing instantly
+
+# Oh My Posh (Prompt) - Needs to be fast, but can be slightly deferred
+if command -v oh-my-posh >/dev/null; then
+    eval "$(oh-my-posh init zsh --config "$DOTFILES/config/oh-my-posh/custom.omp.json")"
+fi
+
+# Defer non-critical tools
+if command -v zsh-defer >/dev/null; then
+    # Zoxide (Better CD)
+    zsh-defer -c '[[ -n "$(command -v zoxide)" ]] && eval "$(zoxide init zsh)"'
+    
+    # Atuin (Magical Shell History)
+    zsh-defer -c '[[ -n "$(command -v atuin)" ]] && eval "$(atuin init zsh --disable-up-arrow)"'
+    
+    # FZF initialization
+    zsh-defer source "$DOTFILES/config/fzf/.fzf.zsh"
+    
+    # Pyenv
+    zsh-defer -c 'export PYENV_ROOT="$HOME/.pyenv"; [[ -d "$PYENV_ROOT" ]] && export PATH="$PYENV_ROOT/bin:$PATH" && command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"'
+    
+    # System Info
+    zsh-defer -c '[[ -o interactive ]] && command -v fastfetch >/dev/null && fastfetch'
+else
+    # Fallback if zsh-defer is not available yet
+    [[ -f "$DOTFILES/config/fzf/.fzf.zsh" ]] && source "$DOTFILES/config/fzf/.fzf.zsh"
+    [[ -n "$(command -v zoxide)" ]] && eval "$(zoxide init zsh)"
 fi

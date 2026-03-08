@@ -10,3 +10,18 @@ extends:
     - .lefthook/markdown-lint/lefthook.yaml
     # lint yaml files
     - .lefthook/yamllint/lefthook.yaml
+
+pre-commit:
+  parallel: true
+  commands:
+    check-executables:
+      glob: "*.sh"
+      run: |
+        failed=0
+        for file in {staged_files}; do
+          if [[ ! -x "$file" ]]; then
+            echo "❌ Error: $file is not executable. Run: chmod +x $file"
+            failed=1
+          fi
+        done
+        if [[ $failed -eq 1 ]]; then exit 1; fi

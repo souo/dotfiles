@@ -71,7 +71,7 @@ This repository uses a **Fragmented Dotbot System** for maximum flexibility:
 
 | Category | Tool | Description |
 | :--- | :--- | :--- |
-| **Shell** | [Zsh](https://www.zsh.org/) + [Antidote](https://getantidote.github.io/) | High-performance static plugin management. |
+| **Shell** | [Zsh](https://www.zsh.org/) + [Antidote](https://getantidote.github.io/) | High-performance static plugin management with `zsh-defer` for zero-delay startup. |
 | **Launcher** | [Raycast](https://www.raycast.com/) | Advanced launcher with script commands and deep integrations. |
 | **Prompt** | [Oh My Posh](https://ohmyposh.dev/) | Cross-shell theme engine for consistent aesthetics. |
 | **Editor** | [Neovim](https://neovim.io/) | Extensible editor with auto-syncing plugins & dependencies. |
