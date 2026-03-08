@@ -2,3 +2,6 @@
     ~/.config/raycast/scripts/dot-rebuild.sh:
       create: true
       path: bin/dot-rebuild.sh
+    ~/.config/raycast/scripts/dot-doctor.sh:
+      create: true
+      path: bin/doctor.sh
