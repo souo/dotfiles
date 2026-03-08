@@ -1,7 +1,7 @@
 {
   "name": "dotfiles",
   "description": "My dotfile",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "devDependencies": {
     "@changesets/cli": "^2.29.8",
@@ -16,7 +16,9 @@
     "markdownlint-cli": "^0.47.0"
   },
   "scripts": {
-    "commit": "cz"
+    "commit": "cz",
+    "change": "changeset",
+    "version": "changeset version && bun install"
   },
   "config": {
     "commitizen": {

@@ -1,0 +1,24 @@
+## 🕒 Atuin Configuration
+## https://docs.atuin.sh/configuration/config/
+
+# --- Sync ---
+auto_sync = true
+update_check = true
+
+# --- Appearance ---
+# Available styles: "full", "compact"
+style = "full"
+inline_height = 0
+show_preview = true
+
+# --- Search ---
+# Available modes: "prefix", "fulltext", "fuzzy", "skims"
+search_mode = "fuzzy"
+
+# --- Filter ---
+# Default filter mode: "global", "host", "session", "directory"
+filter_mode = "global"
+
+# --- Keybindings ---
+# use_iterm2 = true
+# enter_accept = true

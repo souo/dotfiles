@@ -10,8 +10,8 @@ $ErrorActionPreference = "Stop"
 $BASE_CONFIG = "base"
 $CONFIG_SUFFIX = ".yaml"
 
-$META_DIR = "Windows/meta"
-$CONFIG_DIR = "configs"
+$META_DIR = "meta"
+$CONFIG_DIR = "configs/windows"
 $PROFILES_DIR = "profiles"
 
 $DOTBOT_DIR = "dotbot"
@@ -62,3 +62,13 @@ finally {
         $tempFiles.Dispose() #Deletes all temp files
     }
 }
+
+Write-Output "`n🔍 Checking for dead links in $HOME ..."
+Get-ChildItem -Path $HOME -Depth 1 -Attributes ReparsePoint | ForEach-Object {
+    $target = (Get-Item $_.FullName).Target
+    if ($target -like "*$BASEDIR*" -and -not (Test-Path $target)) {
+        Write-Warning "Found dead link: $($_.FullName) -> $target"
+    }
+}
+
+Write-Output "`n✅ Finished deploying $ProfileName!"

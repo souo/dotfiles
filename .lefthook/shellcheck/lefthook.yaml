@@ -3,9 +3,7 @@ pre-commit:
   parallel: true
   commands:
     shellcheck:
-      glob: '*.sh'
-      # https://github.com/koalaman/shellcheck/wiki
-      run: |
-        docker run --rm -v "$PWD:/mnt" koalaman/shellcheck:stable {staged_files}
+      glob: '*.{sh,bash,zsh}'
+      run: shellcheck -x {staged_files}
       env:
         LEFTHOOK_VERBOSE: true

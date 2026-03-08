@@ -1,0 +1,4 @@
+- link:
+    ~/.config/karabiner/karabiner.json:
+      create: true
+      path: config/karabiner/karabiner.json

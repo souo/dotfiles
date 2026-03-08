@@ -1,8 +1,15 @@
 ---
-# dotbot
+# dotbot base configuration
 # https://github.com/anishathalye/dotbot
+
 - defaults:
     link:
       relink: true
-# specify directories that should be checked for dead symbolic links.
-- clean: ['~']
+      create: true
+      force: true
+
+# Clean up dead symbolic links in common directories
+- clean:
+    - '~'
+    - '~/.config'
+    - '~/.local/bin'

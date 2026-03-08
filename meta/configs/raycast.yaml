@@ -1,0 +1,4 @@
+- link:
+    ~/.config/raycast/scripts/dot-rebuild.sh:
+      create: true
+      path: bin/dot-rebuild.sh

@@ -1,83 +1,85 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# ==============================================================================
+# 🚀 Zsh Extreme Configuration (Powered by Antidote)
+# Managed by Dotfiles: https://github.com/yourusername/dotfiles
+# ==============================================================================
+
+# Fast-path for non-interactive shells
+[[ "$TERMINAL_CONTEXT" == "non-interactive" ]] && return
+
+# 📂 Paths & Globals
 export DOTFILES="$HOME/.dotfiles"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
 
-# no more asking to update!
-DISABLE_UPDATE_PROMPT=true
+# --- 📦 Antidote (Plugin Manager) ---
+ANTIDOTE_DIR="$XDG_DATA_HOME/antidote"
+[[ ! -d "$ANTIDOTE_DIR" ]] && git clone --depth=1 https://github.com/mattmc3/antidote.git "$ANTIDOTE_DIR"
+source "$ANTIDOTE_DIR/antidote.zsh"
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-if [[ "$(uname -s)" == 'Darwin' ]]; then
-    plugins=(git macos docker brew eza vscode fzf-tab fzf-tab-source)
+# Compile plugins.txt into a static .zsh file for peak performance
+ANTIDOTE_PLUGINS_TXT="$DOTFILES/config/zsh/common/plugins.txt"
+ANTIDOTE_PLUGINS_ZSH="$XDG_CACHE_HOME/antidote/plugins.zsh"
+
+if [[ ! "$ANTIDOTE_PLUGINS_ZSH" -nt "$ANTIDOTE_PLUGINS_TXT" ]]; then
+    mkdir -p "$(dirname "$ANTIDOTE_PLUGINS_ZSH")"
+    antidote bundle < "$ANTIDOTE_PLUGINS_TXT" > "$ANTIDOTE_PLUGINS_ZSH"
 fi
-if [[ "$(uname -s)" == 'Linux' ]]; then
-    plugins=(git eza vscode )
-fi
+source "$ANTIDOTE_PLUGINS_ZSH"
 
-zstyle ':omz:plugins:eza' 'icons' yes
+# --- 🛠️ Core Environment (Dotbot Managed) ---
 
-ZSH_THEME=""
+# Load exports first so tool-init can use them
+[[ -f ~/.env ]] && source ~/.env
+[[ -f ~/.aliases ]] && source ~/.aliases
 
-source $ZSH/oh-my-zsh.sh
-
-if [[ "$(uname -s)" == 'Darwin' ]]; then
-
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-
-    if brew list "zsh-autosuggestions" &>/dev/null; then
-        source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    fi
-
-    # https://github.com/zsh-users/zsh-syntax-highlighting?tab=readme-ov-file#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file
-    if brew list "zsh-syntax-highlighting" &>/dev/null; then
-        source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    fi
-else
-    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
-if [[ -e ~/.localrc ]]; then
-    source ~/.localrc
-fi
-
-for file in ~/.{env,aliases}; do
-    if [[ -r "$file" ]] && [[ -f "$file" ]]; then
-        # shellcheck source=/dev/null
-        source "$file"
-    fi
+# Local/Private overrides (NOT tracked by git)
+for secret in ~/.{zsh_secret,localrc}; do
+    [[ -r "$secret" ]] && source "$secret"
 done
-unset file
+unset secret
 
-source $DOTFILES/config/fzf/.fzf.zsh
+# --- 🔧 Tool Initializations ---
 
+# FZF initialization
+source "$DOTFILES/config/fzf/.fzf.zsh"
 
-# oh-my-posh
-if [ "$(command -v oh-my-posh)" ]; then
-    if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-        eval "$(oh-my-posh init zsh --config $DOTFILES/config/oh-my-posh/custom.omp.json)"
-    fi
+# Oh My Posh (Prompt)
+if command -v oh-my-posh >/dev/null; then
+    eval "$(oh-my-posh init zsh --config "$DOTFILES/config/oh-my-posh/custom.omp.json")"
 fi
 
-if [ "$(command -v zoxide)" ]; then
+# Zoxide (Better CD)
+# zoxide
+if command -v zoxide >/dev/null; then
     eval "$(zoxide init zsh)"
 fi
 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-
-if [ "$(command -v pyenv)" ]; then
-    eval "$(pyenv init - zsh)"
+# Atuin (Magical Shell History)
+if command -v atuin >/dev/null; then
+    # --disable-up-arrow: Keep default zsh up-arrow behavior if you prefer
+    eval "$(atuin init zsh --disable-up-arrow)"
 fi
 
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/2z/.docker/completions $fpath)
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+if [[ -d "$PYENV_ROOT" ]]; then
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"
+fi
+
+# --- ⚡ Optimized Completion (Compinit) ---
+# Check for changes once a day
 autoload -Uz compinit
-compinit
-# End of Docker CLI completions
+for dump in "$HOME/.zcompdump"(N.m-1); do
+  compinit -C
+done
+if [[ -z "$dump" ]]; then
+  compinit
+fi
+unset dump
 
-fastfetch
-
+# --- ✨ System Info (Interactive only) ---
+if [[ -o interactive ]] && command -v fastfetch >/dev/null; then
+    fastfetch
+fi

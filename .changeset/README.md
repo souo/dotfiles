@@ -7,7 +7,7 @@
 当你完成一个功能或修复后，运行：
 
 ```bash
-npx @changesets/cli
+bunx @changesets/cli
 ```
 
 然后按照提示：
@@ -32,10 +32,10 @@ npx @changesets/cli
 
 ```bash
 # 1. 创建变更记录
-npx changeset
+bunx changeset
 
 # 2. 更新版本（会更新 package.json 和 CHANGELOG.md）
-npx changeset version
+bunx changeset version
 
 # 3. 提交更改
 git add .

@@ -1,0 +1,59 @@
+i{
+  // --- Editor Appearance ---
+  "editor.fontSize": 14,
+  "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Menlo', 'Monaco', 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.lineNumbers": "on",
+  "editor.minimap.enabled": false,
+  "editor.renderWhitespace": "selection",
+  "editor.cursorStyle": "block",
+  "editor.cursorBlinking": "expand",
+  "workbench.iconTheme": "catppuccin-mocha",
+  "workbench.colorTheme": "Vitesse Dark",
+  // --- Editor Behavior ---
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.wordWrap": "on",
+  "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.unicodeHighlight.nonBasicASCII": false,
+  // --- Files & Search ---
+  "files.autoSave": "afterDelay",
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.venv": true
+  },
+  "files.associations": {
+    "*.json": "jsonc"
+  },
+  // --- Terminal ---
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font'",
+  "terminal.integrated.cursorStyle": "block",
+  "terminal.integrated.copyOnSelection": true,
+  // --- Extensions Specific ---
+  "git.autofetch": true,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  // --- Language Specific Defaults ---
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "window.zoomLevel": 1,
+  "workbench.productIconTheme": "icons-carbon"
+}

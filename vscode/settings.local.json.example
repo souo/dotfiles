@@ -1,0 +1,16 @@
+{
+  // ===================================================================
+  // 🤫 Machine-Specific VSCode Settings (NOT tracked by git)
+  // Copy this file to ~/.vscode/settings.local.json (or appropriate path)
+  // if you want to override common settings.
+  // ===================================================================
+
+  // Example: Override font size for a larger screen
+  "editor.fontSize": 18,
+
+  // Example: Change terminal path for specific machine
+  "terminal.integrated.defaultProfile.osx": "zsh",
+
+  // Example: Disable some heavy extensions on a low-end laptop
+  "gitlens.enabled": false
+}

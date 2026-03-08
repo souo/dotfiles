@@ -33,6 +33,11 @@ export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bot
 "$HERE"/lua.sh
 "$HERE"/volta.sh
 "$HERE"/cmdline.sh
+"$HERE"/dust.sh
+"$HERE"/atuin.sh
+"$HERE"/lazydocker.sh
+"$HERE"/karabiner.sh
+"$HERE"/raycast.sh
 "$HERE"/apps.sh
 "$HERE"/zsh.sh
 "$HERE"/image-tools.sh

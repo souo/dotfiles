@@ -4,6 +4,7 @@ set -e
 
 HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
+# shellcheck source=./../utils.sh
 . "$HERE/../utils.sh"
 # shellcheck source=/dev/null
 
@@ -36,4 +37,7 @@ else
   "${HERE}"/fastfetch.sh
 fi
 
+"${HERE}"/dust.sh
+"${HERE}"/atuin.sh
+"${HERE}"/lazydocker.sh
 "${HERE}"/cleanup.sh

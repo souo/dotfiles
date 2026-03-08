@@ -1,0 +1,42 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/base-ubuntu
+{
+	"name": "Dotfiles Development Environment",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		"ghcr.io/devcontainers/features/node:1": {
+			"nodeVersion": "lts"
+		}
+	},
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"redhat.vscode-yaml",
+				"timonwong.shellcheck",
+				"yzhang.markdown-all-in-one",
+				"catppuccin.catppuccin-vsc",
+				"catppuccin.catppuccin-vsc-icons",
+				"atlassian.atlascode", // Changesets support
+				"charliermarsh.ruff",  // Python linting
+				"ms-python.python",
+				"eamodio.gitlens"
+			],
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "zsh"
+			}
+		}
+	},
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "./.devcontainer/post-create.sh",
+
+	// Configure the remote user.
+	"remoteUser": "vscode"
+}

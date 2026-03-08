@@ -1,0 +1,18 @@
+# Ignore large/irrelevant directories
+node_modules/
+.venv/
+venv/
+.git/
+dotbot/
+
+# Ignore lock files
+bun.lock
+uv.lock
+package-lock.json
+
+# Ignore build artifacts
+dist/
+build/
+out/
+*.bak
+*.tmp

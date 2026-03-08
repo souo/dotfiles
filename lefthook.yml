@@ -5,7 +5,7 @@ extends:
     # lint commit messages based by the conventional commits
     - .lefthook/commitlint/lefthook.yaml
     # lint shell scripts
-    # - hooks/shellcheck/lefthook.yaml
+    - .lefthook/shellcheck/lefthook.yaml
     # lint markdown files
     - .lefthook/markdown-lint/lefthook.yaml
     # lint yaml files

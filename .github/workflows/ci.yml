@@ -1,0 +1,57 @@
+name: Lint & Test
+
+on:
+  push:
+    "branches": ["develope", "main"]
+  pull_request:
+    "branches": ["develope", "main"]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: './setups ./bin'
+          severity: warning
+
+      - name: Yaml Lint
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: 'meta/configs'
+          config_file: '.yamllint'
+
+      - name: Markdown Lint
+        run: bunx markdownlint-cli "**/*.md" --ignore node_modules
+
+  test-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Test Ubuntu Profile (Dry-run)
+        run: |
+          chmod +x ./install-profile.sh
+          ./install-profile.sh --dry-run ubuntu
+
+      - name: Test WSL Profile (Dry-run)
+        run: |
+          ./install-profile.sh --dry-run wsl
