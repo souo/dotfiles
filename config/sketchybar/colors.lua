@@ -1,4 +1,4 @@
-return {
+local colors = {
     default = 0x80ffffff,
     black = 0xff181819,
     white = 0xffffffff,
@@ -14,25 +14,27 @@ return {
     transparent = 0x00000000,
 
     bar = {
-        bg = 0xf0181819,  -- Dark with slight transparency
+        bg = 0xf0181819,
         border = 0xff2c2e34,
     },
 
     popup = {
-        bg = 0xFF1d1b2d,
+        bg = 0xff1d1b2d,
         border = 0xff7f8490
     },
 
-    bg1 = 0xFF1d1b2d,
+    bg1 = 0xff1d1b2d,
     bg2 = 0xe0313436,
 
-    accent = 0xFFb482c2,
+    accent = 0xffb482c2,
     accent_bright = 0x33efc2fc,
 
     spotify_green = 0xe040a02b,
-
-    with_alpha = function(color, alpha)
-        if alpha > 1.0 or alpha < 0.0 then return color end
-        return (color & 0x00ffffff) | (math.floor(alpha * 255.0) << 24)
-    end,
 }
+
+function colors.with_alpha(color, alpha)
+    alpha = alpha or 1.0
+    return (color & 0x00ffffff) | (math.floor(alpha * 255.0) << 24)
+end
+
+return colors

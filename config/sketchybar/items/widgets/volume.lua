@@ -2,7 +2,7 @@ local colors = require("colors")
 local icons = require("icons")
 local settings = require("settings")
 
-local popup_width = 180 
+local popup_width = 180
 
 -- Volume percentage display
 local volume_percent = sbar.add("item", "widgets.volume1", {
@@ -59,8 +59,8 @@ local volume_device_output = sbar.add("item", "volume.device.output", {
     width = popup_width,
     align = "left",
     icon = { drawing = false },
-    label = { 
-        string = "Output: Loading...", 
+    label = {
+        string = "Output: Loading...",
         padding_left = 15,
         padding_right = 15,
         font = {
@@ -77,9 +77,9 @@ local volume_device_input = sbar.add("item", "volume.device.input", {
     width = popup_width,
     align = "left",
     icon = { drawing = false },
-    label = { 
-        string = "Input: Loading...", 
-        padding_left = 15, 
+    label = {
+        string = "Input: Loading...",
+        padding_left = 15,
         padding_right = 15,
         font = {
           family = settings.font.zh_cn,
@@ -101,10 +101,10 @@ local volume_slider = sbar.add("slider", popup_width, {
         knob = {
             string = "",
             drawing = true,
-            font = { 
-              family = settings.font.text, 
+            font = {
+              family = settings.font.text,
               style = settings.font.style_map["Regular"],
-              size = 14.0 
+              size = 14.0
             },
         },
     },
@@ -122,7 +122,7 @@ local volume_settings = sbar.add("item", "volume.settings", {
     position = "popup." .. volume_bracket.name,
     width = popup_width,
     align = "left",
-    icon = { 
+    icon = {
         string = " ", -- 使用 Nerd Font 的齿轮图标 (如果显示乱码可以换成 SF Symbol 􀍟)
         padding_left = 15,
         font = {
@@ -131,7 +131,7 @@ local volume_settings = sbar.add("item", "volume.settings", {
           size = 14,
         }
     },
-    label = { 
+    label = {
         string = "声音设置",
         padding_left = 5,
         font = {
@@ -184,23 +184,23 @@ local function volume_toggle_details(env)
         sbar.exec("SwitchAudioSource -t output -c -f human", function(result)
             -- 使用 gsub 去除字符串前后的空格和换行符
             local device = result:gsub("^%s*(.-)%s*$", "%1")
-            
+
             -- 判断是否为空，或者包含错误提示
             if device == "" or device:find("Could not find") then
                 device = "未找到输出设备"
             end
-            
+
             volume_device_output:set({ label = { string = "输出: " .. device } })
         end)
-        
+
         -- 获取并更新当前输入设备 (麦克风)
         sbar.exec("SwitchAudioSource -t input -c -f human", function(result)
             local device = result:gsub("^%s*(.-)%s*$", "%1")
-            
+
             if device == "" or device:find("Could not find") then
                 device = "未找到输入设备"
             end
-            
+
             volume_device_input:set({ label = { string = "输入: " .. device } })
         end)
     else
