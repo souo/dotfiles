@@ -67,11 +67,14 @@ if command -v zsh-defer >/dev/null; then
     
     # Pyenv
     zsh-defer -c 'export PYENV_ROOT="$HOME/.pyenv"; [[ -d "$PYENV_ROOT" ]] && export PATH="$PYENV_ROOT/bin:$PATH" && command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"'
-    
-    # System Info
-    zsh-defer -c '[[ -o interactive ]] && command -v fastfetch >/dev/null && fastfetch'
 else
     # Fallback if zsh-defer is not available yet
     [[ -f "$DOTFILES/config/fzf/.fzf.zsh" ]] && source "$DOTFILES/config/fzf/.fzf.zsh"
     [[ -n "$(command -v zoxide)" ]] && eval "$(zoxide init zsh)"
+fi
+
+# --- ✨ System Info (Immediate Load) ---
+# We want this to appear BEFORE the prompt is ready
+if [[ -o interactive ]] && command -v fastfetch >/dev/null; then
+    fastfetch
 fi
