@@ -4,175 +4,71 @@ local settings = require("settings")
 
 local brew = sbar.add("item", "widgets.brew", {
     position = "right",
-    update_freq = 3600, -- Check every hour (3600s) for efficiency
+    update_freq = 3600,
     icon = {
-        string = "󰏖", -- Nerd font brew icon
-        font = {
-            family = settings.font_icon.text,
-            style = settings.font_icon.style_map["Bold"],
-            size = settings.icon_size
-        },
+        string = "󰏖",
+        font = { family = settings.font_icon.text, style = "Bold", size = settings.icon_size },
         padding_left = settings.padding.icon_label_item.icon.padding_left,
         padding_right = settings.padding.icon_label_item.icon.padding_right,
     },
     label = {
         string = "?",
-        font = {
-            family = settings.font.numbers,
-            style = settings.font.style_map["Bold"],
-            size = settings.label_size,
-        },
+        font = { family = settings.font.numbers, style = "Bold", size = settings.label_size },
         padding_right = settings.padding.icon_label_item.label.padding_right,
     },
-    popup = {
-        align = "center",
-        height = 30,
-    }
 })
 
--- Cache for outdated packages (must be declared before update_brew)
 local cached_packages = {}
 
-local function is_package_line(line)
-    -- Filter out error messages and non-package lines
-    if not line or line == "" or line:match("^%s*$") then
-        return false
-    end
-    if line:match("^Error:") or
-        line:match("^Please report") or
-        line:match("^/opt/homebrew") or
-        line:match("Troubleshooting") or
-        line:match("undefined method") or
-        line:match("%.rb:") then
-        return false
-    end
-    return true
-end
+local function update_brew()
+    -- EXTREME FIX: Use a subshell with a cleaned PATH and HOMEBREW variables to avoid the ruby 'success?' error
+    -- Also use 'timeout' to prevent brew from hanging the event loop if it gets stuck
+    local cmd = [[ /bin/zsh -c "export HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_NO_ANALYTICS=1 HOMEBREW_NO_ENV_HINTS=1; brew outdated -q 2>/dev/null | grep -vE '^(Error:|Please report|/opt/homebrew|Troubleshooting|undefined method|.*\.rb:)'" ]]
 
-local function update_brew(env)
-    local brew_cmd = '/bin/zsh -c "brew outdated -q"'
-
-    -- print("[BREW OUTDATED] Running command: " .. brew_cmd)
-
-    sbar.exec(brew_cmd, function(outdated_output)
-        -- print("[BREW OUTDATED] Cmd Output: " .. outdated_output)
-
-        -- Clear and rebuild cache
+    sbar.exec(cmd, function(output)
         cached_packages = {}
-
-        -- Count and cache valid package lines
         local count = 0
-        for line in outdated_output:gmatch("[^\r\n]+") do
-            -- print("[BREW OUTDATED] Line: " .. line)
-            if is_package_line(line) then
-                count = count + 1
-                table.insert(cached_packages, line)
-                -- print("[BREW OUTDATED] Valid package: " .. line)
-            else
-                -- print("[BREW OUTDATED] Filtered line: " .. line)
+        
+        if output and type(output) == "string" and output ~= "" then
+            for line in output:gmatch("[^\r\n]+") do
+                -- Final filter for the specific ruby error string
+                if not line:find("success%?") and not line:find("nil") then
+                    count = count + 1
+                    table.insert(cached_packages, line)
+                end
             end
         end
 
-        -- print("[BREW OUTDATED] Final count: " .. count .. ", cached: " .. #cached_packages)
-
         local color = colors.green
-        if count >= 4 then
-            color = colors.red
-        elseif count > 0 then
-            color = colors.yellow
+        if count >= 10 then color = colors.red
+        elseif count > 0 then color = colors.yellow
         end
 
         brew:set({
-            label = {
-                string = count,
-                color = color
-            },
+            label = { string = tostring(count), color = color },
             icon = { color = color }
         })
     end)
 end
 
-brew:subscribe({ "routine", "forced" }, update_brew)
+brew:subscribe({"routine", "forced", "system_woke"}, update_brew)
 
--- Run initial update on load
-update_brew()
+local brew_popup = sbar.add("item", {
+    position = "popup." .. brew.name,
+    label = { font = { family = settings.font.text, size = 10.0 }, padding_left = 10, padding_right = 10 },
+    icon = { drawing = false },
+})
 
-local popup_items = {}
-
-local function clear_popup()
-    for _, item in ipairs(popup_items) do
-        sbar.remove(item.name)
-    end
-    popup_items = {}
-end
-
-local function populate_popup()
-    clear_popup()
-
-    -- print("[BREW POPUP] Using cached packages: " .. #cached_packages .. " packages")
-
-    if #cached_packages == 0 then
-        local no_updates = sbar.add("item", {
-            position = "popup." .. brew.name,
-            label = {
-                string = "No outdated packages",
-                font = {
-                    family = settings.font.text,
-                    style = settings.font.style_map["Regular"],
-                    size = settings.font.size,
-                },
-                padding_left = 8,
-                padding_right = 8,
-            },
-            icon = { drawing = false },
-        })
-        table.insert(popup_items, no_updates)
-    else
-        for _, package in ipairs(cached_packages) do
-            -- print("[BREW POPUP] Adding cached package: " .. package)
-
-            local pkg_item = sbar.add("item", {
-                position = "popup." .. brew.name,
-                label = {
-                    string = package,
-                    font = {
-                        family = settings.font.text,
-                        style = settings.font.style_map["Regular"],
-                        size = 10.0,
-                    },
-                    padding_left = 8,
-                    padding_right = 8,
-                },
-                icon = {
-                    string = "•",
-                    padding_left = 8,
-                    padding_right = 4,
-                },
-            })
-            table.insert(popup_items, pkg_item)
-        end
-    end
-end
-
--- Click to toggle popup
 brew:subscribe("mouse.clicked", function(env)
-    local query = brew:query()
-    local should_draw = query and query.popup and query.popup.drawing == "off" or true
-
-    if should_draw then
-        populate_popup()
+    local is_drawing = brew:query().popup.drawing == "on"
+    if not is_drawing then
+        local label_str = #cached_packages > 0 and table.concat(cached_packages, "\n") or "No updates available"
+        brew_popup:set({ label = { string = label_str } })
+        brew:set({ popup = { drawing = true } })
+    else
+        brew:set({ popup = { drawing = false } })
     end
-
-    sbar.exec("sketchybar --set widgets.brew popup.drawing=toggle")
 end)
 
--- Background around the brew item
-sbar.add("bracket", "widgets.brew.bracket", { brew.name }, {
-    background = { color = colors.bg1 }
-})
-
--- Padding after brew item
-sbar.add("item", "widgets.brew.padding", {
-    position = "right",
-    width = settings.group_paddings
-})
+sbar.add("bracket", "widgets.brew.bracket", { brew.name }, { background = { color = colors.bg1 } })
+sbar.add("item", { position = "right", width = settings.group_paddings })

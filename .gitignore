@@ -39,3 +39,8 @@ tmp/
 dist/
 build/
 out/
+
+
+### Lua ###
+# Compiled Lua sources
+luac.out

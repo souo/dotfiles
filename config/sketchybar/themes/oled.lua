@@ -1,0 +1,17 @@
+return {
+    white       = 0xffffffff,
+    black       = 0xff000000,
+    grey        = 0xff444444,
+    red         = 0xffff0000,
+    green       = 0xff00ff00,
+    yellow      = 0xffffff00,
+    blue        = 0xff00ccff,
+    orange      = 0xffff9900,
+    magenta     = 0xffff00ff,
+    cyan        = 0xff00ffff,
+    bar         = { bg = 0xff000000, border = 0x66ffffff },
+    popup       = { bg = 0xff000000, border = 0xff333333 },
+    bg1         = 0x44222222,
+    bg2         = 0x66333333,
+    accent      = 0xff00ffff,
+}

@@ -1,4 +1,5 @@
--- require("items.apple")
+--require("items.apple")
+require("items.custom_menu")
 -- require("items.menus")
 require("items.calendar")
 require("items.widgets")
