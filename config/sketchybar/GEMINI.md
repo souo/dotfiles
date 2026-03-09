@@ -1,0 +1,109 @@
+
+# SketchyBar Lua
+
+## Important Remarks
+
+Calling shell functions using os.execute or io.popen should be avoided. This is because these functions will block the entire lua event handler thread. Instead use:
+
+sbar.exec(<command>, [Optional: <lua_function>])
+where the <command> can be any regular shell command. This function is truly async, which means that the command is executed without blocking the event thread. If you depend on the result of the <command> you can optionally specify a function as a completion handler, which will receive the result of the command as the first argument. Additionally, should the result have a JSON structure, it will be parsed into a LUA table. E.g.:
+
+sbar.exec("sleep 5 && echo TEST", function(result, exit_code)
+  print(result)
+end)
+
+
+## LUA API
+### Bar Domain
+```lua
+sbar.bar(<property_table>)
+```
+where the `<property_table>` is a lua table with key value pairs. The possible
+key-value pairs are the same as stated in the sketchybar documentation.
+
+The shell SketchyBar API uses dots to indicate sub-properties, e.g.
+`icon.y_offset=10 icon.width=50`, in this LUA API all dots are substituted by
+sub-tables, i.e. `icon = { y_offset = 10, width = 50 }`.
+
+### Default Domain
+```lua
+sbar.default(<property_table>)
+```
+
+### Add Domain
+```lua
+local item = sbar.add(<"item", "space", "alias">, <optional: name>, <property_table>)
+local bracket = sbar.add("bracket", <optional: name>, <member_table>, <property_table>)
+local slider = sbar.add(<"slider", "graph">, <optional: name>, <width>, <property_table>)
+local event = sbar.add("event", <name>, <optional: NSDistributedNotification>)
+```
+The `<name>` is the identifier of the item, if no identifier is specified, it
+is generated automatically,
+such that the `local item` can be used in the following to target this
+item with further commands.
+
+Depending on the type there might be additional arguments that can (or must)
+be supplied e.g. if the `type` is `bracket`, the add command takes a list of
+members as a third argument and the property table as the fourth argument. If
+the `type` is `event` the `<property_table>` is replaced by an optional `NSDistributedNotificationCenter` notification name.
+
+### Set Domain
+```lua
+item:set(<property_table>)
+```
+
+### Subscribe Domain
+```lua
+item:subscribe(<event(s)>, <lua_function>)
+```
+where all regular sketchybar events are supported. Events can be supplied as a
+single string or alternatively as a table of events. The `<lua_function>` is
+called when the event occurs and receives one argument, which contains the
+typical sketchybar environment variables, e.g.
+```lua
+front_app:subscribe("front_app_switched", function(env)
+  front_app:set({ label = { string = env.INFO } })
+end)
+```
+
+### Trigger Domain
+
+```lua
+sbar.trigger(<event>, <optional: env_table>)
+```
+
+### Animate Domain
+```lua
+sbar.animate(<curve>, <duration>, <lua_function>)
+```
+where the `<curve>` and `<duration>` arguments are equivalent to those found in
+the sketchybar documentation.
+The lua function given as a third argument shall now contain all commands
+belonging to this animation, i.e. all `set` or `bar` commands that shall be
+animated.
+
+### Query Domain
+```lua
+local info = item:query()
+```
+Regularly the query command would result a JSON containing all the relevant information, here, however, this information is accessible as a LUA table and can be accessed as such, e.g.
+```lua
+local left_padding = front_app:query().icon.padding_left
+```
+
+### Push Domain
+```lua
+graph:push(<float_table>)
+```
+You can push values to a `graph` with the push domain. The `float` values of
+the table should be between 0 and 1.
+
+### Multiple Bars
+If you are using muliple sketchybar instances, you can target the lua module to
+interact with another sketchybar instance by providing the instance name right
+after requiring the module like this:
+```bash
+sbar = require("sketchybar")
+sbar.set_bar_name("bottom_bar")
+```
+where `bottom_bar` is an example bar name.

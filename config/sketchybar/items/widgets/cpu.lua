@@ -2,8 +2,8 @@ local icons = require("icons")
 local colors = require("colors")
 local settings = require("settings")
 
--- 启动 C Helper
-sbar.exec("killall cpu_load >/dev/null; " .. os.getenv("CONFIG_DIR") .. "/helpers/event_providers/cpu_load/bin/cpu_load cpu_update 2.0")
+-- Cleanly start helper
+sbar.exec("killall cpu_load >/dev/null 2>&1; $CONFIG_DIR/helpers/event_providers/cpu_load/bin/cpu_load cpu_update 2.0")
 
 local cpu = sbar.add("item", "widgets.cpu", {
     position = "right",
@@ -22,15 +22,15 @@ local cpu = sbar.add("item", "widgets.cpu", {
 
 cpu:subscribe("cpu_update", function(env)
     local load = tonumber(env.total_load) or 0
-    local color = colors.blue
+    local color = colors.accent
     if load > 80 then color = colors.red
-    elseif load > 50 then color = colors.orange
+    elseif load > 60 then color = colors.orange
     elseif load > 30 then color = colors.yellow
     end
 
     cpu:set({
         icon = { color = color },
-        label = { string = string.format("%02d%%", load), color = color }
+        label = { string = string.format("%02d%%", load) }
     })
 end)
 

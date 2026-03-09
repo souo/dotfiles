@@ -1,0 +1,17 @@
+return {
+    white       = 0xffa9b1d6,
+    black       = 0xff1a1b26,
+    grey        = 0xff565f89,
+    red         = 0xfff7768e,
+    green       = 0xff9ceaf8,
+    yellow      = 0xffe0af68,
+    blue        = 0xff7aa2f7,
+    orange      = 0xffff9e64,
+    magenta     = 0xffbb9af7,
+    cyan        = 0xff7dcfff,
+    bar         = { bg = 0xdd1a1b26, border = 0x557aa2f7 },
+    popup       = { bg = 0xff24283b, border = 0xff414868 },
+    bg1         = 0x44414868,
+    bg2         = 0x66414868,
+    accent      = 0xff7aa2f7,
+}

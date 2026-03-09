@@ -17,23 +17,13 @@ local ram = sbar.add("item", "widgets.ram", {
     },
 })
 
-ram:subscribe({ "routine", "forced" }, function()
-    sbar.exec("memory_pressure", function(output)
-        local free = tonumber(output:match("Pages free:%s+(%d+)")) or 0
-        local active = tonumber(output:match("Pages active:%s+(%d+)")) or 0
-        local inactive = tonumber(output:match("Pages inactive:%s+(%d+)")) or 0
-        local spec = tonumber(output:match("Pages speculative:%s+(%d+)")) or 0
-        local wired = tonumber(output:match("Pages wired down:%s+(%d+)")) or 0
-        local comp = tonumber(output:match("Pages occupied by compressor:%s+(%d+)")) or 0
+ram:subscribe({"routine", "forced"}, function()
+    -- Optimized: Calculate percentage directly in shell to reduce Lua overhead
+    local cmd = [[memory_pressure | awk '/System-wide memory free percentage:/ { printf("%d", 100-$5) }']]
 
-        local total = free + active + inactive + spec + wired + comp
-        if total == 0 then return end
-        
-        -- macOS 真实的已用内存公式
-        local used = active + wired + comp
-        local percent = math.floor((used / total) * 100)
-
-        local color = colors.blue
+    sbar.exec(cmd, function(percent_str)
+        local percent = tonumber(percent_str) or 0
+        local color = colors.accent
         if percent > 85 then color = colors.red
         elseif percent > 70 then color = colors.orange
         elseif percent > 50 then color = colors.yellow
@@ -41,14 +31,12 @@ ram:subscribe({ "routine", "forced" }, function()
 
         ram:set({
             icon = { color = color },
-            label = { string = string.format("%02d%%", percent), color = color }
+            label = { string = string.format("%02d%%", percent) }
         })
     end)
 end)
 
-ram:subscribe("mouse.clicked", function()
-    sbar.exec("open -a 'Activity Monitor'")
-end)
+ram:subscribe("mouse.clicked", function() sbar.exec("open -a 'Activity Monitor'") end)
 
 sbar.add("bracket", "widgets.ram.bracket", { ram.name }, { background = { color = colors.bg1 } })
 sbar.add("item", { position = "right", width = settings.group_paddings })
