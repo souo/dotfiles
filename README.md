@@ -1,10 +1,5 @@
 # 🛠️ dotfiles
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Lefthook](https://img.shields.io/badge/git_hooks-lefthook-blue.svg)](https://github.com/evilmartians/lefthook)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![ShellCheck](https://img.shields.io/badge/shellcheck-enabled-brightgreen.svg)](https://www.shellcheck.net/)
-
 My personal dotfiles, meticulously managed with **Dotbot**. This repository is designed to be modular, cross-platform, and highly automated, supporting macOS, Linux (Ubuntu/WSL2), and Windows.
 
 ---
@@ -52,7 +47,8 @@ To keep your sensitive information (API keys, tokens, private emails) safe and o
 1. **`~/.zsh_secret`**: For sensitive tokens and API keys.
     - *Setup*: `cp config/zsh/common/.zsh_secret.example ~/.zsh_secret`
 2. **`~/.localrc`**: For machine-specific environment overrides or private aliases.
-3. **VSCode Local Settings**: Machine-specific VSCode settings (like font size) can be kept in the IDE without affecting the shared `settings.common.json`.
+3. **`~/.gitconfig.local`**: For Git user information (`name`, `email`) and private Git settings.
+4. **VSCode Local Settings**: Machine-specific VSCode settings (like font size) can be kept in the IDE without affecting the shared `settings.common.json`.
 
 ---
 
@@ -110,7 +106,3 @@ This repository uses a **Fragmented Dotbot System** for maximum flexibility:
   - `bun run version`: Bump version and update `CHANGELOG.md`.
 
 ---
-
-## 📜 License
-
-MIT © yourname

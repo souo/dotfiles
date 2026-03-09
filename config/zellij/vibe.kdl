@@ -12,9 +12,19 @@ layout{
             }
             pane size="40%" stacked=true {
                 pane name="Terminal"
-                pane command="claude"
+                pane name="Claude Code" command="claude"
+                pane name="Gemini Cli" command="gemini"
             }
         }
+        pane size=1 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+    tab name="Planing" hide_floating_panes=true {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        pane command="gemini"
         pane size=1 borderless=true {
             plugin location="zellij:status-bar"
         }

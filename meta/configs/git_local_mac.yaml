@@ -1,4 +1,0 @@
-- link:
-    ~/.gitconfig.local:
-      force: true
-      path: config/git/gitconfig.local

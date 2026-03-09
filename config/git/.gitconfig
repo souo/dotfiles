@@ -50,7 +50,7 @@
 
 # push easily. http://stackoverflow.com/a/23918418/89484
 [push]
-	default = simple 
+	default = simple
 	followTags = true # push annotated tags that are reachable from the pushed commits
 	autoSetupRemote = true
 [pull]
@@ -101,5 +101,3 @@
 	# remember conflict resolutions
 	enabled = true
 	autoupdate = true
-
-

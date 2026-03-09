@@ -12,16 +12,15 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
-# --- ⚡ Optimized Completion (Compinit) ---
+# ---(Compinit) ---
 # MUST be loaded before plugins that use compdef
 autoload -Uz compinit
-for dump in "$HOME/.zcompdump"(N.m-1); do
+# Only run compinit if the dump file is older than 24h
+if [[ -n "$HOME/.zcompdump"(N.m-1) ]]; then
   compinit -C
-done
-if [[ -z "$dump" ]]; then
+else
   compinit
 fi
-unset dump
 
 # --- 📦 Antidote (Plugin Manager) ---
 ANTIDOTE_DIR="$XDG_DATA_HOME/antidote"
@@ -47,34 +46,62 @@ done
 unset secret
 
 # --- 🔧 Tool Initializations (DEFERRED for zero delay) ---
-# We use zsh-defer to keep the initial prompt appearing instantly
 
-# Oh My Posh (Prompt) - Needs to be fast, but can be slightly deferred
+# Oh My Posh (Prompt) - Kept immediate for UI responsiveness
 if command -v oh-my-posh >/dev/null; then
     eval "$(oh-my-posh init zsh --config "$DOTFILES/config/oh-my-posh/custom.omp.json")"
 fi
 
-# Defer non-critical tools
+# Use zsh-defer to keep the initial prompt appearing instantly
 if command -v zsh-defer >/dev/null; then
     # Zoxide (Better CD)
     zsh-defer -c '[[ -n "$(command -v zoxide)" ]] && eval "$(zoxide init zsh)"'
-    
+
     # Atuin (Magical Shell History)
     zsh-defer -c '[[ -n "$(command -v atuin)" ]] && eval "$(atuin init zsh --disable-up-arrow)"'
-    
+
     # FZF initialization
     zsh-defer source "$DOTFILES/config/fzf/.fzf.zsh"
-    
-    # Pyenv
-    zsh-defer -c 'export PYENV_ROOT="$HOME/.pyenv"; [[ -d "$PYENV_ROOT" ]] && export PATH="$PYENV_ROOT/bin:$PATH" && command -v pyenv >/dev/null && eval "$(pyenv init - zsh)"'
+
+    # Python (Pyenv)
+    zsh-defer -c '
+        export PYENV_ROOT="$HOME/.pyenv"
+        if [[ -d "$PYENV_ROOT" ]]; then
+            export PATH="$PYENV_ROOT/bin:$PATH"
+            eval "$(pyenv init - zsh)"
+            eval "$(pyenv virtualenv-init -)" >/dev/null 2>&1
+        fi
+    '
+
+    # Java (jenv)
+    zsh-defer -c '[[ -d "$HOME/.jenv" ]] && export PATH="$HOME/.jenv/bin:$PATH" && eval "$(jenv init -)"'
+
+    # Node.js (fnm)
+    zsh-defer -c '[[ -d "$HOME/.fnm" ]] && export PATH="$HOME/.fnm:$PATH" && eval "$(fnm env --use-on-cd --shell zsh)"'
+
+    # Rust
+    zsh-defer -c '[[ -e "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"'
 else
-    # Fallback if zsh-defer is not available yet
+    # Fallback if zsh-defer is not available
     [[ -f "$DOTFILES/config/fzf/.fzf.zsh" ]] && source "$DOTFILES/config/fzf/.fzf.zsh"
     [[ -n "$(command -v zoxide)" ]] && eval "$(zoxide init zsh)"
+    [[ -n "$(command -v atuin)" ]] && eval "$(atuin init zsh --disable-up-arrow)"
+    [[ -d "$HOME/.pyenv" ]] && export PYENV_ROOT="$HOME/.pyenv" && export PATH="$PYENV_ROOT/bin:$PATH" && eval "$(pyenv init - zsh)"
+    [[ -d "$HOME/.jenv" ]] && export PATH="$HOME/.jenv/bin:$PATH" && eval "$(jenv init -)"
+    [[ -d "$HOME/.fnm" ]] && export PATH="$HOME/.fnm:$PATH" && eval "$(fnm env --use-on-cd --shell zsh)"
+    [[ -e "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 fi
 
-# --- ✨ System Info (Immediate Load) ---
-# We want this to appear BEFORE the prompt is ready
+# --- ⚙️ Zsh Options & Settings ---
+setopt AUTO_CD              # Go to directory by just typing its name
+setopt AUTO_PUSHD           # Push the old directory onto the stack
+setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack
+setopt SHARE_HISTORY        # Share history between all sessions
+setopt HIST_IGNORE_ALL_DUPS # Delete old recorded entry if new entry is a duplicate
+setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks from each command line
+setopt EXTENDED_GLOB        # Use extended globbing features
+
+# --- ✨ System Info ---
 if [[ -o interactive ]] && command -v fastfetch >/dev/null; then
     fastfetch
 fi
