@@ -4,12 +4,15 @@ My personal dotfiles, meticulously managed with **Dotbot**. This repository is d
 
 ---
 
+![Project Screenshot](screenshot.png)
+
 ## 🚀 Quick Start
 
 ### 1. Prerequisites
 
 - **Git** (for cloning)
 - **Python 3** (for Dotbot)
+- **uv** (for installing and running `yamllint`)
 - **zsh** (preferred shell)
 - **Bun** (for development hooks and package management)
 

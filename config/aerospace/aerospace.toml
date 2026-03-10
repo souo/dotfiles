@@ -178,7 +178,7 @@ run = 'move-node-to-workspace 5'
 
 # workspace 6: Steam
 [[on-window-detected]]
-if.app-id = com.valvesoftware.steam
+if.app-id = 'com.valvesoftware.steam'
 run = 'move-node-to-workspace 6'
 
 # Floating Rules for System Apps
