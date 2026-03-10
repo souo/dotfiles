@@ -24,6 +24,17 @@ else
     cd "$FONT_DIR" && git pull
 fi
 
+# Define cleanup function to restore repo state
+cleanup() {
+    echo -e "\n🧹 Cleaning up $FONT_DIR..."
+    cd "$FONT_DIR"
+    git reset --hard HEAD >/dev/null
+    git clean -fd >/dev/null
+}
+
+# Ensure cleanup runs on script exit (success or failure)
+trap cleanup EXIT
+
 # 2. Inject custom SVGs and mappings
 if [ -d "$LOCAL_SVGS" ] && [ "$(ls -A "$LOCAL_SVGS" 2>/dev/null)" ]; then
     echo "📥 Injecting custom SVGs from $LOCAL_SVGS..."

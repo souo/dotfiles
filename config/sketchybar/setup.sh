@@ -60,4 +60,13 @@ make clean 2>/dev/null || true
 make
 
 echo -e "\n${GREEN}✨ SketchyBar setup complete!${NC}"
-echo "💡 Run 'brew services restart sketchybar' to apply changes."
+
+# Ask for service restart
+read -p "🚀 Would you like to restart SketchyBar now? (y/n) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "🔄 Restarting SketchyBar..."
+    brew services restart sketchybar
+else
+    echo "💡 You can restart it later with: brew services restart sketchybar"
+fi
