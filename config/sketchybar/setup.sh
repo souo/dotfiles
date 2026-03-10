@@ -5,7 +5,6 @@ set -euo pipefail
 # --- Colors ---
 BLUE='\033[0;34m'
 GREEN='\033[0;32m'
-RED='\033[0;31m'
 NC='\033[0m'
 
 echo -e "${BLUE}🔧 Starting SketchyBar Setup...${NC}"
@@ -33,29 +32,9 @@ for dep in "${DEPS[@]}"; do
 done
 
 # 2. SketchyBar App Font
-echo -e "\n🎨 Installing SketchyBar App Font..."
-FONT_DIR="$HOME/code/clones/sketchybar-app-font"
-if [ ! -d "$FONT_DIR" ]; then
-    mkdir -p "$(dirname "$FONT_DIR")"
-    git clone https://github.com/kvndrsslr/sketchybar-app-font "$FONT_DIR"
-else
-    cd "$FONT_DIR" && git pull
-fi
-
-cd "$FONT_DIR"
-if command -v bun &>/dev/null; then
-    bun install && bun run build
-elif command -v pnpm &>/dev/null; then
-    pnpm install && pnpm run build
-else
-    echo -e "${RED}Error: Neither bun nor pnpm found for font building.${NC}"
-    exit 1
-fi
-
-# Link fonts and icon maps
-cp -f "./dist/sketchybar-app-font.ttf" "$HOME/Library/Fonts/"
-cp -f "./dist/icon_map.lua" "$SCRIPT_DIR/helpers/app_icons.lua"
-echo "✅ Font and app_icons.lua updated."
+echo -e "\n🎨 Installing & Customizing SketchyBar App Font..."
+chmod +x "$SCRIPT_DIR/build_font.sh"
+"$SCRIPT_DIR/build_font.sh"
 
 # 3. SbarLua
 echo -e "\n📦 Checking SbarLua..."

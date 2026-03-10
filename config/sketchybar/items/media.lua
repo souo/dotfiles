@@ -1,10 +1,20 @@
 local sbar = require("sketchybar")
 local colors = require("colors")
 local settings = require("settings")
-local app_icons = require("helpers.app_icons")
 
 -- Launch helper
 sbar.exec("killall media_helper >/dev/null 2>&1; $CONFIG_DIR/helpers/event_providers/media_helper/bin/media_helper custom_media_change &")
+
+-- Function to get the appropriate background color based on media app
+local function get_media_icon_and_color(bundle_identifier)
+    if bundle_identifier == "com.soda.music" then
+        return ":soda_music:", colors.green
+    elseif bundle_identifier == "com.google.Chrome" then
+        return ":chrome:", colors.blue
+    else
+        return ":music:", colors.white
+    end
+end
 
 local media_time = sbar.add("item", "widgets.media.time", {
     position = "center",
@@ -33,18 +43,18 @@ local function update_media_ui()
     media_title:set({ drawing = active })
     if not active then return end
 
-    local icon = app_icons[m_state.app] or ":music:"
+    local icon, color = get_media_icon_and_color(m_state.app)
     local time_str = format_time(m_state.pos) .. " / " .. format_time(m_state.dur)
 
     media_time:set({
-        icon = { string = icon, color = m_state.playing and colors.accent or colors.white },
+        icon = { string = icon, color = color },
         label = { string = time_str }
     })
     media_title:set({ label = { string = m_state.title } })
 end
 
 local function fetch_media()
-    local cmd = [[ /opt/homebrew/bin/media-control get --now 2>/dev/null | /opt/homebrew/bin/jq -r 'if . == null or . == {} then "STOPPED" else "\(.playing)|\(.elapsedTimeNow // 0)|\(.duration // 0)|\(.title) · \(.artist)|\(."app-name" // .bundleIdentifier // "Music")" end' ]]
+    local cmd = [[ /opt/homebrew/bin/media-control get --now 2>/dev/null | /opt/homebrew/bin/jq -r 'if . == null or . == {} then "STOPPED" else "\(.playing)|\(.elapsedTimeNow // 0)|\(.duration // 0)|\(.title) · \(.artist)|\( .bundleIdentifier // "Music")" end' ]]
     sbar.exec(cmd, function(res)
         if not res or res == "" or res == "STOPPED" then m_state.title = ""
         else

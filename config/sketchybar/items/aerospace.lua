@@ -1,23 +1,23 @@
 local sbar = require("sketchybar")
 local colors = require("colors")
-local app_icons = require("helpers.app_icons")
+local icon_map = require("helpers.icon_map")
 local log = require("helpers.log").new("aerospaces")
 local settings = require("settings")
 local cjson = require("cjson")
 
-log.info("aerospaces.lua: Auto-hide version loading...")
+log.info("aerospaces.lua: Smart Fallback version loading...")
 
 local AEROSPACE_PATH = "/opt/homebrew/bin/aerospace"
 local workspaces = {}
 local update_pending = false
 
--- Helper: Key-agnostic getter
-local function get_any(t, key)
-    if type(t) ~= "table" then return nil end
-    local k_underscore = key:gsub("-", "_")
-    if t[k_underscore] ~= nil then return t[k_underscore] end
-    if t[key] ~= nil then return t[key] end
-    return nil
+-- Helper: Get stylized first letter or standard icon
+local function get_icon(app_name)
+
+    -- Check standard library
+    if icon_map[app_name] then return icon_map[app_name] end
+
+    return icon_map["Default"] or ":default:"
 end
 
 -- Indicator
@@ -26,29 +26,23 @@ local mode_indicator = sbar.add("item", "aerospace.mode", {
     icon = { string = "M", color = colors.green, font = { family = settings.font.text, style = "Bold", size = 14.0 }, padding_left = 8, padding_right = 8 },
     label = { drawing = false },
     background = { color = colors.bg1, drawing = true },
-    drawing = false, -- Default hide
+    drawing = false,
 })
 
 local function update_mode()
     sbar.exec(AEROSPACE_PATH .. " list-modes --current", function(mode, exit_code)
-        -- If command fails or app not running, hide indicator
         if exit_code ~= 0 or not mode or mode == "" or mode:find("Can't connect") then
             mode_indicator:set({ drawing = false })
             return
         end
-
         local current_mode = (tostring(mode) or ""):gsub("%s+", "")
         local styles = { main = { icon = "M", color = colors.green }, service = { icon = "S", color = colors.yellow } }
         local style = styles[current_mode] or styles.main
-        
-        mode_indicator:set({ 
-            drawing = true,
-            icon = { string = style.icon, color = style.color } 
-        })
+        mode_indicator:set({ drawing = true, icon = { string = style.icon, color = style.color } })
     end)
 end
 
--- Ensure Item exists
+-- Ensure Item
 local function ensure_item(ws_name)
     if workspaces[ws_name] or not ws_name or ws_name == "" then return workspaces[ws_name] end
     workspaces[ws_name] = sbar.add("item", "workspace." .. ws_name, {
@@ -62,12 +56,24 @@ local function ensure_item(ws_name)
     return workspaces[ws_name]
 end
 
--- Hide everything when AeroSpace is not running
-local function hide_all_workspaces()
+local function hide_all()
     mode_indicator:set({ drawing = false })
-    for _, item in pairs(workspaces) do
-        item:set({ drawing = false })
-    end
+    for _, item in pairs(workspaces) do item:set({ drawing = false }) end
+end
+
+local function decode(obj)
+    if type(obj) == "table" then return obj end
+    if type(obj) ~= "string" or obj == "" then return nil end
+    local json_start = obj:find("[%[{]")
+    if not json_start then return nil end
+    return pcall(cjson.decode, obj:sub(json_start)) and cjson.decode(obj:sub(json_start)) or nil
+end
+
+-- Key-agnostic getter
+local function get_any(t, key)
+    if type(t) ~= "table" then return nil end
+    local k_underscore = key:gsub("-", "_")
+    return t[k_underscore] or t[key]
 end
 
 -- Main Update
@@ -75,29 +81,25 @@ local function update_workspaces()
     if update_pending then return end
     update_pending = true
 
-    -- Check if AeroSpace is running first
     sbar.exec("pgrep -x AeroSpace", function(pgrep_res, exit_code)
         if exit_code ~= 0 then
             update_pending = false
-            hide_all_workspaces()
+            hide_all()
             return
         end
 
-        -- AeroSpace is running, proceed with data fetch
         local win_cmd = AEROSPACE_PATH .. [[ list-windows --all --json --format "%{window-id}%{app-name}%{workspace}" ]]
         local ws_cmd = AEROSPACE_PATH .. [[ list-workspaces --all --json --format "%{workspace-is-focused}%{workspace-is-visible}%{workspace}%{monitor-appkit-nsscreen-screens-id}" ]]
 
-        sbar.exec(win_cmd, function(win_data)
-            sbar.exec(ws_cmd, function(ws_data)
+        sbar.exec(win_cmd, function(win_raw)
+            sbar.exec(ws_cmd, function(ws_raw)
                 update_pending = false
-                
-                if type(ws_data) ~= "table" then 
-                    hide_all_workspaces()
-                    return 
-                end
+                local win_data = decode(win_raw)
+                local ws_data = decode(ws_raw)
+                if not ws_data then hide_all() return end
 
                 local ws_windows = {}
-                if type(win_data) == "table" then
+                if win_data then
                     for _, win in ipairs(win_data) do
                         local ws = tostring(get_any(win, "workspace") or "")
                         if ws ~= "" then
@@ -115,10 +117,10 @@ local function update_workspaces()
                             local apps = ws_windows[ws_name] or {}
                             local is_focused = get_any(info, "workspace-is-focused") == true
                             local is_visible = get_any(info, "workspace-is-visible") == true
-                            
+
                             local icon_line = ""
                             for _, app in ipairs(apps) do
-                                icon_line = icon_line .. " " .. (app_icons[app] or app_icons["Default"] or ":default:")
+                                icon_line = icon_line .. " " .. get_icon(app)
                             end
 
                             local drawing = true
@@ -127,7 +129,6 @@ local function update_workspaces()
                             end
 
                             local nsscreen_id = math.floor(get_any(info, "monitor-appkit-nsscreen-screens-id") or 1)
-                            
                             item:set({
                                 drawing = drawing,
                                 display = tostring(nsscreen_id),
@@ -142,13 +143,11 @@ local function update_workspaces()
     end)
 end
 
--- Subscriptions
 local root = sbar.add("item", "aerospace.root", { drawing = false, update_freq = 2 })
 root:subscribe({"aerospace_workspace_change", "front_app_switched", "display_change", "aerospace_mode_change", "routine", "forced"}, function()
     update_workspaces()
     update_mode()
 end)
 
--- Start
 update_workspaces()
 update_mode()
