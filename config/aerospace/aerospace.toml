@@ -152,7 +152,7 @@ run = 'move-node-to-workspace 2'
 # Workspace 3: Game Dev
 [[on-window-detected]]
 if.app-id = 'org.godotengine.godot'
-run = 'move-node-to-workspace 3'
+run = ['layout floating','move-node-to-workspace 3']
 
 # Workspace 4: Knowledge & Mail
 [[on-window-detected]]

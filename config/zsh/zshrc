@@ -40,6 +40,13 @@ source "$ANTIDOTE_PLUGINS_ZSH"
 # --- 🛠️ Core Environment (Immediate Load) ---
 [[ -f ~/.env ]] && source ~/.env
 [[ -f ~/.aliases ]] && source ~/.aliases
+# Load custom shell functions from ~/.zsh_functions
+if [[ -d ~/.zsh_functions ]]; then
+    for func in ~/.zsh_functions/*.zsh; do
+        [[ -r "$func" ]] && source "$func"
+    done
+    unset func
+fi
 for secret in ~/.{zsh_secret,localrc}; do
     [[ -r "$secret" ]] && source "$secret"
 done
