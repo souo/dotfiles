@@ -112,3 +112,5 @@ setopt EXTENDED_GLOB        # Use extended globbing features
 if [[ -o interactive ]] && command -v fastfetch >/dev/null; then
     fastfetch
 fi
+
+alias claude-mem='bun "/Users/2z/.claude/plugins/cache/thedotmack/claude-mem/10.5.6/scripts/worker-service.cjs"'

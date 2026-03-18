@@ -1,4 +1,4 @@
-i{
+{
   // --- Editor Appearance ---
   "editor.fontSize": 14,
   "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Menlo', 'Monaco', 'Courier New', monospace",
@@ -8,7 +8,8 @@ i{
   "editor.renderWhitespace": "selection",
   "editor.cursorStyle": "block",
   "editor.cursorBlinking": "expand",
-  "workbench.iconTheme": "catppuccin-mocha",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.productIconTheme": "icons-carbon",
   "workbench.colorTheme": "Vitesse Dark",
   // --- Editor Behavior ---
   "editor.tabSize": 2,
@@ -55,5 +56,5 @@ i{
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "window.zoomLevel": 1,
-  "workbench.productIconTheme": "icons-carbon"
+  "godotTools.editorPath.godot4": "/Users/2z/Applications/Godot-4.6.1.app/Contents/MacOS/Godot",
 }
