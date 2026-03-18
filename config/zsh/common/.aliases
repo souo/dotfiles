@@ -1,38 +1,54 @@
-# Shell aliases only in this file.
-#
-# common aliases
-#
-alias vim=nvim
-alias top=btm
-alias loc=tokei
-alias vsc="code ."
+# ==============================================================================
+# 🐚 Shell Aliases
+# ==============================================================================
 
-if [ "$(command -v xclip)" ]; then
+# --- 🚀 Core Replacements ---
+command -v nvim >/dev/null && alias vim='nvim' && alias v='nvim'
+command -v btm >/dev/null && alias top='btm'
+command -v tokei >/dev/null && alias loc='tokei'
+alias vsc='code .'
+
+# --- 📋 Clipboard ---
+if command -v xclip >/dev/null; then
     alias pbcopy='xclip -selection clipboard'
     alias pbpaste='xclip -selection clipboard -o'
 fi
 
-# Pipe my public key to my clipboard.
-if [ "$(command -v pbcopy)" ]; then
-    alias pubkey="more ~/.ssh/id_ed25519.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+# Public key to clipboard
+if command -v pbcopy >/dev/null; then
+    alias pubkey="cat ~/.ssh/id_ed25519.pub | pbcopy && echo '=> Public key copied to clipboard.'"
 fi
 
-#
-# inline utilities
-#
-# on Ubuntu the bat pkg is called 'batcat'
-if [[ -n "$(command -v batcat)" ]]; then alias bat='batcat'; fi
+# --- 🛠️ Modern CLI Tools ---
 
-# bat (cat(1) clone with wings)
-if [[ -n "$(command -v bat)" ]]; then
-    if alias cat >/dev/null 2>&1; then
-        unalias cat
-    fi
+# Bat (cat replacement)
+if command -v batcat >/dev/null; then
+    alias bat='batcat'
+    alias cat='batcat -p'
+elif command -v bat >/dev/null; then
     alias cat='bat -p'
 fi
 
-if command -v dpkg && dpkg --get-selections | grep -q 'fd-find'; then
-    alias fd=fdfind
+# FD-find (Ubuntu/Debian fix)
+if command -v fdfind >/dev/null; then
+    alias fd='fdfind'
 fi
 
-alias vibe='zellij --layout vibe'
+# Zellij
+command -v zellij >/dev/null && alias vibe='zellij --layout vibe'
+
+# --- 📂 Navigation & LS ---
+# (Note: eza aliases are usually handled by the zsh-eza plugin)
+if command -v eza >/dev/null; then
+    alias l='eza -lh --icons --git'
+    alias la='eza -lah --icons --git'
+    alias lt='eza --tree --level=2 --icons'
+fi
+
+# --- 🐍 Python ---
+alias py='python3'
+alias venv='python3 -m venv venv && source venv/bin/activate'
+
+
+# --- 🚀 App Specific ---
+alias claude-mem='bun "/Users/2z/.claude/plugins/cache/thedotmack/claude-mem/10.5.6/scripts/worker-service.cjs"'
