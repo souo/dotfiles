@@ -58,6 +58,7 @@ R = ['secondary', 'main']
     outer.top = [
         { monitor."AG326UD" = 33 },
         { monitor."P272U PRO" = 33 },
+        { monitor."Built-in Retina Display" = 33},
         10,
     ]
     outer.right =      3
