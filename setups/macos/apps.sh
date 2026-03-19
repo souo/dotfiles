@@ -7,7 +7,7 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 # shellcheck source=/dev/null
 . "$HERE/utils.sh"
 
-cask_apps=(1password raycast hazeover dash logseq notion obsidian tencent-lemon nikitabobko/tap/aerospace karabiner-elements)
+cask_apps=(1password raycast dash logseq notion obsidian tencent-lemon nikitabobko/tap/aerospace karabiner-elements)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

@@ -19,7 +19,6 @@ DEPS=(
     "switchaudio-osx"
     "media-control"
     "jq"
-    "sketchybar"
 )
 
 for dep in "${DEPS[@]}"; do
