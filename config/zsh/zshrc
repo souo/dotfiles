@@ -6,7 +6,7 @@
 # Fast-path for non-interactive shells
 [[ "$TERMINAL_CONTEXT" == "non-interactive" ]] && return
 
-# 📂 Paths & Globals
+# --- 📂 Paths & Globals
 typeset -U path fpath # Ensure unique paths
 export DOTFILES="$HOME/.dotfiles"
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -16,12 +16,17 @@ export XDG_DATA_HOME="$HOME/.local/share"
 # ---(Compinit) ---
 # MUST be loaded before plugins that use compdef
 autoload -Uz compinit
-# Only run compinit if the dump file is older than 24h
-if [[ -n "$HOME/.zcompdump"(N.m-1) ]]; then
-  compinit -C -d "$HOME/.zcompdump"
-else
-  compinit -d "$HOME/.zcompdump"
-fi
+# Dummy compdef to prevent errors before compinit runs
+compdef() { }
+
+# Deferred compinit for performance
+zsh_defer_compinit() {
+  if [[ -n "$HOME/.zcompdump"(N.m-1) ]]; then
+    compinit -C -d "$HOME/.zcompdump"
+  else
+    compinit -d "$HOME/.zcompdump"
+  fi
+}
 
 # --- 📦 Antidote (Plugin Manager) ---
 ANTIDOTE_DIR="$XDG_DATA_HOME/antidote"
@@ -71,13 +76,19 @@ _load_tool() {
     fi
 }
 
-# Oh My Posh (Prompt) - Kept immediate for UI responsiveness
-if command -v oh-my-posh >/dev/null; then
-    eval "$(oh-my-posh init zsh --config "$DOTFILES/config/oh-my-posh/custom.omp.json")"
-fi
+# Simple fallback prompt while heavy one loads
+PROMPT='%F{blue}%n%f@%F{green}%m%f %F{cyan}%1~%f %# '
 
 # Deferred tools
 if command -v zsh-defer >/dev/null; then
+    # Deferred compinit
+    zsh-defer zsh_defer_compinit
+
+    # Oh My Posh (Prompt) - Deferred load
+    if command -v oh-my-posh >/dev/null; then
+        zsh-defer -c "eval \"\$(oh-my-posh init zsh --config \"$DOTFILES/config/oh-my-posh/custom.omp.json\")\""
+    fi
+
     # Tools with standard init commands
     _load_tool "zoxide" "zoxide init zsh"
     _load_tool "atuin" "atuin init zsh --disable-up-arrow"
@@ -136,6 +147,6 @@ bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
 # --- ✨ System Info ---
-if [[ -o interactive ]] && command -v fastfetch >/dev/null; then
-    fastfetch
-fi
+# if [[ -o interactive ]] && command -v fastfetch >/dev/null; then
+#     fastfetch
+# fi

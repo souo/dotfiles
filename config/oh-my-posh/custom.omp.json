@@ -1,5 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "streaming": 100,
   "palette": {
     "blue": "#00C5C7",
     "green": "#33FF57",

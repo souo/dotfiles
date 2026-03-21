@@ -1,7 +1,7 @@
 #!/bin/bash
 # ==============================================================================
 # Script Name: setup_ssh.sh
-# Description: Automates SSH key generation, initializes ~/.ssh/config, 
+# Description: Automates SSH key generation, initializes ~/.ssh/config,
 #              starts ssh-agent, adds the key, and provides quick links.
 # ==============================================================================
 
@@ -16,7 +16,7 @@ NC='\033[0m' # No Color (Reset)
 
 # Prompt user for device identifier/email
 echo -e "${CYAN}Enter your email or device identifier (e.g., user@example.com - Mac):${NC} \c"
-read IDENTIFIER
+read -r IDENTIFIER
 
 SSH_DIR="$HOME/.ssh"
 KEY_PATH="$SSH_DIR/id_ed25519"
@@ -91,5 +91,5 @@ echo -e "${CYAN}----------------------------------------------------------------
 echo -e "${YELLOW}Next Step: Copy the text above and click the links below to add it:${NC}"
 echo ""
 echo -e "👉 ${CYAN}GitHub:${NC} https://github.com/settings/keys"
-echo -e "👉 ${CYAN}GitLab:${NC} https://gitlab.com/-/profile/keys"
+echo -e "👉 ${CYAN}GitLab:${NC} https://gitlab.com/-/user_settings/ssh_keys"
 echo -e "${GREEN}=================================================================${NC}"
