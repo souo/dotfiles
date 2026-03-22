@@ -22,7 +22,6 @@ if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null; then
   "${HERE}"/cmdline.sh
   "${HERE}"/mise.sh
   "${HERE}"/python.sh
-  "${HERE}"/../rustup.sh
   "${HERE}"/zsh.sh
   "${HERE}"/dotnet.sh
   "${HERE}"/fastfetch.sh
@@ -33,7 +32,6 @@ else
   "${HERE}"/cmdline.sh
   "${HERE}"/mise.sh
   "${HERE}"/python.sh
-  "${HERE}"/../rustup.sh
   "${HERE}"/zsh.sh
   "${HERE}"/browers.sh
   "${HERE}"/flatpak.sh

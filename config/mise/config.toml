@@ -1,3 +1,6 @@
+[settings]
+idiomatic_version_file_enable_tools = ["python"]
+
 [tools]
 bun = "latest"
 just = "latest"
@@ -5,6 +8,7 @@ node = "lts"
 pnpm = "latest"
 yarn = "latest"
 python = "3.14"
+rust = "stable"
 "cargo:sd" = "latest"
 "cargo:tealdeer" = "latest"
 "cargo:topgrade" = "latest"

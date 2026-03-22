@@ -2,7 +2,7 @@
 replace-with = 'mirror'
 
 [source.mirror]
-registry = "sparse+http://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
+registry = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
 
 [registries.mirror]
-index = "sparse+http://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
+index = "sparse+https://mirrors.tuna.tsinghua.edu.cn/crates.io-index/"
