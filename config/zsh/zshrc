@@ -109,9 +109,6 @@ if command -v zsh-defer >/dev/null; then
     # Java (jenv)
     zsh-defer -c '[[ -d "$HOME/.jenv" ]] && path=("$HOME/.jenv/bin" $path) && eval "$(jenv init -)"'
 
-    # Node.js (fnm)
-    zsh-defer -c '[[ -d "$HOME/.fnm" ]] && path=("$HOME/.fnm" $path) && eval "$(fnm env --use-on-cd --shell zsh)"'
-
     # Rust
     zsh-defer -c '[[ -e "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"'
 

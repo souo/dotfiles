@@ -13,7 +13,6 @@ ohmyzsh/ohmyzsh path:plugins/zoxide
 # antidote only loads them on correct OS via conditional checks in .zshrc if needed, 
 # but here we load them and they usually have internal OS checks.
 ohmyzsh/ohmyzsh path:plugins/macos
-ohmyzsh/ohmyzsh path:plugins/brew
 
 # --- High Performance External Plugins ---
 romkatv/zsh-defer
