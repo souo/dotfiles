@@ -12,38 +12,45 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-print_in_purple "\n   Python\n\n"
+print_in_purple "\n   Python Ecosystem (mise & pipx) \n\n"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-if [ -z "$PYENV_ROOT" ]; then
-  export PYENV_ROOT="${HOME}/.pyenv"
-fi
 
-# Checks for `.pyenv` file, and suggests to remove it for installing
-if ! [ -d "${PYENV_ROOT}" ]; then
-    execute  "curl -fsSL https://pyenv.run | bash" "pyenv"
-fi
-execute  "$PYENV_ROOT/bin/pyenv update" "pyenv update"
+print_in_purple "Installing Python build dependencies (for mise)..."
 
-python_versions=(3.12.9 3.11.9)
+# Dependencies required for compiling Python from source
+python_build_deps=(
+  libssl-dev
+  zlib1g-dev
+  libbz2-dev
+  libreadline-dev
+  libsqlite3-dev
+  curl
+  libncursesw5-dev
+  xz-utils
+  tk-dev
+  libxml2-dev
+  libxmlsec1-dev
+  libffi-dev
+  liblzma-dev
+)
 
-pyenv_install() {
-
-  declare -r VERSION="$2"
-  declare -r READABLE_NAME="$1"
-
-  execute "$PYENV_ROOT/bin/pyenv install $VERSION" "$READABLE_NAME"
-}
-
-export PYTHON_BUILD_MIRROR_URL_SKIP_CHECKSUM=1
-export PYTHON_BUILD_MIRROR_URL="https://registry.npmmirror.com/-/binary/python"
-
-for version in "${python_versions[@]}"; do
-  pyenv_install "Pythyon '${version} (pyenv)'" "$version"
+for dep in "${python_build_deps[@]}"; do
+  install_package "install '${dep}'" "$dep"
 done
 
-execute "$PYENV_ROOT/bin/pyenv global 3.12.9" "Set global python version (3.12.9)"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-
+print_in_purple "\n   pipx \n\n"
 
 install_package "pipx" "pipx"
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+print_in_purple "\n   uv \n\n"
+
+if ! cmd_exists "uv"; then
+  execute "curl -LsSf https://astral.sh/uv/install.sh | sh" "Installing uv"
+else
+  print_success "uv"
+fi

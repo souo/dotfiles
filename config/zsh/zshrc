@@ -67,12 +67,10 @@ unset secret
 _load_tool() {
     local cmd="$1"
     local init_cmd="$2"
-    if command -v "$cmd" >/dev/null 2>&1; then
-        if command -v zsh-defer >/dev/null 2>&1; then
-            zsh-defer -c "eval \"\$($init_cmd)\""
-        else
-            eval "$($init_cmd)"
-        fi
+    if command -v zsh-defer >/dev/null 2>&1; then
+        zsh-defer -c "command -v $cmd >/dev/null && eval \"\$($init_cmd)\""
+    else
+        command -v "$cmd" >/dev/null && eval "$($init_cmd)"
     fi
 }
 
@@ -84,25 +82,25 @@ if command -v zsh-defer >/dev/null; then
     # Deferred compinit
     zsh-defer zsh_defer_compinit
 
+    # Mise (Multi-language version manager: MUST load before tools it manages)
+    if command -v mise >/dev/null; then
+        zsh-defer -c 'eval "$(mise activate zsh)"'
+    fi
+
+    # Rust/Cargo
+    zsh-defer -c '[[ -e "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"'
+
     # Oh My Posh (Prompt) - Deferred load
     if command -v oh-my-posh >/dev/null; then
         zsh-defer -c "eval \"\$(oh-my-posh init zsh --config \"$DOTFILES/config/oh-my-posh/custom.omp.json\")\""
     fi
 
-    # Tools with standard init commands
+    # Tools with standard init commands (Load AFTER mise)
     _load_tool "zoxide" "zoxide init zsh"
     _load_tool "atuin" "atuin init zsh --disable-up-arrow"
 
     # FZF
     zsh-defer source "$DOTFILES/config/fzf/.fzf.zsh"
-
-    # Mise (Multi-language version manager: replaces pyenv, jenv, nvm, volta, etc.)
-    if command -v mise >/dev/null; then
-        zsh-defer -c 'eval "$(mise activate zsh)"'
-    fi
-
-    # Rust
-    zsh-defer -c '[[ -e "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"'
 
     # Custom completions & options that can be deferred
     zsh-defer -c '
@@ -113,11 +111,11 @@ if command -v zsh-defer >/dev/null; then
     '
 else
     # Fallback if zsh-defer is not available
+    command -v mise >/dev/null && eval "$(mise activate zsh)"
+    [[ -e "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
     [[ -f "$DOTFILES/config/fzf/.fzf.zsh" ]] && source "$DOTFILES/config/fzf/.fzf.zsh"
     command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
     command -v atuin >/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
-    command -v mise >/dev/null && eval "$(mise activate zsh)"
-    [[ -e "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 fi
 
 # --- ⚙️ Zsh Options & Settings ---

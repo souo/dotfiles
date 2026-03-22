@@ -37,6 +37,22 @@ fi
 # Zellij
 command -v zellij >/dev/null && alias vibe='zellij --layout vibe'
 
+# Modern Replacements
+command -v xh >/dev/null && alias http='xh'
+command -v sd >/dev/null && alias sed-smart='sd'
+
+# Lazygit
+command -v lazygit >/dev/null && alias lg='lazygit'
+
+# Yazi (using our custom yy function)
+command -v yazi >/dev/null && alias y='yy'
+
+# FZF Search Aliases
+alias f='fp'      # Fuzzy File Search
+alias fz='fd'     # Fuzzy Zoxide/Directory Search
+alias fk='fkill'  # Fuzzy Kill
+alias dot='fconf' # Fuzzy Dotfiles Config
+
 # --- 🐍 Python ---
 alias py='python3'
 alias venv='python3 -m venv venv && source venv/bin/activate'

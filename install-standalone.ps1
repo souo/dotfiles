@@ -8,50 +8,55 @@ $ErrorActionPreference = "Stop"
 
 $BASE_CONFIG = "base"
 $CONFIG_SUFFIX = ".yaml"
-
-$META_DIR = "Windows/meta"
-$CONFIG_DIR = "configs"
-
+$META_DIR = "meta"
+$CONFIG_DIR = "configs/windows"
 $DOTBOT_DIR = "dotbot"
 $DOTBOT_BIN = "bin/dotbot"
 $BASEDIR = $PSScriptRoot
 
 Set-Location $BASEDIR
+
+Write-Host "🚀 Initializing submodules..." -ForegroundColor Cyan
 git -C $DOTBOT_DIR submodule sync --quiet --recursive
 git submodule update --init --recursive $DOTBOT_DIR
 
+# --- Find Python ---
 foreach ($PYTHON in ('python', 'python3', 'FAIL')) {
-    # Python redirects to Microsoft Store in Windows 10 when not installed
-    if (& { $ErrorActionPreference = "SilentlyContinue"
-            ![string]::IsNullOrEmpty((&$PYTHON -V))
-            $ErrorActionPreference = "Stop" }) {
-        break
-    }
+    if (& { $ErrorActionPreference = "SilentlyContinue"; ![string]::IsNullOrEmpty((&$PYTHON -V)); $ErrorActionPreference = "Stop" }) { break }
 }
+if ($PYTHON -eq 'FAIL') { Write-Error "Error: Cannot find Python."; return }
 
-if ($PYTHON -eq 'FAIL') {
-    Write-Error "Error: Cannot find Python."
-    return
-}
-
-
-$BaseConfigPath = Join-Path $BASEDIR  -ChildPath $META_DIR/$BASE_CONFIG$CONFIG_SUFFIX
+# --- Prepare Combined Config ---
+Write-Host "📦 Preparing unified configuration for standalone configs..." -ForegroundColor Cyan
+$TempConfigFile = [IO.Path]::GetTempFileName()
 
 try {
-    # TempFileCollection manages  temp files and deletes them when it is disposed.
-    $tempFiles = [System.CodeDom.Compiler.TempFileCollection]::new()
-    foreach ($CONFIG in $Configs) {
-        Write-Output "`nConfigure $config"
-        $file = New-TemporaryFile
-        $tempFiles.AddFile($file.FullName, $false)
-        Get-Content -Path $BaseConfigPath | Add-Content -Path $file
-        Get-Content -Path ( Join-Path $BASEDIR  -ChildPath $META_DIR/$CONFIG_DIR/$CONFIG$CONFIG_SUFFIX ) | Add-Content -Path $file
-        Write-Verbose (Get-Content -Path $file | Out-String)
-        & $PYTHON $(Join-Path $BASEDIR -ChildPath $DOTBOT_DIR | Join-Path -ChildPath $DOTBOT_BIN) -d $BASEDIR -c $file
+    $BaseConfigPath = Join-Path $BASEDIR "$META_DIR/$BASE_CONFIG$CONFIG_SUFFIX"
+    if (-not (Test-Path $BaseConfigPath)) { Write-Error "Base config not found at $BaseConfigPath"; return }
+    Get-Content $BaseConfigPath | Set-Content $TempConfigFile
+
+    $ValidCount = 0
+    foreach ($Config in $Configs) {
+        $ConfigPath = Join-Path $BASEDIR "$META_DIR/$CONFIG_DIR/$Config$CONFIG_SUFFIX"
+        if (Test-Path $ConfigPath) {
+            Add-Content $TempConfigFile "`n# --- Fragment: $Config ---"
+            Get-Content $ConfigPath | Add-Content $TempConfigFile
+            $ValidCount++
+        } else {
+            Write-Warning "Configuration $Config not found at $ConfigPath. Skipping."
+        }
     }
+
+    if ($ValidCount -eq 0) { Write-Error "No valid configuration fragments found."; return }
+
+    Write-Host "✨ Deploying $ValidCount standalone fragments via Dotbot..." -ForegroundColor Green
+
+    # --- Run Dotbot ONCE ---
+    $DotbotPath = Join-Path $BASEDIR "$DOTBOT_DIR/$DOTBOT_BIN"
+    & $PYTHON $DotbotPath -d $BASEDIR -c $TempConfigFile
 }
 finally {
-    if ($null -ne $tempFiles) {
-        $tempFiles.Dispose() #Deletes all temp files
-    }
+    if (Test-Path $TempConfigFile) { Remove-Item $TempConfigFile -Force }
 }
+
+Write-Host "`n✅ Finished standalone installation!" -ForegroundColor Green

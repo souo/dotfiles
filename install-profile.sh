@@ -64,7 +64,7 @@ if [ ! -f "${PROFILE_FILE}" ]; then
 fi
 
 # --- Execution ---
-echo "Initializing submodules..."
+echo "🚀 Initializing submodules..."
 git submodule update --init --recursive 
 
 # Read configs from profile (ignore empty lines and comments)
@@ -75,44 +75,52 @@ for extra in ${EXTRA_CONFIGS}; do
     CONFIGS+=("${extra}")
 done
 
-echo "Deploying profile: ${PROFILE_NAME} ${DRY_RUN:+($DRY_RUN)}"
+echo "📦 Preparing unified configuration for profile: ${PROFILE_NAME}..."
 
+# Create a temporary file for the combined config
+COMBINED_CONFIG=$(mktemp)
+trap 'rm -f "$COMBINED_CONFIG"' EXIT
+
+# 1. Start with Base Config
+cat "${BASE_DIR}/${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}" > "$COMBINED_CONFIG"
+
+# 2. Append each config fragment
+VALID_CONFIG_COUNT=0
 for config in "${CONFIGS[@]}"; do
     config_path="${BASE_DIR}/${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX}"
     
     if [ ! -f "${config_path}" ]; then
-        echo "Warning: Configuration file '${config}' not found at ${config_path}. Skipping."
+        echo "⚠️  Warning: Configuration file '${config}' not found. Skipping."
         continue
     fi
 
-    echo -e "\n--- Configure $config ---"
-    configFile=$(mktemp)
-    trap 'rm -f "$configFile"' EXIT
-    
-    # 1. Start with Base Config (removing potential leading ---)
-    sed '1{/^--- *$/d;}' "${BASE_DIR}/${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}" > "$configFile"
-    
-    # 2. Add newline
-    echo "" >> "$configFile"
-    
-    # 3. Append current Config
-    sed '1{/^--- *$/d;}' "${config_path}" >> "$configFile"
-    
-    # 4. Run Dotbot
-    if [ -n "$DRY_RUN" ]; then
-        "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "$configFile" --dry-run
-    else
-        "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "$configFile"
-    fi
-    
-    rm -f "$configFile"
-    trap - EXIT
+    echo -e "\n# --- Fragment: $config ---" >> "$COMBINED_CONFIG"
+    # Append content, stripping potential leading YAML document separators
+    sed '1{/^--- *$/d;}' "${config_path}" >> "$COMBINED_CONFIG"
+    VALID_CONFIG_COUNT=$((VALID_CONFIG_COUNT + 1))
 done
+
+if [ "$VALID_CONFIG_COUNT" -eq 0 ]; then
+    echo "❌ Error: No valid configuration fragments found. Aborting."
+    exit 1
+fi
+
+echo "✨ Deploying ${VALID_CONFIG_COUNT} fragments via Dotbot..."
+
+# 3. Run Dotbot ONCE
+if [ -n "$DRY_RUN" ]; then
+    "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "$COMBINED_CONFIG" --dry-run
+else
+    "${BASE_DIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASE_DIR}" -c "$COMBINED_CONFIG"
+fi
 
 # --- 🔗 Dead Link Check ---
 echo -e "\n🔍 Checking for orphaned dotfile links in ~ ..."
-find ~ -maxdepth 2 -xtype l -lname "*$BASE_DIR*" 2>/dev/null | while read -r link; do
-    echo "⚠️  Found dead link: $link (pointing to a missing file in your dotfiles)"
-done
+# Portable way to find dead links pointing to this repo
+while read -r link; do
+    if [ ! -e "$link" ]; then
+        echo "⚠️  Found dead link: $link (pointing to a missing file in your dotfiles)"
+    fi
+done < <(find ~ -maxdepth 2 -type l -lname "*$BASE_DIR*" 2>/dev/null || true)
 
 echo -e "\n✅ Finished deploying ${PROFILE_NAME}!"

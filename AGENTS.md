@@ -20,26 +20,28 @@ This repository contains personal **dotfiles** managed with **Dotbot**, designed
 
 ### 1. Deployment & Installation
 
-- **Initialization**: Run `./setups/setup.sh` (Unix) or `.\Windows\setups\Setup.ps1` (Windows) for system-level dependencies.
-- **Deploy Profile**: Use the custom wrapper to merge fragments:
-  - `macOS`: `./install-profile.sh mac`
-  - `Ubuntu`: `./install-profile.sh ubuntu`
-  - `WSL`: `./install-profile.sh wsl`
-  - `Windows`: `.\install-profile.ps1 windows`
-- **Dry-run**: `./install-profile.sh --dry-run <profile>` to preview changes.
+- **Initialization**: Run `just bootstrap` (cross-platform).
+- **Deploy Profile**: Use `just` to merge fragments:
+  - `macOS`: `just install mac`
+  - `Ubuntu`: `just install ubuntu`
+  - `WSL`: `just install wsl`
+  - `Windows`: `just install windows`
+- **Standalone**: `just standalone <config> [configs...]` (e.g., `just standalone nvim zsh`).
+- **Dry-run**: `just dry-run <profile>` to preview changes.
 
 ### 2. Maintenance & Development
 
 - **New Config**: Add a YAML fragment to `meta/configs/` and update relevant profiles in `meta/profiles/`.
-- **Commit**: Use `bun run commit` for conventional commit prompts.
+- **Commit**: Use `just commit` for conventional commit prompts.
 - **Versioning**:
-  - `bun run change`: Create a new changeset record.
-  - `bun run version`: Bump version and update `CHANGELOG.md`.
+  - `just change`: Create a new changeset record.
+  - `just version`: Bump version and update `CHANGELOG.md`.
+- **Update**: `just update` to sync submodules.
 
 ### 3. Quality Control
 
 - **Linting**: Lefthook automatically runs `shellcheck`, `yamllint`, and `markdownlint` on pre-commit.
-- **Manual Lint**: `npx lefthook run pre-commit`.
+- **Manual Lint**: `just lint`.
 
 ---
 

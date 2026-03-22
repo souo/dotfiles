@@ -3,3 +3,6 @@
       path: config/mise/config.toml
       create: true
       force: true
+
+- shell:
+    - mise install

@@ -4,7 +4,6 @@ editorconfig
 eza
 fastfetch
 fzf
-git_local_mac
 git
 htop
 lazygit
@@ -13,6 +12,7 @@ npm
 nvim
 tealdeer
 uv
+cargo
 mise
 vscode_mac
 wezterm

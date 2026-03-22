@@ -7,7 +7,6 @@ ohmyzsh/ohmyzsh path:plugins/git
 ohmyzsh/ohmyzsh path:plugins/extract
 ohmyzsh/ohmyzsh path:plugins/cp
 ohmyzsh/ohmyzsh path:plugins/eza
-ohmyzsh/ohmyzsh path:plugins/zoxide
 
 # --- Platform Specific ---
 # antidote only loads them on correct OS via conditional checks in .zshrc if needed, 
@@ -22,3 +21,4 @@ zsh-users/zsh-completions
 Aloxaf/fzf-tab
 jeffreytse/zsh-vi-mode
 junegunn/fzf-git.sh
+hlissner/zsh-autopair

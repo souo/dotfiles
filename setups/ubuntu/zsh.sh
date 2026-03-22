@@ -21,7 +21,3 @@ install_package "zsh" "zsh"
 "$HERE"/../oh-my-zsh.sh
 
 execute "curl -s https://ohmyposh.dev/install.sh | bash -s" "Oh My Posh"
-
-install_package "zsh-autosuggestions" "zsh-autosuggestions"
-
-install_package "zsh-syntax-highlighting" "zsh-syntax-highlighting"

@@ -2,68 +2,77 @@
 param(
     [Parameter(Mandatory, Position = 0)]
     [ValidateNotNullOrEmpty()]
-    [string] $ProfileName
+    [string] $ProfileName,
+
+    [Parameter()]
+    [switch] $DryRun
 )
 
 $ErrorActionPreference = "Stop"
 
 $BASE_CONFIG = "base"
 $CONFIG_SUFFIX = ".yaml"
-
 $META_DIR = "meta"
 $CONFIG_DIR = "configs/windows"
 $PROFILES_DIR = "profiles"
-
 $DOTBOT_DIR = "dotbot"
 $DOTBOT_BIN = "bin/dotbot"
 $BASEDIR = $PSScriptRoot
 
 Set-Location $BASEDIR
+
+Write-Host "🚀 Initializing submodules..." -ForegroundColor Cyan
 git -C $DOTBOT_DIR submodule sync --quiet --recursive
 git submodule update --init --recursive $DOTBOT_DIR
 
+# --- Find Python ---
 foreach ($PYTHON in ('python', 'python3', 'FAIL')) {
-    # Python redirects to Microsoft Store in Windows 10 when not installed
-    if (& { $ErrorActionPreference = "SilentlyContinue"
-            ![string]::IsNullOrEmpty((&$PYTHON -V))
-            $ErrorActionPreference = "Stop" }) {
-        break
-    }
+    if (& { $ErrorActionPreference = "SilentlyContinue"; ![string]::IsNullOrEmpty((&$PYTHON -V)); $ErrorActionPreference = "Stop" }) { break }
 }
+if ($PYTHON -eq 'FAIL') { Write-Error "Error: Cannot find Python."; return }
 
-if ($PYTHON -eq 'FAIL') {
-    Write-Error "Error: Cannot find Python."
-    return
-}
+# --- Read Profile ---
+$ProfileFile = Join-Path $BASEDIR "$META_DIR/$PROFILES_DIR/$ProfileName"
+if (-not (Test-Path $ProfileFile)) { Write-Error "Profile $ProfileName not found."; return }
+$Configs = Get-Content $ProfileFile | Where-Object { $_ -notmatch '^\s*(#|$)' }
 
-$CONFIGS = @()
-
-Get-Content ( Join-Path $BASEDIR  -ChildPath $META_DIR/$PROFILES_DIR/$ProfileName) | ForEach-Object {
-    $CONFIGS += $_
-}
-
-$BaseConfigPath = Join-Path $BASEDIR  -ChildPath $META_DIR/$BASE_CONFIG$CONFIG_SUFFIX
+# --- Prepare Combined Config ---
+Write-Host "📦 Preparing unified configuration for profile: $ProfileName..." -ForegroundColor Cyan
+$TempConfigFile = [IO.Path]::GetTempFileName()
 
 try {
-    # TempFileCollection manages  temp files and deletes them when it is disposed.
-    $tempFiles = [System.CodeDom.Compiler.TempFileCollection]::new()
-    foreach ($CONFIG in $CONFIGS) {
-        Write-Output "`nConfigure $config"
-        $file = New-TemporaryFile
-        $tempFiles.AddFile($file.FullName, $false)
-        Get-Content -Path $BaseConfigPath | Add-Content -Path $file
-        Get-Content -Path ( Join-Path $BASEDIR  -ChildPath $META_DIR/$CONFIG_DIR/$CONFIG$CONFIG_SUFFIX ) | Add-Content -Path $file
-        Write-Verbose (Get-Content -Path $file | Out-String)
-        & $PYTHON $(Join-Path $BASEDIR -ChildPath $DOTBOT_DIR | Join-Path -ChildPath $DOTBOT_BIN) -d $BASEDIR -c $file
+    $BaseConfigPath = Join-Path $BASEDIR "$META_DIR/$BASE_CONFIG$CONFIG_SUFFIX"
+    Get-Content $BaseConfigPath | Set-Content $TempConfigFile
+
+    $ValidCount = 0
+    foreach ($Config in $Configs) {
+        $ConfigPath = Join-Path $BASEDIR "$META_DIR/$CONFIG_DIR/$Config$CONFIG_SUFFIX"
+        if (Test-Path $ConfigPath) {
+            Add-Content $TempConfigFile "`n# --- Fragment: $Config ---"
+            Get-Content $ConfigPath | Add-Content $TempConfigFile
+            $ValidCount++
+        } else {
+            Write-Warning "Configuration $Config not found at $ConfigPath. Skipping."
+        }
     }
+
+    if ($ValidCount -eq 0) { Write-Error "No valid configuration fragments found."; return }
+
+    Write-Host "✨ Deploying $ValidCount fragments via Dotbot..." -ForegroundColor Green
+
+    # --- Run Dotbot ONCE ---
+    $DotbotPath = Join-Path $BASEDIR "$DOTBOT_DIR/$DOTBOT_BIN"
+    $Args = @("-d", $BASEDIR, "-c", $TempConfigFile)
+    if ($DryRun) { $Args += "--dry-run" }
+
+    & $PYTHON $DotbotPath $Args
 }
 finally {
-    if ($null -ne $tempFiles) {
-        $tempFiles.Dispose() #Deletes all temp files
-    }
+    if (Test-Path $TempConfigFile) { Remove-Item $TempConfigFile -Force }
 }
 
-Write-Output "`n🔍 Checking for dead links in $HOME ..."
+# --- Dead Link Check ---
+Write-Host "`n🔍 Checking for dead links in $HOME ..." -ForegroundColor Yellow
 Get-ChildItem -Path $HOME -Depth 1 -Attributes ReparsePoint | ForEach-Object {
     $target = (Get-Item $_.FullName).Target
     if ($target -like "*$BASEDIR*" -and -not (Test-Path $target)) {
@@ -71,4 +80,4 @@ Get-ChildItem -Path $HOME -Depth 1 -Attributes ReparsePoint | ForEach-Object {
     }
 }
 
-Write-Output "`n✅ Finished deploying $ProfileName!"
+Write-Host "`n✅ Finished deploying $ProfileName!" -ForegroundColor Green

@@ -1,0 +1,7 @@
+# Create commands specify empty directories to be created.
+- create:
+    - ~/.cargo
+- link:
+    ~/.cargo/config.toml:
+      force: true
+      path: config/cargo/config.toml
