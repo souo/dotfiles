@@ -96,18 +96,10 @@ if command -v zsh-defer >/dev/null; then
     # FZF
     zsh-defer source "$DOTFILES/config/fzf/.fzf.zsh"
 
-    # Python (Pyenv)
-    zsh-defer -c '
-        if [[ -d "$HOME/.pyenv" ]]; then
-            export PYENV_ROOT="$HOME/.pyenv"
-            path=("$PYENV_ROOT/bin" $path)
-            eval "$(pyenv init - zsh)"
-            eval "$(pyenv virtualenv-init -)" >/dev/null 2>&1
-        fi
-    '
-
-    # Java (jenv)
-    zsh-defer -c '[[ -d "$HOME/.jenv" ]] && path=("$HOME/.jenv/bin" $path) && eval "$(jenv init -)"'
+    # Mise (Multi-language version manager: replaces pyenv, jenv, nvm, volta, etc.)
+    if command -v mise >/dev/null; then
+        zsh-defer -c 'eval "$(mise activate zsh)"'
+    fi
 
     # Rust
     zsh-defer -c '[[ -e "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"'
@@ -115,16 +107,16 @@ if command -v zsh-defer >/dev/null; then
     # Custom completions & options that can be deferred
     zsh-defer -c '
         zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
+        zstyle ":completion:*:descriptions" format "[%d]"
         zstyle ":fzf-tab:*" fzf-command ftb-tmux-popup
+        zstyle ":fzf-tab:complete:*" fzf-preview "eza -1 --color=always \$realpath"
     '
 else
     # Fallback if zsh-defer is not available
     [[ -f "$DOTFILES/config/fzf/.fzf.zsh" ]] && source "$DOTFILES/config/fzf/.fzf.zsh"
     command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
     command -v atuin >/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
-    [[ -d "$HOME/.pyenv" ]] && export PYENV_ROOT="$HOME/.pyenv" && path=("$PYENV_ROOT/bin" $path) && eval "$(pyenv init - zsh)"
-    [[ -d "$HOME/.jenv" ]] && path=("$HOME/.jenv/bin" $path) && eval "$(jenv init -)"
-    [[ -d "$HOME/.fnm" ]] && path=("$HOME/.fnm" $path) && eval "$(fnm env --use-on-cd --shell zsh)"
+    command -v mise >/dev/null && eval "$(mise activate zsh)"
     [[ -e "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 fi
 

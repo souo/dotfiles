@@ -77,10 +77,10 @@ This repository uses a **Fragmented Dotbot System** for maximum flexibility:
 | **Terminal** | [WezTerm](https://wezfurlong.org/wezterm/) | GPU-accelerated cross-platform terminal. |
 | **Window Mgmt** | [Aerospace](https://github.com/nikitabobko/AeroSpace) + [Sketchybar](https://github.com/FelixKratz/SketchyBar) | (macOS) Tiling window management and custom status bar. |
 | **File Manager** | [Yazi](https://yazi-rs.github.io/) + [xplr](https://xplr.art/) | Blazing fast Rust-based terminal file managers. |
-| **Navigation** | [fzf](https://github.com/junegunn/fzf) + [zoxide](https://github.com/ajeetdsouza/zoxide) + [Atuin](https://github.com/atuinsh/atuin) | Fuzzy finder, smarter `cd`, and magical shell history. |
+| **Navigation** | [fzf](https://github.com/junegunn/fzf) + [zoxide](https://github.com/ajeetdsouza/zoxide) + [Atuin](https://github.com/atuinsh/atuin) | Fuzzy finder, smarter `cd`, and magical shell history. Integrated with `ripgrep` and `fzf-git.sh`. |
 | **Multiplexer** | [tmux](https://github.com/tmux/tmux) + [Zellij](https://zellij.dev/) | Terminal multiplexing and workspaces. |
-| **Modern CLI** | `eza`, `bat`, `delta`, `difftastic`, `dust` | Better versions of `ls`, `cat`, `diff`, and `du`. |
-| **Dev Tooling** | `uv`, `volta`, `rustup`, `bun` | Toolchain management for Python, Node, Rust, and JS. |
+| **Modern CLI** | `eza`, `bat`, `delta`, `difftastic`, `rg` | Better versions of `ls`, `cat`, `diff`, `grep`. |
+| **Dev Tooling** | `uv`, [mise](https://mise.jdx.dev/), `rustup`, `bun` | Toolchain management for Python, Node, Java, Rust, and JS. |
 | **System Info** | [fastfetch](https://github.com/fastfetch-cli/fastfetch) + [htop](https://htop.dev/) + [bottom](https://github.com/ClementTsang/bottom) | Pretty system info and modern system monitoring (btm). |
 
 ---

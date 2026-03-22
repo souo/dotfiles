@@ -1,0 +1,5 @@
+- link:
+    ~/.config/mise/config.toml:
+      path: config/mise/config.toml
+      create: true
+      force: true

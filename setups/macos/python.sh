@@ -7,19 +7,6 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 # shellcheck source=/dev/null
 . "$HERE/utils.sh"
 
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-print_in_purple "\n   pyenv \n"
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-# Pyenv
-brew_install "pyenv" "pyenv"
-
-# pyenv-virtualenv
-brew_install "pyenv-virtualenv" "pyenv-virtualenv"
-
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 print_in_purple "\n   pyenv build environment \n"

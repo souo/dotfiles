@@ -29,9 +29,9 @@ export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bot
 "$HERE"/editor.sh
 "$HERE"/terminals.sh
 "$HERE"/fonts.sh
+"$HERE"/mise.sh
 "$HERE"/python.sh
 "$HERE"/lua.sh
-"$HERE"/volta.sh
 "$HERE"/cmdline.sh
 "$HERE"/dust.sh
 "$HERE"/atuin.sh

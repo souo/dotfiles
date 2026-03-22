@@ -37,18 +37,9 @@ fi
 # Zellij
 command -v zellij >/dev/null && alias vibe='zellij --layout vibe'
 
-# --- 📂 Navigation & LS ---
-# (Note: eza aliases are usually handled by the zsh-eza plugin)
-if command -v eza >/dev/null; then
-    alias l='eza -lh --icons --git'
-    alias la='eza -lah --icons --git'
-    alias lt='eza --tree --level=2 --icons'
-fi
-
 # --- 🐍 Python ---
 alias py='python3'
 alias venv='python3 -m venv venv && source venv/bin/activate'
-
 
 # --- 🚀 App Specific ---
 alias claude-mem='bun "/Users/2z/.claude/plugins/cache/thedotmack/claude-mem/10.5.6/scripts/worker-service.cjs"'

@@ -1,0 +1,6 @@
+[tools]
+bun = "latest"
+node = "lts"
+pnpm = "latest"
+python = "3.14"
+yarn = "latest"

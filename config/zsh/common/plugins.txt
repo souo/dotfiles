@@ -21,3 +21,4 @@ zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-completions
 Aloxaf/fzf-tab
 jeffreytse/zsh-vi-mode
+junegunn/fzf-git.sh
