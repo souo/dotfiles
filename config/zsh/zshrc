@@ -82,9 +82,6 @@ if command -v zsh-defer >/dev/null; then
     # Deferred compinit
     zsh-defer zsh_defer_compinit
 
-    # Rust/Cargo
-    zsh-defer -c '[[ -e "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"'
-
     # Mise (Multi-language version manager: MUST load after PATH modifications)
     if command -v mise >/dev/null; then
         zsh-defer -c 'eval "$(mise activate zsh)"'
@@ -111,7 +108,6 @@ if command -v zsh-defer >/dev/null; then
     '
 else
     # Fallback if zsh-defer is not available
-    [[ -e "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
     command -v mise >/dev/null && eval "$(mise activate zsh)"
     [[ -f "$DOTFILES/config/fzf/.fzf.zsh" ]] && source "$DOTFILES/config/fzf/.fzf.zsh"
     command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
@@ -129,7 +125,7 @@ setopt EXTENDED_GLOB        # Use extended globbing features
 setopt NO_BEEP              # Shhh.
 
 # Keybindings
-bindkey -e                  # Use emacs keybindings
+bindkey -v                  # Use vim keybindings
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
