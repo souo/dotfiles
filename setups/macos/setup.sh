@@ -30,7 +30,6 @@ export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bot
 "$HERE"/terminals.sh
 "$HERE"/fonts.sh
 "$HERE"/mise.sh
-"$HERE"/python.sh
 "$HERE"/lua.sh
 "$HERE"/cmdline.sh
 "$HERE"/dust.sh
