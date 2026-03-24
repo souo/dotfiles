@@ -8,18 +8,61 @@ command -v btm >/dev/null && alias top='btm'
 command -v tokei >/dev/null && alias loc='tokei'
 alias vsc='code .'
 
-# --- 📋 Clipboard ---
-if command -v xclip >/dev/null; then
-    alias pbcopy='xclip -selection clipboard'
-    alias pbpaste='xclip -selection clipboard -o'
+# --- 📁 Navigation ---
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ~='cd ~'
+alias d='cd ~/Downloads'
+alias p='cd ~/Projects'
+alias dotfiles="cd $DOTFILES"
+
+# --- 🛡️ Safe Operations ---
+# Unify trash tool aliases to 'tp'
+if command -v trash-put >/dev/null; then
+    alias tp='trash-put' tl='trash-list' tr='trash-restore' te='trash-empty'
+elif command -v trash >/dev/null; then
+    # macOS 'trash' (Homebrew)
+    alias tp='trash'
+elif [[ -x "$DOTFILES/bin/trash.sh" ]]; then
+    alias tp="$DOTFILES/bin/trash.sh"
 fi
 
-# Public key to clipboard
-if command -v pbcopy >/dev/null; then
-    alias pubkey="cat ~/.ssh/id_ed25519.pub | pbcopy && echo '=> Public key copied to clipboard.'"
+# Redefine rm as a warning function if tp is available
+if alias tp >/dev/null 2>&1; then
+    # Use a function instead of an alias and try to use 'rich' for fancy output
+    rm() {
+        # Use $'...' to let Zsh parse \n as a real newline and ensure backslashes are handled correctly
+        local msg=$'[bold red]🛡️ 危险操作！[/]\n请使用 [bold green]tp[/] (trash-put) 或 [bold yellow]\\rm[/] (原始命令)。'
+        if command -v rich >/dev/null; then
+            rich --print "$msg"
+        elif command -v python3 >/dev/null && python3 -c "import rich" 2>/dev/null; then
+            # Pass msg via sys.argv to avoid issues with multi-line strings and nested quoting
+            python3 -c "import sys; from rich.console import Console; Console().print(sys.argv[1])" "$msg"
+        else
+            printf "🛡️ 危险操作！\n请使用 \"tp\" (trash-put) 或 \"\\\\rm\" (原始命令)。\n"
+        fi
+        return 1
+    }
+else
+    # Fallback to interactive rm as a last resort if no trash tools are available
+    alias rm='rm -i'
 fi
+
+alias cp='cp -i'
+alias mv='mv -i'
 
 # --- 🛠️ Modern CLI Tools ---
+
+# Eza (ls replacement)
+if command -v eza >/dev/null; then
+    alias ls='eza --icons --group-directories-first'
+    alias ll='eza -lh --icons --group-directories-first'
+    alias la='eza -a --icons --group-directories-first'
+    alias lt='eza --tree --icons --level=2'
+    alias llt='eza -lh --tree --icons --level=2'
+fi
 
 # Bat (cat replacement)
 if command -v batcat >/dev/null; then
@@ -49,7 +92,7 @@ command -v yazi >/dev/null && alias y='yy'
 
 # FZF Search Aliases
 alias f='fp'      # Fuzzy File Search
-alias fz='fd'     # Fuzzy Zoxide/Directory Search
+# fz is now a function in fzf.zsh
 alias fk='fkill'  # Fuzzy Kill
 alias dot='fconf' # Fuzzy Dotfiles Config
 
