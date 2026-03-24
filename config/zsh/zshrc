@@ -14,19 +14,18 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
 # ---(Compinit) ---
-# MUST be loaded before plugins that use compdef
+# Faster compinit: only runs if the dump file is older than 24h
 autoload -Uz compinit
-# Dummy compdef to prevent errors before compinit runs
-compdef() { }
-
-# Deferred compinit for performance
 zsh_defer_compinit() {
-  if [[ -n "$HOME/.zcompdump"(N.m-1) ]]; then
-    compinit -C -d "$HOME/.zcompdump"
+  local dump="$HOME/.zcompdump"
+  if [[ -s "$dump" && (! "$dump" -nt "${ZDOTDIR:-$HOME}/.zshrc" || "$(date +%j)" != "$(date -r "$dump" +%j)") ]]; then
+    compinit -d "$dump"
   else
-    compinit -d "$HOME/.zcompdump"
+    compinit -C -d "$dump"
   fi
 }
+# Dummy compdef to prevent errors before compinit runs
+compdef() { }
 
 # --- 📦 Antidote (Plugin Manager) ---
 ANTIDOTE_DIR="$XDG_DATA_HOME/antidote"
@@ -41,19 +40,25 @@ if [[ ! "$ANTIDOTE_PLUGINS_ZSH" -nt "$ANTIDOTE_PLUGINS_TXT" ]]; then
     mkdir -p "$(dirname "$ANTIDOTE_PLUGINS_ZSH")"
     antidote bundle < "$ANTIDOTE_PLUGINS_TXT" > "$ANTIDOTE_PLUGINS_ZSH"
 fi
+
 source "$ANTIDOTE_PLUGINS_ZSH"
 
 # --- 🛠️ Core Environment (Immediate Load) ---
 [[ -f ~/.env ]] && source ~/.env
+
+# Mise (Multi-language version manager: Load EARLY for tool availability)
+if command -v mise >/dev/null; then
+    eval "$(mise activate zsh)"
+fi
+
+# Load aliases after mise is activated (so mise-managed tools like trash-put are available)
 [[ -f ~/.aliases ]] && source ~/.aliases
 
-# Load custom shell functions
-if [[ -d ~/.zsh_functions ]]; then
-    for func in ~/.zsh_functions/*.zsh; do
-        [[ -r "$func" ]] && source "$func"
-    done
-    unset func
-fi
+# Load custom shell functions (Source directly from DOTFILES if symlink fails)
+for func in "$DOTFILES/config/zsh/functions"/*.zsh; do
+    [[ -r "$func" ]] && source "$func"
+done
+unset func
 
 # Machine-specific secrets/configs
 for secret in ~/.{zsh_secret,localrc}; do
@@ -61,73 +66,110 @@ for secret in ~/.{zsh_secret,localrc}; do
 done
 unset secret
 
-# --- 🔧 Tool Initializations (DEFERRED for zero delay) ---
+# --- 🔧 Helpers (Smart Loading) ---
 
-# Helper: Load a tool if it exists, deferred if zsh-defer is available
+# Execute a command/function, deferred if zsh-defer is available
+_run_deferred() {
+    if command -v zsh-defer >/dev/null 2>&1; then
+        zsh-defer "$@"
+    else
+        # If it's -c "cmd", eval the cmd. Otherwise run the function/command.
+        if [[ "$1" == "-c" ]]; then
+            eval "$2"
+        else
+            "$@"
+        fi
+    fi
+}
+
+# Load a tool via its init command, deferred if possible
 _load_tool() {
     local cmd="$1"
     local init_cmd="$2"
-    if command -v zsh-defer >/dev/null 2>&1; then
-        zsh-defer -c "command -v $cmd >/dev/null && eval \"\$($init_cmd)\""
-    else
-        command -v "$cmd" >/dev/null && eval "$($init_cmd)"
-    fi
+    _run_deferred -c "command -v $cmd >/dev/null && eval \"\$($init_cmd)\""
 }
 
 # Simple fallback prompt while heavy one loads
 PROMPT='%F{blue}%n%f@%F{green}%m%f %F{cyan}%1~%f %# '
 
-# Deferred tools
-if command -v zsh-defer >/dev/null; then
-    # Deferred compinit
-    zsh-defer zsh_defer_compinit
+# --- 🚀 Tool Initializations (Flattened) ---
 
-    # Mise (Multi-language version manager: MUST load after PATH modifications)
-    if command -v mise >/dev/null; then
-        zsh-defer -c 'eval "$(mise activate zsh)"'
-    fi
-
-    # Oh My Posh (Prompt) - Deferred load
-    if command -v oh-my-posh >/dev/null; then
-        zsh-defer -c "eval \"\$(oh-my-posh init zsh --config \"$DOTFILES/config/oh-my-posh/custom.omp.json\")\""
-    fi
-
-    # Tools with standard init commands (Load AFTER mise)
-    _load_tool "zoxide" "zoxide init zsh"
-    _load_tool "atuin" "atuin init zsh --disable-up-arrow"
-
-    # FZF
-    zsh-defer source "$DOTFILES/config/fzf/.fzf.zsh"
-
-    # Custom completions & options that can be deferred
-    zsh-defer -c '
-        zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
-        zstyle ":completion:*:descriptions" format "[%d]"
-        zstyle ":fzf-tab:*" fzf-command ftb-tmux-popup
-        zstyle ":fzf-tab:complete:*" fzf-preview "eza -1 --color=always \$realpath"
-    '
+# SSH Check: Don't load fancy prompt if on SSH
+if [[ -n "$SSH_CONNECTION" ]]; then
+    PROMPT='%F{yellow}%n@%m%f %F{cyan}%1~%f %# '
 else
-    # Fallback if zsh-defer is not available
-    command -v mise >/dev/null && eval "$(mise activate zsh)"
-    [[ -f "$DOTFILES/config/fzf/.fzf.zsh" ]] && source "$DOTFILES/config/fzf/.fzf.zsh"
-    command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
-    command -v atuin >/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
+    _load_tool "oh-my-posh" "oh-my-posh init zsh --config \"$DOTFILES/config/oh-my-posh/custom.omp.json\""
 fi
 
+# 2. Deferred Load (UI/Interactive tools)
+_run_deferred zsh_defer_compinit
+_run_deferred source "$DOTFILES/config/fzf/.fzf.zsh"
+
+# FZF-Tab (MUST be after compinit)
+_run_deferred -c '
+    # If using antidote, fzf-tab can be bundled but we source it here for order
+    # Or clone/use path if you prefer. Assuming antidote downloads it to $ANTIDOTE_DIR
+    [[ -d "$ANTIDOTE_DIR/Aloxaf/fzf-tab" ]] && source "$ANTIDOTE_DIR/Aloxaf/fzf-tab/fzf-tab.plugin.zsh"
+'
+
+_load_tool "zoxide" "zoxide init zsh"
+_load_tool "atuin" "atuin init zsh --disable-up-arrow"
+_load_tool "pay-respects" "pay-respects zsh --alias fuck"
+
+# 3. Deferred Configs & UI Tweaks
+_run_deferred -c '
+    zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
+    zstyle ":completion:*:descriptions" format "[%d]"
+    zstyle ":fzf-tab:*" fzf-command ftb-tmux-popup
+    zstyle ":fzf-tab:*" group-colors $'\''\e[32m\e[1m'\'' $'\''\e[33m\e[1m'\'' $'\''\e[35m\e[1m'\'' $'\''\e[31m\e[1m'\'' $'\''\e[36m\e[1m'\'' $'\''\e[34m\e[1m'\''
+    zstyle ":fzf-tab:complete:*" fzf-preview "eza -1 --color=always \$realpath"
+    # Disable sorting when using zoxide/recent results
+    zstyle ":fzf-tab:complete:z:*" fzf-preview "eza -1 --color=always \$realpath"
+    zstyle ":fzf-tab:complete:z:*" fzf-flags --no-sort
+'
+
 # --- ⚙️ Zsh Options & Settings ---
+# History
+setopt NO_BEEP              # Shhh.
+setopt INTERACTIVE_COMMENTS # Allow comments in interactive shell
+setopt NOTIFY               # Report the status of background jobs immediately
+setopt NO_HUP               # Don't kill background jobs when logout
+setopt CORRECT              # Suggest corrections for misspelled commands
+
+
+setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt APPEND_HISTORY            # Append to history file, don't overwrite.
+setopt INC_APPEND_HISTORY        # Write to history file immediately, not just on exit.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks from each command line.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+
+# Navigation & UI
 setopt AUTO_CD              # Go to directory by just typing its name
 setopt AUTO_PUSHD           # Push the old directory onto the stack
 setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack
-setopt SHARE_HISTORY        # Share history between all sessions
-setopt HIST_IGNORE_ALL_DUPS # Delete old recorded entry if new entry is a duplicate
-setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks from each command line
 setopt EXTENDED_GLOB        # Use extended globbing features
 setopt NO_BEEP              # Shhh.
+setopt INTERACTIVE_COMMENTS # Allow comments in interactive shell
 
 # Keybindings
-bindkey -v                  # Use vim keybindings
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
+bindkey -e # Use emacs keybindings by default (unless zsh-vi-mode overrides)
+
+# History substring search (bind after plugins are loaded)
+if [[ -n "$terminfo[kcuu1]" ]]; then
+  bindkey "$terminfo[kcuu1]" history-substring-search-up
+fi
+if [[ -n "$terminfo[kcud1]" ]]; then
+  bindkey "$terminfo[kcud1]" history-substring-search-down
+fi
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # --- ✨ System Info ---
 # if [[ -o interactive ]] && command -v fastfetch >/dev/null; then

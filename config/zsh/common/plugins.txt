@@ -9,16 +9,17 @@ ohmyzsh/ohmyzsh path:plugins/cp
 ohmyzsh/ohmyzsh path:plugins/eza
 
 # --- Platform Specific ---
-# antidote only loads them on correct OS via conditional checks in .zshrc if needed, 
+# antidote only loads them on correct OS via conditional checks in .zshrc if needed,
 # but here we load them and they usually have internal OS checks.
 ohmyzsh/ohmyzsh path:plugins/macos
 
 # --- High Performance External Plugins ---
 romkatv/zsh-defer
 zsh-users/zsh-autosuggestions
-zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-completions
-Aloxaf/fzf-tab
+zsh-users/zsh-history-substring-search
 jeffreytse/zsh-vi-mode
 junegunn/fzf-git.sh
 hlissner/zsh-autopair
+# Syntax highlighting MUST be last
+zsh-users/zsh-syntax-highlighting

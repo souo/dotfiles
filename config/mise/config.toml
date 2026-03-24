@@ -1,5 +1,8 @@
 [settings]
-idiomatic_version_file_enable_tools = ["python"]
+idiomatic_version_file_enable_tools = ["python", "node", "rust"]
+
+[env]
+PYTHON_PIP_VERSION = "latest"
 
 [tools]
 bun = "latest"
@@ -7,6 +10,7 @@ just = "latest"
 node = "lts"
 pnpm = "latest"
 yarn = "latest"
+go = "latest"
 python = { version = "3.14", postinstall = "pip install --user pipx" }
 uv = "latest"
 rust = "stable"
@@ -17,4 +21,7 @@ rust = "stable"
 "cargo:zoxide" = "latest"
 "cargo:bottom" = "latest"
 "pipx:pre-commit" = "latest"
+"pipx:thefuck" = "latest"
 "aqua:BurntSushi/ripgrep" = "latest"
+"cargo:pay-respects" = "latest"
+"pipx:trash-cli" = "latest"
