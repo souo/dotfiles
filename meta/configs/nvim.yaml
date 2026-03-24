@@ -3,6 +3,3 @@
       force: true
       path: config/nvim/user-plugins.lua
       create: true
-
-- shell:
-    - [config/nvim/config.sh, config nvim]

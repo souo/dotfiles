@@ -28,7 +28,8 @@ setup_nvim_config() {
         fi
       fi
       # Not AstroNvim, backup and remove
-      local backup_dir="$HOME/.config/nvim.backup.$(date +%Y%m%d_%H%M%S)"
+      local backup_dir
+      backup_dir="$HOME/.config/nvim.backup.$(date +%Y%m%d_%H%M%S)"
       print_warning "Backing up existing nvim config to $backup_dir"
       mv "$nvim_config_dir" "$backup_dir"
     else
@@ -53,14 +54,8 @@ setup_user_plugins() {
 install_deps() {
   print_in_purple "Checking Neovim dependencies..."
 
-  if command -v pip3 >/dev/null; then
-    pip3 install --user --upgrade pynvim 2>/dev/null || true
-  fi
-
-  if command -v bun >/dev/null; then
-    bun install -g neovim 2>/dev/null || true
-  elif command -v npm >/dev/null; then
-    npm install -g neovim 2>/dev/null || true
+  if command -v uv >/dev/null; then
+    uv tool install --upgrade pynvim 2>/dev/null || true
   fi
 
   # Install Treesitter CLI if not present
