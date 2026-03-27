@@ -77,25 +77,25 @@ version:
 bootstrap:
     @{{ if os() == "windows" { "powershell -File ./Windows/setups/Setup.ps1" } else { "./setups/setup.sh" } }}
 
-# --- 🎮 Neovim (AstroNvim) ---
+# --- 🎮 Neovim ---
 
-# Reinstall AstroNvim from scratch (backup old config)
+# Reinstall Neovim from scratch (backup old config)
 [group('nvim')]
 nvim-reinstall:
     @REINSTALL=yes ./config/nvim/config.sh
 
-# Sync AstroNvim plugins
+# Sync Neovim plugins
 [group('nvim')]
 nvim-sync:
     @nvim --headless "+Lazy! sync" +qa
 
-# Update AstroNvim core
+# Update vim-config core
 [group('nvim')]
 nvim-update:
     @cd ~/.config/nvim && git pull --rebase
-    @echo "AstroNvim updated. Run 'just nvim-sync' to update plugins."
+    @echo "vim-config updated. Run 'just nvim-sync' to update plugins."
 
-# Open AstroNvim plugin configuration
+# Open plugin configuration
 [group('nvim')]
 nvim-config:
     @nvim ~/.config/nvim/lua/plugins/user-plugins.lua

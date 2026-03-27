@@ -71,9 +71,25 @@ Enhanced [Yazi](https://yazi-rs.github.io/) integration:
 
 - **`y`**: Launch Yazi. When you quit with `q`, your shell automatically `cd`s to the last directory you were browsing.
 
-### 🎮 AstroNvim (Neovim)
+### 🪐 Atuin Magical History
 
-A fully-featured Neovim configuration powered by [AstroNvim](https://astronvim.com/):
+[Atuin](https://github.com/atuinsh/atuin) replaces your shell history with a SQLite database for enhanced search and sync:
+
+- **Full-text search**: Filter history by any keyword
+- **Directory aware**: Only show commands run in the current directory (toggle with `Ctrl+D`)
+- **Filter mode**: Toggle between global, directory, and session history (toggle with `Ctrl+R`)
+- **Time sync**: History synced across all your machines
+- **Fuzzy search**: Built-in fuzzy matching for finding that command you ran last week
+
+**Tips:**
+
+- Use `Ctrl+R` to open Atuin's interactive search UI
+- Configure sync behavior in `~/.config/atuin/config.toml`
+- Use `atuin import auto` to import existing shell history on first setup
+
+### 🎮 Neovim (rafi/vim-config)
+
+A modern Neovim configuration powered by [rafi/vim-config](https://github.com/rafi/vim-config):
 
 - **LSP**: Full language server protocol support for code completion, diagnostics, and refactoring
 - **Treesitter**: Syntax highlighting and code understanding
@@ -83,16 +99,18 @@ A fully-featured Neovim configuration powered by [AstroNvim](https://astronvim.c
 - **Gitsigns**: Inline git diff display
 - **Auto-pairs**: Automatic bracket/quote closing
 
-**Manage AstroNvim:**
+**Manage Neovim:**
+
 ```bash
 just nvim-reinstall   # Reinstall from scratch (backup old config)
 just nvim-sync        # Sync all plugins
-just nvim-update      # Update AstroNvim core
+just nvim-update      # Update vim-config core
 just nvim-config      # Open plugin configuration
 just nvim-health      # Check health status
 ```
 
 **Key Bindings:**
+
 - `<leader>ff` - Find files
 - `<leader>fg` - Live grep
 - `<leader>fb` - List buffers
@@ -147,7 +165,7 @@ This repository uses a **Fragmented Dotbot System**:
 | **Shell** | [Zsh](https://www.zsh.org/) + [Antidote](https://getantidote.github.io/) | Static plugin management with `zsh-defer` for zero-delay startup. |
 | **Launcher** | [Raycast](https://www.raycast.com/) | Advanced launcher with script commands and deep integrations. |
 | **Prompt** | [Oh My Posh](https://ohmyposh.dev/) | Cross-shell theme engine for consistent aesthetics. |
-| **Editor** | [Neovim](https://neovim.io/) + [AstroNvim](https://astronvim.com/) | Modern Lua-based Neovim distribution with LSP, autocomplete, and file explorer. |
+| **Editor** | [Neovim](https://neovim.io/) + [rafi/vim-config](https://github.com/rafi/vim-config) | Modern Lua-based Neovim distribution with LSP, autocomplete, and file explorer. |
 | **Terminal** | [WezTerm](https://wezfurlong.org/wezterm/) + [Zellij](https://zellij.dev/) | GPU terminal & terminal workspace with "Vibe" layouts. |
 | **Window Mgmt** | [Aerospace](https://github.com/nikitabobko/AeroSpace) + [Borders](https://github.com/FelixKratz/JankyBorders) | (macOS) Tiling window management with visible borders. |
 | **Status Bar** | [SketchyBar](https://felixkratz.github.io/SketchyBar/) | (macOS) Highly customizable Lua-based status bar. |
@@ -155,7 +173,7 @@ This repository uses a **Fragmented Dotbot System**:
 | **Navigation** | [fzf](https://github.com/junegunn/fzf) + [zoxide](https://github.com/ajeetdsouza/zoxide) + [Atuin](https://github.com/atuinsh/atuin) | Fuzzy finder, smarter `cd`, and magical shell history. |
 | **Git Tooling** | [Lazygit](https://github.com/jesseduffield/lazygit) + `delta` + `difftastic` | TUI for git and enhanced diffing. |
 | **Modern CLI** | `eza`, `bat`, `rg`, `fastfetch`, `tealdeer`, `htop` | Better versions of `ls`, `cat`, `grep`, `neofetch`, `tldr`, `top`. |
-| **Dev Tooling** | `uv`, [mise](https://mise.jdx.dev/), `rustup`, `bun`, `volta` | Toolchain management for Python, Node, Java, Rust, and JS. |
+| **Dev Tooling** | `uv`, [mise](https://mise.jdx.dev/), `rustup`, `bun` | Toolchain management for Python, Node, Java, Rust, and JS. |
 | **Customizer** | [Karabiner](https://karabiner-elements.pqrs.org/) + [IdeaVim](https://github.com/JetBrains/ideavim) | Keyboard customization and Vim emulation for IDEs. |
 
 ---

@@ -1,12 +1,12 @@
-# AstroNvim Configuration
+# Neovim Configuration
 
-基于 [AstroNvim/template](https://github.com/AstroNvim/template) 的用户配置。
+基于 [rafi/vim-config](https://github.com/rafi/vim-config) 的用户配置。
 
 ## Structure
 
-```
+```text
 config/nvim/
-├── config.sh          # 安装脚本（克隆 AstroNvim/template）
+├── config.sh          # 安装脚本（克隆 rafi/vim-config）
 ├── user-plugins.lua   # 自定义插件配置
 └── README.md          # 此文件
 ```
@@ -28,8 +28,8 @@ just nvim-reinstall
 ## How it works
 
 1. **Dotbot** 链接 `user-plugins.lua` 到 `~/.config/nvim/lua/plugins/`
-2. **config.sh** 克隆 [AstroNvim/template](https://github.com/AstroNvim/template) 到 `~/.config/nvim`
-3. AstroNvim 自动加载 `lua/plugins/` 目录下的所有插件配置
+2. **config.sh** 克隆 [rafi/vim-config](https://github.com/rafi/vim-config) 到 `~/.config/nvim`
+3. vim-config 自动加载 `lua/plugins/` 目录下的所有插件配置
 
 ## Customization
 
@@ -53,10 +53,10 @@ return {
 
   -- 修改现有插件
   {
-    "AstroNvim/astrotheme",
+    "folke/tokyonight.nvim",
     opts = {
       transparent = true,
-      style = "dark",
+      style = "storm",
     },
   },
 }
@@ -67,13 +67,13 @@ return {
 Default leader key is `<Space>`. Common bindings:
 
 | Key | Action |
-|-----|--------|
+| :--- | :--- |
 | `<leader>ff` | Find files |
 | `<leader>fg` | Live grep |
 | `<leader>fb` | List buffers |
 | `<leader>fs` | Save file |
 | `<leader>fn` | New file |
-| `<leader>un` | Toggle line numbers |
+| `<leader>sp` | Open plugin spec |
 | `<S-h>` | Previous buffer |
 | `<S-l>` | Next buffer |
 | `<S-q>` | Close buffer |
@@ -84,7 +84,7 @@ Default leader key is `<Space>`. Common bindings:
 # 同步插件
 just nvim-sync
 
-# 更新 AstroNvim 核心
+# 更新 vim-config 核心
 just nvim-update
 
 # 检查健康状态
@@ -103,7 +103,7 @@ just nvim-config
 - **File Explorer**: Neo-tree 项目文件树
 - **Search**: Telescope 模糊查找文件、文本、buffers
 - **Buffer Management**: Bufferline 标签式界面
-- **Themes**: AstroNvim astrotheme 支持透明背景
+- **Themes**: 支持多种主题（tokyonight, catppuccin 等）
 
 ## Troubleshooting
 
@@ -131,7 +131,6 @@ just nvim-reinstall
 
 ## Resources
 
-- [AstroNvim 文档](https://astronvim.com/)
-- [AstroNvim/template](https://github.com/AstroNvim/template)
+- [rafi/vim-config](https://github.com/rafi/vim-config)
 - [Lazy.nvim](https://github.com/folke/lazy.nvim)
 - [Neovim Lua 指南](https://neovim.io/doc/user/lua-guide.html)
