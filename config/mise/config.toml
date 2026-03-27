@@ -1,6 +1,9 @@
 [settings]
 idiomatic_version_file_enable_tools = ["python", "node", "rust"]
 
+[settings.npm]
+package_manager = "bun"
+
 [env]
 PYTHON_PIP_VERSION = "latest"
 
@@ -25,3 +28,4 @@ rust = "stable"
 "cargo:pay-respects" = "latest"
 "pipx:trash-cli" = "latest"
 "pipx:rich-cli" = "latest"
+"npm:@mermaid-js/mermaid-cli" = "latest"

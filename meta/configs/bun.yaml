@@ -1,0 +1,4 @@
+- link:
+    ~/.bunfig.toml:
+      force: true
+      path: config/bun/bunfig.toml

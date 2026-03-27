@@ -9,39 +9,55 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 REINSTALL=${REINSTALL:-no}
 
-ASTRONOMER_USER="${ASTRONOMER_USER:-AstroNvim}"
-ASTRONOMER_REPO="${ASTRONOMER_REPO:-https://github.com/AstroNvim/template.git}"
+VIM_CONFIG_REPO="https://github.com/rafi/vim-config.git"
 
 setup_nvim_config() {
   local nvim_config_dir="$HOME/.config/nvim"
 
   if [ -d "$nvim_config_dir" ]; then
     if [ "$REINSTALL" = no ]; then
-      # Check if it's an existing AstroNvim installation
+      # Check if it's an existing  installation
       if [ -f "$nvim_config_dir/.git/HEAD" ]; then
         local current_remote
         current_remote=$(git -C "$nvim_config_dir" remote get-url origin 2>/dev/null || echo "")
-        if [[ "$current_remote" == *"AstroNvim"* ]]; then
-          print_success "Found existing AstroNvim installation, updating..."
+        if [[ "$current_remote" == *"rafi/vim-config"* ]]; then
+          print_success "Found existing vim installation, updating..."
           git -C "$nvim_config_dir" pull --rebase
           return 0
         fi
       fi
-      # Not AstroNvim, backup and remove
+      # backup and remove
       local backup_dir
       backup_dir="$HOME/.config/nvim.backup.$(date +%Y%m%d_%H%M%S)"
       print_warning "Backing up existing nvim config to $backup_dir"
       mv "$nvim_config_dir" "$backup_dir"
     else
-      print_warning "Removing existing nvim config"
-      rm -rf "$nvim_config_dir"
+      ask_for_confirmation "Do you want to backup Neovim data (share, state, cache) before reinstalling?"
+      if answer_is_yes; then
+        local timestamp
+        timestamp=$(date +%Y%m%d_%H%M%S)
+        for dir in "$HOME/.local/share/nvim" "$HOME/.local/state/nvim" "$HOME/.cache/nvim"; do
+          if [ -d "$dir" ]; then
+            print_warning "Backing up $dir to ${dir}.backup.$timestamp"
+            mv "$dir" "${dir}.backup.$timestamp"
+          fi
+        done
+      else
+        print_warning "Removing existing nvim data (share, state, cache)"
+        rm -rf "$HOME/.local/share/nvim" "$HOME/.local/state/nvim" "$HOME/.cache/nvim"
+      fi
+
+      local backup_dir
+      backup_dir="$HOME/.config/nvim.backup.$(date +%Y%m%d_%H%M%S)"
+      print_warning "Backing up existing nvim config to $backup_dir"
+      mv "$nvim_config_dir" "$backup_dir"
     fi
   fi
 
   if [ ! -d "$nvim_config_dir" ]; then
     execute \
-      "git clone --depth=1 ${ASTRONOMER_REPO} ${nvim_config_dir}" \
-      "Cloning AstroNvim"
+      "git clone --depth=1 ${VIM_CONFIG_REPO} ${nvim_config_dir}" \
+      "Cloning Nvim config"
   fi
 }
 
@@ -77,10 +93,6 @@ main() {
   while [ $# -gt 0 ]; do
     case $1 in
       --reinstall) REINSTALL=yes ;;
-      --user)
-        shift
-        ASTRONOMER_USER="$1"
-        ;;
     esac
     shift
   done
@@ -90,7 +102,7 @@ main() {
   install_deps
   sync_plugins
 
-  print_success "AstroNvim setup complete!"
+  print_success "nvim setup complete!"
   print_in_purple "Run 'nvim' to start. Press <leader>sp to open plugin spec."
 }
 

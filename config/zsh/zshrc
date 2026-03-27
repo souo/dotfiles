@@ -156,3 +156,5 @@ bindkey '^[[B' history-substring-search-down
 # if [[ -o interactive ]] && command -v fastfetch >/dev/null; then
 #     fastfetch
 # fi
+
+alias claude-mem='bun "/Users/2z/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
