@@ -101,32 +101,13 @@ else
     _load_tool "oh-my-posh" "oh-my-posh init zsh --config \"$DOTFILES/config/oh-my-posh/custom.omp.json\""
 fi
 
-# 2. Deferred Load (UI/Interactive tools)
+# FZF-Tab (MUST be after compinit)
 _run_deferred zsh_defer_compinit
 _run_deferred source "$DOTFILES/config/fzf/.fzf.zsh"
-
-# FZF-Tab (MUST be after compinit)
-_run_deferred -c '
-    # If using antidote, fzf-tab can be bundled but we source it here for order
-    # Or clone/use path if you prefer. Assuming antidote downloads it to $ANTIDOTE_DIR
-    [[ -d "$ANTIDOTE_DIR/Aloxaf/fzf-tab" ]] && source "$ANTIDOTE_DIR/Aloxaf/fzf-tab/fzf-tab.plugin.zsh"
-'
 
 _load_tool "zoxide" "zoxide init zsh"
 _load_tool "atuin" "atuin init zsh --disable-up-arrow"
 _load_tool "pay-respects" "pay-respects zsh --alias fuck"
-
-# 3. Deferred Configs & UI Tweaks
-_run_deferred -c '
-    zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
-    zstyle ":completion:*:descriptions" format "[%d]"
-    zstyle ":fzf-tab:*" fzf-command ftb-tmux-popup
-    zstyle ":fzf-tab:*" group-colors $'\''\e[32m\e[1m'\'' $'\''\e[33m\e[1m'\'' $'\''\e[35m\e[1m'\'' $'\''\e[31m\e[1m'\'' $'\''\e[36m\e[1m'\'' $'\''\e[34m\e[1m'\''
-    zstyle ":fzf-tab:complete:*" fzf-preview "eza -1 --color=always \$realpath"
-    # Disable sorting when using zoxide/recent results
-    zstyle ":fzf-tab:complete:z:*" fzf-preview "eza -1 --color=always \$realpath"
-    zstyle ":fzf-tab:complete:z:*" fzf-flags --no-sort
-'
 
 # --- ⚙️ Zsh Options & Settings ---
 # History

@@ -36,6 +36,5 @@ export HOMEBREW_BOTTLE_DOMAIN="https://mirrors.tuna.tsinghua.edu.cn/homebrew-bot
 "$HERE"/atuin.sh
 "$HERE"/lazydocker.sh
 "$HERE"/apps.sh
-"$HERE"/zsh.sh
 "$HERE"/image-tools.sh
 "$HERE"/documents-tools.sh

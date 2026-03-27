@@ -21,5 +21,7 @@ zsh-users/zsh-history-substring-search
 jeffreytse/zsh-vi-mode
 junegunn/fzf-git.sh
 hlissner/zsh-autopair
+Aloxaf/fzf-tab
+Freed-Wu/fzf-tab-source
 # Syntax highlighting MUST be last
 zsh-users/zsh-syntax-highlighting

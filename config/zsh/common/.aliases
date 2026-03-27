@@ -31,20 +31,18 @@ fi
 
 # Redefine rm as a warning function if tp is available
 if alias tp >/dev/null 2>&1; then
-    # Use a function instead of an alias and try to use 'rich' for fancy output
-    rm() {
-        # Use $'...' to let Zsh parse \n as a real newline and ensure backslashes are handled correctly
+    _rm_warning() {
         local msg=$'[bold red]🛡️ 危险操作！[/]\n请使用 [bold green]tp[/] (trash-put) 或 [bold yellow]\\rm[/] (原始命令)。'
         if command -v rich >/dev/null; then
             rich --print "$msg"
         elif command -v python3 >/dev/null && python3 -c "import rich" 2>/dev/null; then
-            # Pass msg via sys.argv to avoid issues with multi-line strings and nested quoting
             python3 -c "import sys; from rich.console import Console; Console().print(sys.argv[1])" "$msg"
         else
             printf "🛡️ 危险操作！\n请使用 \"tp\" (trash-put) 或 \"\\\\rm\" (原始命令)。\n"
         fi
         return 1
     }
+    alias rm='_rm_warning'
 else
     # Fallback to interactive rm as a last resort if no trash tools are available
     alias rm='rm -i'

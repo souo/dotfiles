@@ -13,7 +13,7 @@ print_in_purple "\n   Command line tools\n"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-cmdline_tools=(wget curl jq tokei bat fd fzf zellij shellcheck fastfetch eza tree-sitter-cli)
+cmdline_tools=(wget curl jq tokei bat fd fzf zellij shellcheck fastfetch eza tree-sitter-cli oh-my-posh)
 
 for cmd in "${cmdline_tools[@]}"; do
   brew_install "$cmd" "$cmd"
