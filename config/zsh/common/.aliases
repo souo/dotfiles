@@ -18,6 +18,18 @@ alias d='cd ~/Downloads'
 alias p='cd ~/Projects'
 alias dotfiles="cd $DOTFILES"
 
+# --- 📦 Git (Modern & Minimal) ---
+alias g='git'
+alias gst='git status'
+alias gp='git push'
+alias gl='git pull'
+alias gco='git checkout'
+alias gb='git branch'
+alias gd='git diff'
+alias gcm='git commit -m'
+alias gaa='git add --all'
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
 # --- 🛡️ Safe Operations ---
 # Unify trash tool aliases to 'tp'
 if command -v trash-put >/dev/null; then
@@ -34,13 +46,22 @@ alias mv='mv -i'
 
 # --- 🛠️ Modern CLI Tools ---
 
-# Eza (ls replacement)
+# Eza (ls replacement) - Optimized & Enhanced
 if command -v eza >/dev/null; then
-    alias ls='eza --icons --group-directories-first'
-    alias ll='eza -lh --icons --group-directories-first'
-    alias la='eza -a --icons --group-directories-first'
-    alias lt='eza --tree --icons --level=2'
-    alias llt='eza -lh --tree --icons --level=2'
+    # Shared base parameters: Icons, directories first, and terminal hyperlinks
+    local eza_params='--icons --group-directories-first --hyperlink'
+
+    alias ls="eza $eza_params"
+    alias ll="eza -lh --git $eza_params"
+    alias la="eza -lah --git $eza_params"
+    alias lt="eza --tree --level=2 $eza_params"
+    alias llt="eza -lh --tree --level=2 $eza_params"
+
+    # Specialty Views (Inherited from OMZ plugin)
+    alias ldot="eza -ld .* $eza_params"          # List only hidden files (dots)
+    alias lD="eza -lD $eza_params"               # List only directories
+    alias lS="eza -1lh -ssize $eza_params"       # Sort by size (largest first)
+    alias lT="eza -1lh -smodified $eza_params"   # Sort by time (newest first)
 fi
 
 # Bat (cat replacement)

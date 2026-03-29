@@ -16,6 +16,9 @@ print_in_purple "\n   Terminals\n"
 # wezterm
 brew_install "wezterm" "wezterm" "--cask"
 
+# zellij
+brew_install "zellij" "zellij"
+
 # tmux
 brew_install "tmux" "tmux"
 

@@ -16,9 +16,11 @@ config/zsh/
 ├── zshrc               # 主入口文件 (链接至 ~/.zshrc)
 ├── common/             # 共享配置
 │   ├── .env           # 环境变量
-│   ├── .aliases       # 别名定义
-│   └── plugins.txt    # Antidote 插件定义
-├── functions/          # 自定义函数库 (自动加载 ~/.zsh_functions/*.zsh)
+│   ├── .aliases       # 别名定义 (包含精简的 Git 别名)
+│   └── plugins.txt    # Antidote 插件定义 (不包含 OMZ)
+├── functions/          # 自定义函数库
+│   ├── extract.zsh    # 通用解压工具
+│   └── ...            # 其他自动加载的函数
 └── README.md           # 本说明文档
 ```
 

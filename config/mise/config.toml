@@ -30,3 +30,5 @@ rust = "stable"
 "pipx:rich-cli" = "latest"
 "npm:@mermaid-js/mermaid-cli" = "latest"
 "npm:release-it" = "latest"
+"pipx:copier" = "latest"
+"github:GDQuest/GDScript-formatter" = {version = "latest", bin = "gdscript-formatter"}

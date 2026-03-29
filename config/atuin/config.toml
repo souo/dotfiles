@@ -10,6 +10,8 @@ update_check = true
 style = "full"
 inline_height = 0
 show_preview = true
+inline_height_shell_up_key_binding = 15
+
 
 # --- Search ---
 # Available modes: "prefix", "fulltext", "fuzzy", "skims"
@@ -18,7 +20,4 @@ search_mode = "fuzzy"
 # --- Filter ---
 # Default filter mode: "global", "host", "session", "directory"
 filter_mode = "global"
-
-# --- Keybindings ---
-# use_iterm2 = true
-# enter_accept = true
+filter_mode_shell_up_key_binding = "global"

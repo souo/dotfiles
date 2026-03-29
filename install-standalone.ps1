@@ -1,5 +1,7 @@
 [CmdletBinding()]
 param(
+    [Parameter(Mandatory = $false)]
+    [switch] $UpdateDotbot,
     [Parameter(Mandatory, Position = 0)]
     [string[]] $Configs
 )
@@ -17,8 +19,19 @@ $BASEDIR = $PSScriptRoot
 Set-Location $BASEDIR
 
 Write-Host "🚀 Initializing submodules..." -ForegroundColor Cyan
-git -C $DOTBOT_DIR submodule sync --quiet --recursive
-git submodule update --init --recursive $DOTBOT_DIR
+
+# Check if submodules are already initialized
+$GitModulesPath = Join-Path $BASEDIR ".git/modules"
+if ($UpdateDotbot) {
+    Write-Host "🔄 Updating dotbot from remote..." -ForegroundColor Cyan
+    git -C $DOTBOT_DIR submodule sync --quiet --recursive
+    git submodule update --init --recursive $DOTBOT_DIR
+} elseif (-not (Test-Path $GitModulesPath)) {
+    git -C $DOTBOT_DIR submodule sync --quiet --recursive
+    git submodule update --init --recursive $DOTBOT_DIR
+} else {
+    Write-Host "✨ Submodules already initialized, skipping fetch..." -ForegroundColor Green
+}
 
 # --- Find Python ---
 foreach ($PYTHON in ('python', 'python3', 'FAIL')) {
