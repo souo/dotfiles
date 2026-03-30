@@ -6,5 +6,5 @@
     ~/.zshrc:
       force: true
       path: config/zsh/zshrc
-    ~/.env:
-      path: config/zsh/common/.env
+    ~/.env.zsh:
+      path: config/zsh/common/.env.zsh

@@ -9,6 +9,9 @@
 # --- 📂 Paths & Globals
 typeset -U path fpath # Ensure unique paths
 export DOTFILES="$HOME/.dotfiles"
+
+# Docker CLI completions (Must be before compinit)
+[[ -d "$HOME/.docker/completions" ]] && fpath=("$HOME/.docker/completions" $fpath)
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -41,7 +44,6 @@ if [[ ! "$ANTIDOTE_PLUGINS_ZSH" -nt "$ANTIDOTE_PLUGINS_TXT" ]]; then
     antidote bundle < "$ANTIDOTE_PLUGINS_TXT" > "$ANTIDOTE_PLUGINS_ZSH"
 fi
 
-
 # Keybindings & Plugin Hooks
 # Note: jeffreytse/zsh-vi-mode handles core keybindings.
 # Custom bindings must be inside hooks for robustness.
@@ -60,12 +62,10 @@ function zvm_after_lazy_keybindings() {
   zvm_bindkey vicmd 'j' atuin-up-search
 }
 
-
 source "$ANTIDOTE_PLUGINS_ZSH"
 
-
 # --- 🛠️ Core Environment (Immediate Load) ---
-[[ -f ~/.env ]] && source ~/.env
+[[ -f ~/.env.zsh ]] && source ~/.env.zsh
 
 # Mise (Multi-language version manager: Load EARLY for tool availability)
 if command -v mise >/dev/null; then
@@ -138,7 +138,6 @@ setopt NOTIFY               # Report the status of background jobs immediately
 setopt NO_HUP               # Don't kill background jobs when logout
 setopt CORRECT              # Suggest corrections for misspelled commands
 
-
 setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
 setopt SHARE_HISTORY             # Share history between all sessions.
 setopt APPEND_HISTORY            # Append to history file, don't overwrite.
@@ -160,10 +159,14 @@ setopt EXTENDED_GLOB        # Use extended globbing features
 setopt NO_BEEP              # Shhh.
 setopt INTERACTIVE_COMMENTS # Allow comments in interactive shell
 
-
 # --- ✨ System Info ---
 # if [[ -o interactive ]] && command -v fastfetch >/dev/null; then
 #     fastfetch
 # fi
 
 alias claude-mem='bun "/Users/2z/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/2z/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

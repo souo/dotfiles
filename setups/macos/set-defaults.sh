@@ -20,6 +20,8 @@ defaults write -g NSWindowShouldDragOnGesture -bool true
 # Disable windows opening animations
 defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
 
+# defaults write com.apple.universalaccess reduceMotion -bool true
+
 ###############################################################################
 # Finder                                                                      #
 ###############################################################################

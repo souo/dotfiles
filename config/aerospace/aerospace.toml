@@ -154,6 +154,7 @@ run = 'move-node-to-workspace 2'
 [[on-window-detected]]
 if.app-id = 'org.godotengine.godot'
 run = ['layout floating','move-node-to-workspace 3']
+check-further-callbacks = false
 
 # Workspace 4: Knowledge & Mail
 [[on-window-detected]]
@@ -181,6 +182,16 @@ run = 'move-node-to-workspace 5'
 [[on-window-detected]]
 if.app-id = 'com.valvesoftware.steam'
 run = 'move-node-to-workspace 6'
+
+# workspace E: Slack
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = 'move-node-to-workspace E'
+
+# workspace E: WeChat
+[[on-window-detected]]
+if.app-id = 'com.tencent.xinWeChat'
+run = 'move-node-to-workspace E'
 
 # Floating Rules for System Apps
 [[on-window-detected]]

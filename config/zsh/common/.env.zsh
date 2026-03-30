@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # ==============================================================================
 # 🌍 Environment Variables
 # ==============================================================================
@@ -16,13 +17,13 @@ export PAGER='less'
 # (Note: path is unique via typeset -U in zshrc)
 
 # Homebrew (Smarter detection)
-local -a brew_paths=(
+typeset -a brew_paths=(
     "/opt/homebrew/bin/brew"
     "/usr/local/bin/brew"
     "/home/linuxbrew/.linuxbrew/bin/brew"
 )
 
-for bp in $brew_paths; do
+for bp in "${brew_paths[@]}"; do
     if [[ -x "$bp" ]]; then
         eval "$($bp shellenv)"
         break
@@ -31,7 +32,7 @@ done
 unset brew_paths bp
 
 # Add essential custom bins to the front (only if they exist)
-local -a custom_bins=(
+typeset -a custom_bins=(
     "$HOME/.local/bin"
     "$DOTFILES/bin"
     "$HOME/bin2/maven/bin"
@@ -40,7 +41,8 @@ local -a custom_bins=(
     "/opt/local/sbin"
 )
 
-for b in $custom_bins; do
+for b in "${custom_bins[@]}"; do
+    # shellcheck disable=SC2206
     [[ -d "$b" ]] && path=("$b" $path)
 done
 unset custom_bins b

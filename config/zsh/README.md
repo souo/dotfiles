@@ -15,7 +15,7 @@
 config/zsh/
 ├── zshrc               # 主入口文件 (链接至 ~/.zshrc)
 ├── common/             # 共享配置
-│   ├── .env           # 环境变量
+│   ├── .env.zsh       # 环境变量
 │   ├── .aliases       # 别名定义 (包含精简的 Git 别名)
 │   └── plugins.txt    # Antidote 插件定义 (不包含 OMZ)
 ├── functions/          # 自定义函数库
