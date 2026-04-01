@@ -70,6 +70,26 @@ change:
 version:
     bun run version
 
+# --- 🔐 Secrets Management ---
+
+# Initialize SOPS and generate Age key
+[group('secrets')]
+sops-init:
+    ./bin/sops-init.sh
+
+# Safely edit encrypted API keys and secrets
+[group('secrets')]
+secret-edit:
+    SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops --input-type dotenv --output-type dotenv ./config/zsh/common/.env.secret.sops
+
+# Decrypt variables into a local un-tracked zsh file
+[group('secrets')]
+secret-sync:
+    @echo "set -a" > ~/.zsh_secret
+    @SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops -d --input-type dotenv --output-type dotenv ./config/zsh/common/.env.secret.sops >> ~/.zsh_secret
+    @echo "set +a" >> ~/.zsh_secret
+    @echo "✅ Decrypted secrets applied to ~/.zsh_secret"
+
 # --- 🔧 Bootstrap ---
 
 # One-time bootstrap for system dependencies

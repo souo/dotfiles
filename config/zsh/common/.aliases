@@ -9,6 +9,9 @@ command -v tokei >/dev/null && alias loc='tokei'
 alias vsc='code .'
 
 # --- 📁 Navigation ---
+if command -v zoxide >/dev/null; then
+    alias cd='z'
+fi
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -83,9 +86,11 @@ command -v zellij >/dev/null && alias vibe='zellij --layout vibe'
 # Modern Replacements
 command -v xh >/dev/null && alias http='xh'
 command -v sd >/dev/null && alias sed-smart='sd'
+command -v jaq >/dev/null && alias jq='jaq'
 
-# Lazygit
+# Lazygit / Lazydocker
 command -v lazygit >/dev/null && alias lg='lazygit'
+command -v lazydocker >/dev/null && alias ld='lazydocker'
 
 # Yazi (using our custom yy function)
 command -v yazi >/dev/null && alias y='yy'

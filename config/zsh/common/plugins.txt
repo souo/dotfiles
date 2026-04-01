@@ -12,4 +12,4 @@ hlissner/zsh-autopair
 Aloxaf/fzf-tab
 Freed-Wu/fzf-tab-source
 # Syntax highlighting MUST be last
-zsh-users/zsh-syntax-highlighting
+zdharma-continuum/fast-syntax-highlighting

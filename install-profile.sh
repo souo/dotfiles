@@ -65,7 +65,7 @@ fi
 
 # --- Execution ---
 echo "🚀 Initializing submodules..."
-git submodule update --init --recursive 
+git submodule update --init --recursive
 
 # Read configs from profile (ignore empty lines and comments)
 mapfile -t CONFIGS < <(grep -vE '^\s*(#|$)' "${PROFILE_FILE}")
@@ -88,7 +88,7 @@ cat "${BASE_DIR}/${META_DIR}/${BASE_CONFIG}${CONFIG_SUFFIX}" > "$COMBINED_CONFIG
 VALID_CONFIG_COUNT=0
 for config in "${CONFIGS[@]}"; do
     config_path="${BASE_DIR}/${META_DIR}/${CONFIG_DIR}/${config}${CONFIG_SUFFIX}"
-    
+
     if [ ! -f "${config_path}" ]; then
         echo "⚠️  Warning: Configuration file '${config}' not found. Skipping."
         continue

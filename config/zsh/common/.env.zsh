@@ -3,16 +3,6 @@
 # 🌍 Environment Variables
 # ==============================================================================
 
-# --- 📝 Editors ---
-if command -v nvim >/dev/null; then
-    export EDITOR='nvim'
-    export VISUAL='nvim'
-else
-    export EDITOR='vim'
-    export VISUAL='vim'
-fi
-export PAGER='less'
-
 # --- 📂 Path Management ---
 # (Note: path is unique via typeset -U in zshrc)
 
@@ -41,15 +31,27 @@ typeset -a custom_bins=(
     "/opt/local/sbin"
 )
 
+typeset -a valid_bins
 for b in "${custom_bins[@]}"; do
-    # shellcheck disable=SC2206
-    [[ -d "$b" ]] && path=("$b" $path)
+    [[ -d "$b" ]] && valid_bins+=("$b")
 done
-unset custom_bins b
+# shellcheck disable=SC2206
+path=("${valid_bins[@]}" $path)
+unset custom_bins b valid_bins
+
+# --- 📝 Editors (Check after PATH is configured) ---
+if command -v nvim >/dev/null; then
+    export EDITOR='nvim'
+    export VISUAL='nvim'
+else
+    export EDITOR='vim'
+    export VISUAL='vim'
+fi
+export PAGER='less'
 
 # --- 📦 Tool Configs ---
 export EZA_CONFIG_DIR="$XDG_CONFIG_HOME/eza"
-export LESS="-g -i -M -R -S -w -z-4"
+export LESS="-g -i -M -R -S -w -z-4 -F -X"
 [[ -x /usr/local/bin/lesspipe.sh ]] && export LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
 
 # FZF Theme (OneDark/Catppuccin-ish)

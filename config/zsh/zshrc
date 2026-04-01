@@ -4,7 +4,7 @@
 # ==============================================================================
 
 # Fast-path for non-interactive shells
-[[ "$TERMINAL_CONTEXT" == "non-interactive" ]] && return
+[[ $- != *i* ]] && return
 
 # --- 📂 Paths & Globals
 typeset -U path fpath # Ensure unique paths
@@ -62,10 +62,11 @@ function zvm_after_lazy_keybindings() {
   zvm_bindkey vicmd 'j' atuin-up-search
 }
 
-source "$ANTIDOTE_PLUGINS_ZSH"
-
 # --- 🛠️ Core Environment (Immediate Load) ---
+# Load environment first so plugins have full PATH
 [[ -f ~/.env.zsh ]] && source ~/.env.zsh
+
+source "$ANTIDOTE_PLUGINS_ZSH"
 
 # Mise (Multi-language version manager: Load EARLY for tool availability)
 if command -v mise >/dev/null; then
@@ -165,8 +166,7 @@ setopt INTERACTIVE_COMMENTS # Allow comments in interactive shell
 # fi
 
 alias claude-mem='bun "/Users/2z/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/2z/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
+
+
+# Added by Antigravity
+export PATH="/Users/2z/.antigravity/antigravity/bin:$PATH"

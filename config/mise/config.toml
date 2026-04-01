@@ -32,3 +32,5 @@ rust = "stable"
 "npm:release-it" = "latest"
 "github:GDQuest/GDScript-formatter" = {version = "latest", bin = "gdscript-formatter"}
 "pipx:copier" = "latest"
+"npm:firecrawl-cli" = "latest"
+"npm:repomix" = "latest"

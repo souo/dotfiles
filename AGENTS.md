@@ -1,75 +1,83 @@
-# GEMINI.md - Project Context & Instructions
+# GEMINI.md - Dotfiles Context & Instructions
 
-This repository contains personal **dotfiles** managed with **Dotbot**, designed for high modularity and cross-platform compatibility (macOS, Ubuntu/WSL, Windows).
+This repository contains a modular, cross-platform **dotfiles** system managed with **Dotbot** and automated via **just**. It supports macOS, Ubuntu/WSL, and Windows.
 
 ---
 
 ## 🎯 Project Overview
 
-- **Management Tool**: [Dotbot](https://github.com/anishathalye/dotbot) (included as a git submodule).
-- **Architecture**: **Fragmented Configuration**. Instead of a single `install.conf.yaml`, configuration is split into tool-specific fragments (`meta/configs/*.yaml`) and environment-specific profiles (`meta/profiles/*`).
-- **Core Tech Stack**:
-  - **Shell**: Zsh managed by **Antidote** (static plugin loading).
-  - **Editor**: Neovim (automated dependency and plugin syncing).
-  - **Terminal**: WezTerm.
-  - **Automation**: Lefthook (Git hooks), Changesets (Versioning/Changelog).
+- **Core Tool**: [Dotbot](https://github.com/anishathalye/dotbot) (git submodule).
+- **Architecture**: **Fragmented Configuration**.
+  - **Fragments**: Individual tool configs in `meta/configs/*.yaml`.
+  - **Profiles**: Environment-specific lists in `meta/profiles/` (e.g., `mac`, `ubuntu`, `wsl`).
+  - **Unified Deployment**: `install-profile.sh` merges fragments into a single Dotbot execution for speed.
+- **Tech Stack Highlights**:
+  - **Shell**: Zsh managed by **Antidote**.
+  - **Editor**: Neovim (rafi/vim-config distribution).
+  - **Terminal**: WezTerm + Zellij.
+  - **macOS UI**: AeroSpace (Tiling WM) + SketchyBar (Status Bar) + JankyBorders.
+  - **CLI Tools**: `fzf`, `zoxide`, `atuin`, `eza`, `bat`, `yazi`, `lazygit`.
 
 ---
 
 ## 🚀 Key Workflows
 
-### 1. Deployment & Installation
+### 1. Installation & Deployment
 
-- **Initialization**: Run `just bootstrap` (cross-platform).
-- **Deploy Profile**: Use `just` to merge fragments:
-  - `macOS`: `just install mac`
-  - `Ubuntu`: `just install ubuntu`
-  - `WSL`: `just install wsl`
-  - `Windows`: `just install windows`
-- **Standalone**: `just standalone <config> [configs...]` (e.g., `just standalone nvim zsh`).
-- **Dry-run**: `just dry-run <profile>` to preview changes.
+- **Bootstrap**: Run `just bootstrap` to install system dependencies and initialize submodules.
+- **Deploy Profile**:
+  - macOS: `just install mac`
+  - Ubuntu: `just install ubuntu`
+  - WSL: `just install wsl`
+  - Windows: `just install windows`
+- **Dry-run**: `just dry-run <profile>` to preview changes without applying them.
+- **Standalone**: `just standalone <config> [extra...]` (e.g., `just standalone nvim zsh`).
 
-### 2. Maintenance & Development
+### 2. Maintenance & Updates
 
-- **New Config**: Add a YAML fragment to `meta/configs/` and update relevant profiles in `meta/profiles/`.
-- **Commit**: Use `just commit` for conventional commit prompts.
+- **Sync Everything**: `just update` (updates submodules and runs `topgrade`).
+- **Check Links**: `just check-links` to find orphaned symbolic links in your home directory.
+- **Neovim Management**:
+  - `just nvim-sync`: Sync plugins.
+  - `just nvim-reinstall`: Fresh reinstall of Neovim config.
+- **Linting**: `just lint` (runs `shellcheck`, `yamllint`, and `markdownlint` via Lefthook).
+
+### 3. Development
+
+- **New Config**: Add a YAML fragment to `meta/configs/` and add its name to relevant profiles in `meta/profiles/`.
+- **Commits**: Use `just commit` for interactive conventional commit prompts.
 - **Versioning**:
-  - `just change`: Create a new changeset record.
+  - `just change`: Create a new changeset.
   - `just version`: Bump version and update `CHANGELOG.md`.
-- **Update**: `just update` to sync submodules.
-
-### 3. Quality Control
-
-- **Linting**: Lefthook automatically runs `shellcheck`, `yamllint`, and `markdownlint` on pre-commit.
-- **Manual Lint**: `just lint`.
 
 ---
 
-## 🛡️ Security Standards
+## 🛡️ Security & Local Overrides
 
-- **Secrets**: **NEVER** commit API keys or tokens.
-- **Local Overrides**:
-  - Use `~/.zsh_secret` for private tokens (sourced by `.zshrc`).
-  - Use `~/.localrc` for machine-specific shell overrides.
-  - VSCode uses `settings.common.json`; local overrides should be handled via the IDE or untracked `settings.local.json` logic.
-- **Git**: Ensure `.gitignore` remains strict about `*.bak` and sensitive paths.
+**NEVER** commit secrets. Use these untracked local files for sensitive or machine-specific data:
 
----
-
-## 📂 Directory Structure Highlights
-
-- `meta/configs/`: Dotbot YAML fragments.
-- `meta/profiles/`: Lists of fragments defining a system profile.
-- `config/`: Source configuration files (links point here).
-- `setups/`: OS-specific bootstrap scripts.
-- `bin/`: Custom CLI helpers and scripts.
-- `.lefthook/`: Configuration for automated quality checks.
+- `~/.zsh_secret`: API keys and tokens.
+- `~/.localrc`: Machine-specific shell aliases/overrides.
+- `~/.gitconfig.local`: Personal Git identity (`name`, `email`).
+- `vscode/settings.local.json`: Machine-specific VSCode settings.
 
 ---
 
-## 💡 Future Agent Instructions
+## 📂 Directory Structure
 
-- **Adding Configs**: Always check if a fragment already exists in `meta/configs/` before creating a new one.
-- **Scripting**: All `.sh` scripts must pass `shellcheck` and include `set -euo pipefail`.
-- **Modularity**: Prioritize splitting configurations into reusable parts rather than adding machine-specific logic to common files.
-- **Verification**: Use the `--dry-run` flag in `install-profile.sh` to verify Dotbot pathing before suggesting final changes.
+- `config/`: Source configuration files (symlinked by Dotbot).
+- `meta/configs/`: Dotbot YAML fragments for specific tools.
+- `meta/profiles/`: Definitions of system-wide profiles.
+- `setups/`: OS-specific bootstrap and package installation scripts.
+- `bin/`: Custom helper scripts and CLI utilities.
+- `.lefthook/`: Git hook configurations for quality control.
+
+---
+
+## 💡 Agent Instructions
+
+- **Adding Fragments**: Always check `meta/configs/` first. Follow the pattern in `meta/configs/nvim.yaml`.
+- **Shell Scripts**: Must include `set -euo pipefail` and pass `shellcheck`.
+- **Modularity**: Prefer small, reusable fragments over large, monolithic files.
+- **Verification**: When suggesting changes to deployment logic, use `./install-profile.sh --dry-run` to verify.
+- **Submodules**: Remember that `dotbot` and some configs are submodules; use `git submodule` commands when necessary.

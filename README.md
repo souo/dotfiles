@@ -4,6 +4,8 @@ My personal dotfiles, meticulously managed with **Dotbot** and powered by **just
 
 ---
 
+[![CI](https://github.com/souo/dotfiles/actions/workflows/ci.yml/badge.svg)](https://github.com/souo/dotfiles/actions/workflows/ci.yml)
+
 ![Project Screenshot](screenshot.png)
 
 ## 🚀 Quick Start
@@ -138,9 +140,11 @@ A tiling window management system combined with a highly dynamic status bar:
 
 ## 🛡️ Security & Privacy
 
-To keep your sensitive information safe and out of version control, this repository supports local, untracked configuration files:
+To keep your sensitive information safe and secure, this repository uses **SOPS + Age** for GitOps-style encrypted secret management:
 
-1. **`~/.zsh_secret`**: For sensitive tokens and API keys.
+1. **`~/.dotfiles/config/zsh/common/.env.secret.sops`**: Encrypted API keys and tokens safely tracked by Git.
+   - Run `just secret-edit` to securely modify secrets.
+   - Run `just secret-sync` to decrypt them locally to `~/.zsh_secret`.
 2. **`~/.localrc`**: For machine-specific environment overrides or private aliases.
 3. **`~/.gitconfig.local`**: For Git user information (`name`, `email`).
 4. **VSCode Local Settings**: Machine-specific settings in `settings.local.json`.
@@ -149,7 +153,16 @@ To keep your sensitive information safe and out of version control, this reposit
 
 ## 🏗️ Modular Architecture
 
-This repository uses a **Fragmented Dotbot System**:
+This repository uses a **Fragmented Dotbot System** to scale cleanly:
+
+```text
+├── meta/
+│   ├── configs/   # Isolated YAML fragments (e.g., nvim.yaml, zsh.yaml)
+│   └── profiles/  # OS profiles combining fragments (mac, ubuntu, wsl)
+├── config/        # Source dotfiles symlinked to your system
+├── bin/           # Custom CLI utilities
+└── setups/        # Bootstrap OS-level dependency installers
+```
 
 - **`meta/configs/`**: Standalone YAML fragments for individual tools (e.g., `nvim.yaml`, `zsh.yaml`).
 - **`meta/profiles/`**: Environment definitions that list which fragments to apply.
@@ -171,9 +184,11 @@ This repository uses a **Fragmented Dotbot System**:
 | **Status Bar** | [SketchyBar](https://felixkratz.github.io/SketchyBar/) | (macOS) Highly customizable Lua-based status bar. |
 | **File Manager** | [Yazi](https://yazi-rs.github.io/) | Blazing fast Rust-based terminal file manager. |
 | **Navigation** | [fzf](https://github.com/junegunn/fzf) + [zoxide](https://github.com/ajeetdsouza/zoxide) + [Atuin](https://github.com/atuinsh/atuin) | Fuzzy finder, smarter `cd`, and magical shell history. |
-| **Git Tooling** | [Lazygit](https://github.com/jesseduffield/lazygit) + `delta` + `difftastic` | TUI for git and enhanced diffing. |
-| **Modern CLI** | `eza`, `bat`, `rg`, `fastfetch`, `tealdeer`, `htop` | Better versions of `ls`, `cat`, `grep`, `neofetch`, `tldr`, `top`. |
+| **Git Tooling** | [Lazygit](https://github.com/jesseduffield/lazygit) + `gh` + `delta` + `difftastic` | TUI for Git, GitHub CLI, and enhanced diffing. |
+| **Docker Tooling** | [Lazydocker](https://github.com/jesseduffield/lazydocker) | TUI for managing Docker containers. |
+| **Modern CLI** | `eza`, `bat`, `rg`, `fd`, `jaq`, `fastfetch` | Better versions of core Unix utilities. |
 | **Dev Tooling** | `uv`, [mise](https://mise.jdx.dev/), `rustup`, `bun` | Toolchain management for Python, Node, Java, Rust, and JS. |
+| **Maintenance** | [Topgrade](https://github.com/topgrade-rs/topgrade) | System-wide update manager. |
 | **Customizer** | [Karabiner](https://karabiner-elements.pqrs.org/) + [IdeaVim](https://github.com/JetBrains/ideavim) | Keyboard customization and Vim emulation for IDEs. |
 
 ---
