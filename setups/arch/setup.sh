@@ -16,6 +16,7 @@ update
 "${HERE}"/locale.sh
 
 "${HERE}"/build-essentials.sh
+"${HERE}"/nvidia.sh
 "${HERE}"/cmdline.sh
 "${HERE}"/shell-script.sh
 "${HERE}"/lesspipe.sh
