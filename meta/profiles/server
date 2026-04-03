@@ -1,13 +1,15 @@
 _init
 atuin
 bat
+bun
 cargo
+delta
+difftastic
 editorconfig
+eza
 fastfetch
 fzf
 git
-htop
-ideavim
 lazygit
 lesspipe
 mise
