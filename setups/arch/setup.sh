@@ -20,7 +20,6 @@ update
 "${HERE}"/git.sh
 "${HERE}"/mise.sh
 "${HERE}"/lua.sh
-"${HERE}"/zsh.sh
 "${HERE}"/neovim.sh
 "${HERE}"/fastfetch.sh
 "${HERE}"/lazygit.sh

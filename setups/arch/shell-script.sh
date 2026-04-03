@@ -5,3 +5,8 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 . "$HERE/utils.sh"
 print_in_purple "\n • Installs zsh\n\n"
 install_packages zsh bash
+
+if [ "$(basename "$SHELL")" != "zsh" ]; then
+  print_in_purple "Setting default shell to zsh"
+  chsh -s "$(command -v zsh)" || print_warning "Failed to set default shell. You may need to run 'chsh -s \$(command -v zsh)' manually."
+fi
