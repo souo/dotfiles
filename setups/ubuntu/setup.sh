@@ -42,6 +42,7 @@ else
   "${HERE}"/fastfetch.sh
 fi
 
+"${HERE}"/lesspipe.sh
 "${HERE}"/dust.sh
 "${HERE}"/atuin.sh
 "${HERE}"/lazydocker.sh
