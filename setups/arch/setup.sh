@@ -13,6 +13,7 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 print_in_purple "arch setup"
 
 update
+"${HERE}"/locale.sh
 
 "${HERE}"/build-essentials.sh
 "${HERE}"/cmdline.sh

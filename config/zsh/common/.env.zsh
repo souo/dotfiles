@@ -3,6 +3,10 @@
 # 🌍 Environment Variables
 # ==============================================================================
 
+# --- 🌍 Localization ---
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
 # --- 📂 Path Management ---
 # (Note: path is unique via typeset -U in zshrc)
 
