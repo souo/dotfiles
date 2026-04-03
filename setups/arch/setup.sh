@@ -17,6 +17,7 @@ update
 "${HERE}"/build-essentials.sh
 "${HERE}"/cmdline.sh
 "${HERE}"/shell-script.sh
+"${HERE}"/lesspipe.sh
 "${HERE}"/git.sh
 "${HERE}"/mise.sh
 "${HERE}"/lua.sh
