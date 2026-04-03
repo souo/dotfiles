@@ -114,12 +114,7 @@ PROMPT='%F{blue}%n%f@%F{green}%m%f %F{cyan}%1~%f %# '
 
 # --- 🚀 Tool Initializations (Flattened) ---
 
-# SSH Check: Don't load fancy prompt if on SSH
-if [[ -n "$SSH_CONNECTION" ]]; then
-    PROMPT='%F{yellow}%n@%m%f %F{cyan}%1~%f %# '
-else
-    _load_tool "oh-my-posh" "oh-my-posh init zsh --config \"$DOTFILES/config/oh-my-posh/custom.omp.json\""
-fi
+_load_tool "oh-my-posh" "oh-my-posh init zsh --config \"$DOTFILES/config/oh-my-posh/custom.omp.json\""
 
 # FZF-Tab (MUST be after compinit)
 _run_deferred zsh_defer_compinit
