@@ -1,0 +1,5 @@
+[tools]
+just = "latest"
+uv = "latest"
+bun = "latest"
+python = "3.13"
