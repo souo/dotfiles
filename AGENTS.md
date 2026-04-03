@@ -5,7 +5,6 @@ This repository contains a modular, cross-platform **dotfiles** system managed w
 ---
 
 ## 🎯 Project Overview
-
 - **Core Tool**: [Dotbot](https://github.com/anishathalye/dotbot) (git submodule).
 - **Architecture**: **Fragmented Configuration**.
   - **Fragments**: Individual tool configs in `meta/configs/*.yaml`.

@@ -1,6 +1,6 @@
 
 # Disable specific steps - same options as the command line flag
-disable = ["docker"]
+disable = ["containers"]
 
 # Cleanup temporary or old files (default: false)
 cleanup = true

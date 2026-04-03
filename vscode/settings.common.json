@@ -57,4 +57,5 @@
   },
   "window.zoomLevel": 1,
   "godotTools.editorPath.godot4": "/Users/2z/Applications/Godot-4.6.1.app/Contents/MacOS/Godot",
+  "explorer.confirmDelete": false,
 }

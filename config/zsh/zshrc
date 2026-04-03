@@ -10,8 +10,6 @@
 typeset -U path fpath # Ensure unique paths
 export DOTFILES="$HOME/.dotfiles"
 
-# Docker CLI completions (Must be before compinit)
-[[ -d "$HOME/.docker/completions" ]] && fpath=("$HOME/.docker/completions" $fpath)
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"

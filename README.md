@@ -9,7 +9,7 @@ My personal dotfiles, meticulously managed with **Dotbot** and powered by **just
 ![Project Screenshot](screenshot.png)
 
 ## 🚀 Quick Start
-
+¡™
 ### 1. Prerequisites
 
 - **Git** (for cloning)

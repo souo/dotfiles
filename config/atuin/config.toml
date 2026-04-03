@@ -20,4 +20,4 @@ search_mode = "fuzzy"
 # --- Filter ---
 # Default filter mode: "global", "host", "session", "directory"
 filter_mode = "global"
-filter_mode_shell_up_key_binding = "global"
+filter_mode_shell_up_key_binding = "directory"
