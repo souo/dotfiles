@@ -1,6 +1,6 @@
 # 🛠️ dotfiles
 
-My personal dotfiles, meticulously managed with **Dotbot** and powered by **just**. This repository is designed to be modular, cross-platform, and highly automated, supporting macOS, Linux (Ubuntu/WSL2), and Windows.
+My personal dotfiles, meticulously managed with **Dotbot** and powered by **just**. This repository is designed to be modular, cross-platform, and highly automated, supporting macOS, Linux (Arch/Ubuntu/WSL2), and Windows.
 
 ---
 
@@ -9,8 +9,6 @@ My personal dotfiles, meticulously managed with **Dotbot** and powered by **just
 ![Project Screenshot](screenshot.png)
 
 ## 🚀 Quick Start
-
-¡™
 
 ### 1. Prerequisites
 
@@ -26,8 +24,7 @@ My personal dotfiles, meticulously managed with **Dotbot** and powered by **just
 git clone --recursive https://github.com/yourusername/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 
-# If using mise, it will automatically install 'just'
-# Otherwise, ensure 'just' is in your PATH
+# mise will automatically install dependencies from the local mise.toml (just, uv, bun, python)
 just bootstrap
 ```
 
@@ -38,6 +35,9 @@ Deploy environment-specific configurations using the unified task runner:
 ```bash
 # macOS
 just install mac
+
+# Arch Linux (Headless/Server)
+just install server
 
 # Ubuntu / WSL 2
 just install ubuntu

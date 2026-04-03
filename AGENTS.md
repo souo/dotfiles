@@ -1,6 +1,6 @@
 # GEMINI.md - Dotfiles Context & Instructions
 
-This repository contains a modular, cross-platform **dotfiles** system managed with **Dotbot** and automated via **just**. It supports macOS, Ubuntu/WSL, and Windows.
+This repository contains a modular, cross-platform **dotfiles** system managed with **Dotbot** and automated via **just**. It supports macOS, Arch Linux, Ubuntu/WSL, and Windows.
 
 ---
 
@@ -9,7 +9,7 @@ This repository contains a modular, cross-platform **dotfiles** system managed w
 - **Core Tool**: [Dotbot](https://github.com/anishathalye/dotbot) (git submodule).
 - **Architecture**: **Fragmented Configuration**.
   - **Fragments**: Individual tool configs in `meta/configs/*.yaml`.
-  - **Profiles**: Environment-specific lists in `meta/profiles/` (e.g., `mac`, `ubuntu`, `wsl`).
+  - **Profiles**: Environment-specific lists in `meta/profiles/` (e.g., `mac`, `server`, `ubuntu`, `wsl`).
   - **Unified Deployment**: `install-profile.sh` merges fragments into a single Dotbot execution for speed.
 - **Tech Stack Highlights**:
   - **Shell**: Zsh managed by **Antidote**.
@@ -27,6 +27,7 @@ This repository contains a modular, cross-platform **dotfiles** system managed w
 - **Bootstrap**: Run `just bootstrap` to install system dependencies and initialize submodules.
 - **Deploy Profile**:
   - macOS: `just install mac`
+  - Arch Linux: `just install server`
   - Ubuntu: `just install ubuntu`
   - WSL: `just install wsl`
   - Windows: `just install windows`
