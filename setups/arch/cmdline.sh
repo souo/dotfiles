@@ -4,4 +4,4 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 # shellcheck disable=SC1091
 . "$HERE/utils.sh"
 print_in_purple "\n • Installs cmdline tools\n\n"
-install_packages bat fzf tmux ripgrep fd yazi htop unzip zip tar
+install_packages bat fzf tmux ripgrep fd yazi htop unzip zip tar jq tokei shellcheck tree-sitter-cli

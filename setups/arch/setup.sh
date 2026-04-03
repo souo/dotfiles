@@ -16,6 +16,9 @@ update
 
 "${HERE}"/build-essentials.sh
 "${HERE}"/cmdline.sh
+"${HERE}"/git.sh
+"${HERE}"/mise.sh
+"${HERE}"/lua.sh
 "${HERE}"/zsh.sh
 "${HERE}"/neovim.sh
 "${HERE}"/fastfetch.sh
@@ -23,3 +26,5 @@ update
 "${HERE}"/eza.sh
 "${HERE}"/atuin.sh
 "${HERE}"/tealdeer.sh
+"${HERE}"/dust.sh
+"${HERE}"/lazydocker.sh
