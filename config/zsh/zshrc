@@ -168,3 +168,6 @@ alias claude-mem='bun "/Users/2z/.claude/plugins/marketplaces/thedotmack/plugin/
 
 # Added by Antigravity
 export PATH="/Users/2z/.antigravity/antigravity/bin:$PATH"
+
+# Added by Antigravity
+export PATH="/Users/2z/.antigravity/antigravity/bin:$PATH"
