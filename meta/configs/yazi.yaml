@@ -7,4 +7,4 @@
               force: true
               path: config/yazi/*.toml
 - shell:
-        - [cd ~/.config/yazi && ya pack -i, config yazi]
+        - [command -v ya >/dev/null && cd ~/.config/yazi && ya pack -i || true, config yazi]
