@@ -30,3 +30,4 @@ update
 "${HERE}"/atuin.sh
 "${HERE}"/dust.sh
 "${HERE}"/lazydocker.sh
+"${HERE}"/secure_tool.sh

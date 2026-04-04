@@ -23,8 +23,7 @@ fi
 print_in_purple "Detected kernel: $kernel. Installing $driver...\n"
 
 packages=("$driver" "nvidia-utils" "nvidia-settings")
-
-# Install multilib utils if enabled
+# Install multilib utils if enable
 if grep -q "^\[multilib\]" /etc/pacman.conf; then
     packages+=("lib32-nvidia-utils")
 fi
