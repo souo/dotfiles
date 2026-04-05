@@ -48,16 +48,20 @@ fi
 
 # 1. After core ZVM initialization (handles Insert/Emacs mode)
 function zvm_after_init() {
-  # --- 🔍 History Substring Search (Arrows) ---
-  zvm_bindkey viins '^[[A' atuin-up-search
-  zvm_bindkey viins '^[[B' atuin-up-search
+  # --- 🔍 History Search (Arrows) ---
+  if (( $+widgets[atuin-up-search] )); then
+    zvm_bindkey viins '^[[A' atuin-up-search
+    zvm_bindkey viins '^[[B' atuin-up-search
+  fi
 }
 
 # 2. After lazy keybindings (handles Normal/Visual mode)
 function zvm_after_lazy_keybindings() {
-  # History Substring Search (Vim keys)
-  zvm_bindkey vicmd 'k' atuin-up-search
-  zvm_bindkey vicmd 'j' atuin-up-search
+  # History Search (Vim keys)
+  if (( $+widgets[atuin-up-search] )); then
+    zvm_bindkey vicmd 'k' atuin-up-search
+    zvm_bindkey vicmd 'j' atuin-up-search
+  fi
 }
 
 # --- 🛠️ Core Environment (Immediate Load) ---
@@ -69,6 +73,11 @@ source "$ANTIDOTE_PLUGINS_ZSH"
 # Mise (Multi-language version manager: Load EARLY for tool availability)
 if command -v mise >/dev/null; then
     eval "$(mise activate zsh)"
+fi
+
+# Atuin (Load synchronously before ZVM hooks to avoid "widget not found" errors)
+if command -v atuin >/dev/null; then
+    eval "$(atuin init zsh --disable-up-arrow)"
 fi
 
 # Load aliases after mise is activated (so mise-managed tools like trash-put are available)
@@ -121,7 +130,6 @@ _run_deferred zsh_defer_compinit
 _run_deferred source "$DOTFILES/config/fzf/.fzf.zsh"
 
 _load_tool "zoxide" "zoxide init zsh"
-_load_tool "atuin" "atuin init zsh --disable-up-arrow"
 _load_tool "pay-respects" "pay-respects zsh --alias fuck"
 
 # --- ⚙️ Zsh Options & Settings ---
