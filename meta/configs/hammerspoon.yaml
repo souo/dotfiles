@@ -1,0 +1,9 @@
+- link:
+    ~/.hammerspoon:
+      force: true
+      path: config/hammerspoon
+      create: true
+
+- shell:
+    - echo '✅ Hammerspoon 配置已部署'
+    - echo '请打开 Hammerspoon.app，然后在菜单中选择 Reload Config (Ctrl+Alt+Cmd+R)'

@@ -1,0 +1,120 @@
+{
+  "SSDBackup": {
+    "desc": "自动备份源码到移动硬盘的 Spoon",
+    "submodules": [],
+    "docs": [
+      {
+        "name": "obj.ssName",
+        "desc": "SSD 卷标名称，用于检测设备和构建备份路径",
+        "doc": "Variable\nSSD 卷标名称（默认 \"Assets\"）",
+        "type": "Variable",
+        "signature": "SSDBackup.ssName"
+      },
+      {
+        "name": "obj.projectSrc",
+        "desc": "源码目录路径",
+        "doc": "Variable\n源码目录路径（默认 \"~/code/\"）",
+        "type": "Variable",
+        "signature": "SSDBackup.projectSrc"
+      },
+      {
+        "name": "obj.notifyLevel",
+        "desc": "通知级别",
+        "doc": "Variable\n通知级别：0=无，1=仅错误，2=全部（默认 2）",
+        "type": "Variable",
+        "signature": "SSDBackup.notifyLevel"
+      },
+      {
+        "name": "obj.useChecksum",
+        "desc": "使用 checksum 校验文件变化",
+        "doc": "Variable\n使用 checksum 校验（更准确但更慢，默认 false）",
+        "type": "Variable",
+        "signature": "SSDBackup.useChecksum"
+      },
+      {
+        "name": "obj.logDir",
+        "desc": "日志文件目录",
+        "doc": "Variable\n日志目录（默认 ~/.hammerspoon/logs）",
+        "type": "Variable",
+        "signature": "SSDBackup.logDir"
+      },
+      {
+        "name": "obj.logMaxAge",
+        "desc": "日志保留天数",
+        "doc": "Variable\n日志文件保留天数（默认 30 天）",
+        "type": "Variable",
+        "signature": "SSDBackup.logMaxAge"
+      },
+      {
+        "name": "obj:init()",
+        "desc": "初始化 Spoon，解析路径，设置默认值",
+        "doc": "Method\n初始化 Spoon，解析路径，设置默认值\n\nParameters:\n * None\n\nReturns:\n * obj",
+        "type": "Method",
+        "signature": "SSDBackup:init()"
+      },
+      {
+        "name": "obj:start()",
+        "desc": "启动 Spoon，开始监听 USB 设备事件",
+        "doc": "Method\n启动 Spoon，开始监听 USB 设备事件\n\nParameters:\n * None\n\nReturns:\n * obj",
+        "type": "Method",
+        "signature": "SSDBackup:start()"
+      },
+      {
+        "name": "obj:stop()",
+        "desc": "停止 Spoon，移除 USB 监听和热键",
+        "doc": "Method\n停止 Spoon，移除 USB 监听和热键\n\nParameters:\n * None\n\nReturns:\n * obj",
+        "type": "Method",
+        "signature": "SSDBackup:stop()"
+      },
+      {
+        "name": "obj:startBackup(manual)",
+        "desc": "启动 rsync 备份任务",
+        "doc": "Method\n启动 rsync 备份任务\n\nParameters:\n * manual - boolean, 是否为手动触发（默认 false）\n\nReturns:\n * obj",
+        "type": "Method",
+        "signature": "SSDBackup:startBackup(manual)"
+      },
+      {
+        "name": "obj:bindHotkeys(mapping)",
+        "desc": "绑定热键到指定操作",
+        "doc": "Method\n绑定热键到指定操作\n\nParameters:\n * mapping - 热键映射表，格式：{backup={{\"ctrl\",\"alt\",\"cmd\"}, \"B\"}}\n\nReturns:\n * obj",
+        "type": "Method",
+        "signature": "SSDBackup:bindHotkeys(mapping)"
+      },
+      {
+        "name": "obj:isSSDMounted()",
+        "desc": "检查 SSD 是否已挂载",
+        "doc": "Method\n检查 SSD 是否已挂载\n\nParameters:\n * None\n\nReturns:\n * boolean - 已挂载返回 true",
+        "type": "Method",
+        "signature": "SSDBackup:isSSDMounted()"
+      },
+      {
+        "name": "obj:isSourceDirValid()",
+        "desc": "检查源目录是否存在且可读",
+        "doc": "Method\n检查源目录是否存在且可读\n\nParameters:\n * None\n\nReturns:\n * boolean - 有效返回 true",
+        "type": "Method",
+        "signature": "SSDBackup:isSourceDirValid()"
+      }
+    ],
+    "items": [
+      ["obj", "SSDBackup"],
+      ["obj.ssName", "SSDBackup.ssName"],
+      ["obj.projectSrc", "SSDBackup.projectSrc"],
+      ["obj.notifyLevel", "SSDBackup.notifyLevel"],
+      ["obj.useChecksum", "SSDBackup.useChecksum"],
+      ["obj.logMaxAge", "SSDBackup.logMaxAge"],
+      ["obj:init()", "SSDBackup:init()"],
+      ["obj:start()", "SSDBackup:start()"],
+      ["obj:stop()", "SSDBackup:stop()"],
+      ["obj:cleanOldLogs(maxAge)", "SSDBackup:cleanOldLogs(maxAge)"],
+      ["obj:startBackup(manual)", "SSDBackup:startBackup(manual)"],
+      ["obj:bindHotkeys(mapping)", "SSDBackup:bindHotkeys(mapping)"],
+      ["obj:isSSDMounted()", "SSDBackup:isSSDMounted()"],
+      ["obj:isSourceDirValid()", "SSDBackup:isSourceDirValid()"]
+    ],
+    "name": "SSDBackup",
+    "version": "1.0.0",
+    "author": "2z",
+    "license": "MIT",
+    "homepage": "https://github.com/2z/dotfiles"
+  }
+}

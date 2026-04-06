@@ -1,0 +1,54 @@
+# SSDBackup 排除列表
+# 用于 rsync --exclude-from 选项
+
+# 编译生成的目录
+target/
+build/
+dist/
+*.o
+*.a
+*.so
+*.dylib
+
+# Godot 引擎缓存
+.godot/
+.godot.editor/
+
+# Python 虚拟环境和缓存
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Node.js 缓存
+node_modules/.cache/
+
+# Git 目录（不需要备份版本控制）
+.git/
+
+# IDE 配置
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# macOS 系统文件
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# 临时文件
+*.tmp
+*.temp
+*.log
+Thumbs.db
+
+# Unity 临时文件
+Library/
+Temp/
+Obj/
