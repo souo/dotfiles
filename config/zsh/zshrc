@@ -169,3 +169,5 @@ setopt INTERACTIVE_COMMENTS # Allow comments in interactive shell
 # Added by Antigravity
 export PATH="/Users/2z/.antigravity/antigravity/bin:$PATH"
 
+
+alias claude-mem='bun "/Users/2z/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
