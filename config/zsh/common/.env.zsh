@@ -78,3 +78,5 @@ export PYTHON_BUILD_MIRROR_URL="https://registry.npmmirror.com/-/binary/python"
 export PYTHON_BUILD_MIRROR_URL_SKIP_CHECKSUM=1
 export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 export RUSTUP_DIST_SERVER="https://rsproxy.cn"
+export GO111MODULE=on
+export GOPROXY=https://goproxy.cn

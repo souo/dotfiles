@@ -48,6 +48,9 @@
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 
+[url "ssh://git@code.remount.work/"]
+    insteadOf = "https://code.remount.work/"
+
 # push easily. http://stackoverflow.com/a/23918418/89484
 [push]
 	default = simple
