@@ -4,6 +4,9 @@ idiomatic_version_file_enable_tools = ["python", "node", "rust"]
 [settings.npm]
 package_manager = "bun"
 
+[settings.node]
+mirror_url = "https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/"
+
 [env]
 PYTHON_PIP_VERSION = "latest"
 
@@ -38,3 +41,5 @@ java = "openjdk-21"
 "npm:oxfmt" = "latest"
 "pipx:openviking" = "latest"
 "npm:chromadb" = "latest"
+"go:mvdan.cc/sh/v3/cmd/shfmt" = "latest"
+"go:github.com/minio/mc" = "latest"
