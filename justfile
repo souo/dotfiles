@@ -90,6 +90,17 @@ secret-sync:
     @echo "set +a" >> ~/.zsh_secret
     @echo "✅ Decrypted secrets applied to ~/.zsh_secret"
 
+# Decrypt Claude settings into ~/.claude/settings.json
+[group('secrets')]
+claude-secret-sync:
+	@SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops -d ./config/claude/settings.json.sops > ~/.claude/settings.json
+	@echo "✅ Decrypted Claude settings applied to ~/.claude/settings.json"
+
+# Safely edit encrypted Claude settings
+[group('secrets')]
+claude-secret-edit:
+	SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt sops ./config/claude/settings.json.sops
+
 # --- 🔧 Bootstrap ---
 
 # One-time bootstrap for system dependencies

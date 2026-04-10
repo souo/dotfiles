@@ -1,0 +1,3 @@
+# Claude Code configuration (SOPS-encrypted)
+# Edit with: just claude-secret-edit
+# Sync with: just claude-secret-sync
