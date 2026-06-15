@@ -9,9 +9,6 @@ command -v tokei >/dev/null && alias loc='tokei'
 alias vsc='code .'
 
 # --- 📁 Navigation ---
-if command -v zoxide >/dev/null; then
-    alias cd='z'
-fi
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'

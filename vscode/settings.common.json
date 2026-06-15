@@ -25,10 +25,11 @@
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "files.exclude": {
-    "**/.git": true,
     "**/.DS_Store": true,
-    "**/node_modules": true,
-    "**/.venv": true
+    "**/.git": true,
+    "**/.venv": true,
+    "**/*.uid": true,
+    "**/node_modules": true
   },
   "files.associations": {
     "*.json": "jsonc"
@@ -58,4 +59,10 @@
   "window.zoomLevel": 1,
   "godotTools.editorPath.godot4": "/Users/2z/Applications/Godot-4.6.1.app/Contents/MacOS/Godot",
   "explorer.confirmDelete": false,
+  "json.schemaDownload.trustedDomains": {
+    "https://opencode.ai/": true
+  },
+  "godotFormatter.linterMaxLineLength": 120,
+  "workbench.sideBar.location": "right",
+  "chat.viewSessions.orientation": "stacked",
 }

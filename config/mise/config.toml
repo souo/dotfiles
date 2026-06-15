@@ -1,23 +1,18 @@
 [settings]
 idiomatic_version_file_enable_tools = ["python", "node", "rust"]
-
-[settings.npm]
-package_manager = "bun"
-
-[settings.node]
-mirror_url = "https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/"
+npm.package_manager = "bun"
 
 [env]
 PYTHON_PIP_VERSION = "latest"
 
+
 [tools]
-bun = "latest"
 just = "latest"
-node = "lts"
+node = "latest"
 pnpm = "latest"
 yarn = "latest"
 go = "latest"
-python = { version = "3.14", postinstall = "pip install --user pipx" }
+python = { version = "3.13", postinstall = "pip install --user pipx" }
 uv = "latest"
 rust = "stable"
 "cargo:sd" = "latest"
@@ -43,3 +38,12 @@ java = "openjdk-21"
 "npm:chromadb" = "latest"
 "go:mvdan.cc/sh/v3/cmd/shfmt" = "latest"
 "go:github.com/minio/mc" = "latest"
+"npm:opencode-ai" = "latest"
+"cargo:forgejo-cli" = "latest"
+"npm:@google/gemini-cli" = "latest"
+bun = "latest"
+"npm:@qwen-code/qwen-code" = "latest"
+"npm:beads-ui" = "latest"
+"pipx:mempalace" = "latest"
+"npm:@agentmemory/agentmemory" = "latest"
+"npm:gitnexus" = "latest"

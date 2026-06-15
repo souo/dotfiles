@@ -60,6 +60,11 @@ fi
 
 echo ""
 echo "🎉 SOPS is fully initialized!"
+echo "⚠️  IMPORTANT: Please backup your private key to Bitwarden!"
+echo "   Create a Secure Note named 'dotfiles-age-key' and paste the content of:"
+echo "   $KEY_FILE"
+echo "   This allows you to restore it on other machines using 'just sops-restore'."
+echo ""
 echo "👉 Run 'just secret-edit' to add your API keys securely."
 echo "👉 Run 'just secret-sync' to dynamically decrypt them to ~/.zsh_secret so they are recognized by Zsh."
 echo "👉 Run 'just claude-secret-edit' to edit Claude Code settings."

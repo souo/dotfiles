@@ -4,7 +4,7 @@
 # ==============================================================================
 
 # Fast-path for non-interactive shells
-[[ $- != *i* ]] && return
+#[[ $- != *i* ]] && return
 
 # --- 📂 Paths & Globals
 typeset -U path fpath # Ensure unique paths
@@ -170,4 +170,10 @@ setopt INTERACTIVE_COMMENTS # Allow comments in interactive shell
 export PATH="/Users/2z/.antigravity/antigravity/bin:$PATH"
 
 
-alias claude-mem='bun "/Users/2z/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/2z/.local/bin:$PATH"
+
+# Added by Antigravity IDE
+export PATH="/Users/2z/.antigravity-ide/antigravity-ide/bin:$PATH"

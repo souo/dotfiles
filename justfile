@@ -77,6 +77,11 @@ version:
 sops-init:
     ./bin/sops-init.sh
 
+# Restore SOPS Age key from Bitwarden
+[group('secrets')]
+sops-restore:
+    ./bin/sops-restore.sh
+
 # Safely edit encrypted API keys and secrets
 [group('secrets')]
 secret-edit:

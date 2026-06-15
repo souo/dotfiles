@@ -3,7 +3,19 @@ layout{
         pane size=1 borderless=true {
             plugin location="zellij:tab-bar"
         }
-        pane command="claude"
+        pane split_direction="vertical" {
+            pane size="60%" split_direction="horizontal" {
+                pane command="nvim" size="60%" {
+                    args "."
+                }
+                pane command="lazygit" size="40%"
+            }
+            pane size="40%" stacked=true {
+                pane name="Terminal"
+                pane name="Claude Code" command="claude"
+                pane name="Gemini Cli" command="gemini"
+            }
+        }
         pane size=1 borderless=true {
             plugin location="zellij:status-bar"
         }

@@ -104,3 +104,6 @@
 	# remember conflict resolutions
 	enabled = true
 	autoupdate = true
+[credential "https://code.remount.work"]
+	helper = 
+	helper = !tea login helper

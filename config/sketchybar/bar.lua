@@ -11,7 +11,6 @@ sbar.bar({
     sticky = true,
     padding_right = 8,
     padding_left = 8,
-    blur_radius = 30,
     topmost = "window",
     display = "all", -- Use 'all' or remove for global bar
 })
