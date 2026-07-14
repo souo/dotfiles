@@ -16,6 +16,7 @@ cargo
 mise
 vscode_mac
 wezterm
+ghostty
 zellij
 zsh
 atuin

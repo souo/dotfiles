@@ -3,12 +3,12 @@ config-version = 2
 
 after-startup-command = [
   'exec-and-forget brew services restart borders',
-  'exec-and-forget brew services restart sketchybar'
+#  'exec-and-forget brew services restart sketchybar'
 ]
 
 exec-on-workspace-change = [
-    '/bin/zsh', '-c',
-    '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+#    '/bin/zsh', '-c',
+#    '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 ]
 
 start-at-login = true
@@ -31,7 +31,7 @@ persistent-workspaces = ["1", "2", "3", "4", "5", "6", "Q", "W", "E", "R"]
 
 # Callback for mode changes
 on-mode-changed = [
-    'exec-and-forget sketchybar --trigger aerospace_mode_change'
+#    'exec-and-forget sketchybar --trigger aerospace_mode_change'
 ]
 
 # Monitor Workspace Assignment
@@ -55,12 +55,7 @@ R = ['secondary', 'main']
        0
     ]
     outer.bottom =    10
-    outer.top = [
-        { monitor."AG326UD" = 33 },
-        { monitor."P272U PRO" = 33 },
-        { monitor."Built-in Retina Display" = 33},
-        10,
-    ]
+    outer.top = 10
     outer.right =      3
 
 [mode.main.binding]

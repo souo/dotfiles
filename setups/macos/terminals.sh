@@ -16,6 +16,9 @@ print_in_purple "\n   Terminals\n"
 # wezterm
 brew_install "wezterm" "wezterm" "--cask"
 
+# ghostty
+brew_install "ghostty" "ghostty" "--cask"
+
 # zellij
 brew_install "zellij" "zellij"
 

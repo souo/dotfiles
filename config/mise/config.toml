@@ -1,6 +1,7 @@
 [settings]
 idiomatic_version_file_enable_tools = ["python", "node", "rust"]
 npm.package_manager = "bun"
+minimum_release_age = "1h"
 
 [env]
 PYTHON_PIP_VERSION = "latest"
@@ -10,9 +11,11 @@ PYTHON_PIP_VERSION = "latest"
 just = "latest"
 node = "latest"
 pnpm = "latest"
+bun = "latest"
 yarn = "latest"
 go = "latest"
-python = { version = "3.13", postinstall = "pip install --user pipx" }
+python = "3.13"
+"pipx:pipx" = "latest"
 uv = "latest"
 rust = "stable"
 "cargo:sd" = "latest"
@@ -41,9 +44,12 @@ java = "openjdk-21"
 "npm:opencode-ai" = "latest"
 "cargo:forgejo-cli" = "latest"
 "npm:@google/gemini-cli" = "latest"
-bun = "latest"
+
 "npm:@qwen-code/qwen-code" = "latest"
 "npm:beads-ui" = "latest"
 "pipx:mempalace" = "latest"
 "npm:@agentmemory/agentmemory" = "latest"
+"npm:uipro-cli" = "latest"
+"npm:@alibaba-group/open-code-review" = "latest"
 "npm:gitnexus" = "latest"
+"pipx:beads-mcp" = "latest"

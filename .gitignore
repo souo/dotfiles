@@ -48,3 +48,9 @@ luac.out
 # Worktrees
 .worktrees/
 
+# Qwen Code local config
+.qwen/
+
+# Hammerspoon runtime logs
+config/hammerspoon/logs/
+

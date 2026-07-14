@@ -1,18 +1,18 @@
 layout{
-    tab name="Coding" focus=true hide_floating_panes=true {
+    tab name="Qwen" focus=true hide_floating_panes=true {
         pane size=1 borderless=true {
             plugin location="zellij:tab-bar"
         }
-        pane command="claude"
+        pane command="qwen"
         pane size=1 borderless=true {
             plugin location="zellij:status-bar"
         }
     }
-    tab name="Planing" hide_floating_panes=true {
+    tab name="Agy" hide_floating_panes=true {
         pane size=1 borderless=true {
             plugin location="zellij:tab-bar"
         }
-        pane command="gemini"
+        pane command="agy"
         pane size=1 borderless=true {
             plugin location="zellij:status-bar"
         }
@@ -22,17 +22,6 @@ layout{
             plugin location="zellij:tab-bar"
         }
         pane command="lazygit"
-        pane size=1 borderless=true {
-            plugin location="zellij:status-bar"
-        }
-    }
-    tab name="Usage" hide_floating_panes=true {
-        pane size=1 borderless=true {
-            plugin location="zellij:tab-bar"
-        }
-        pane command="bunx" {
-            args "ccusage" "blocks" "--live"
-        }
         pane size=1 borderless=true {
             plugin location="zellij:status-bar"
         }

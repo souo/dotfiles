@@ -1,0 +1,5 @@
+- link:
+    ~/.config/ghostty/config.ghostty:
+      force: true
+      create: true
+      path: config/terminals/ghostty/config.ghostty

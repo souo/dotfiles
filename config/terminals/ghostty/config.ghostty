@@ -1,0 +1,94 @@
+# ===== Font =====
+font-family = JetBrainsMono Nerd Font
+font-family-bold = JetBrainsMono Nerd Font
+font-family-italic = JetBrainsMono Nerd Font
+font-family-bold-italic = JetBrainsMono Nerd Font
+font-size = 16
+font-thicken = false
+adjust-cell-height = 20%
+
+# ===== Cursor =====
+cursor-style = block
+cursor-style-blink = true
+cursor-color = #f5e0dc
+cursor-text = #11111b
+
+# ===== Colors =====
+foreground = #dbd7ca
+background = #121212
+selection-background = #2a2a2a
+selection-foreground = #dbd7ca
+
+# Normal colors (ansi 0-7)
+palette = 0=#393a34
+palette = 1=#cb7676
+palette = 2=#4d9375
+palette = 3=#e6cc77
+palette = 4=#6394bf
+palette = 5=#d9739f
+palette = 6=#5eaab5
+palette = 7=#dbd7ca
+
+# Bright colors (ansi 8-15)
+palette = 8=#777777
+palette = 9=#cb7676
+palette = 10=#4d9375
+palette = 11=#e6cc77
+palette = 12=#6394bf
+palette = 13=#d9739f
+palette = 14=#5eaab5
+palette = 15=#ffffff
+
+# ===== Window =====
+window-padding-x = 0
+window-padding-y = 10,7
+window-decoration = true
+macos-titlebar-style = tabs
+window-save-state = always
+window-theme = ghostty
+
+# ===== Tab bar =====
+gtk-tabs-location = bottom
+
+# ===== Scrollback =====
+scrollback-limit = 5000
+
+# ===== Shell =====
+command = zsh -l
+
+# ===== Mouse =====
+mouse-hide-while-typing = true
+copy-on-select = false
+link-url = true
+
+# ===== Misc =====
+confirm-close-surface = false
+clipboard-paste-protection = false
+
+# ===== Keybindings (macOS) =====
+# Window / Maximize
+keybind = super+enter=toggle_maximize
+
+# Panes (split)
+keybind = super+backslash=new_split:down
+keybind = super+ctrl+backslash=new_split:right
+keybind = super+shift+w=close_surface
+
+# Pane navigation
+keybind = super+ctrl+k=goto_split:up
+keybind = super+ctrl+j=goto_split:down
+keybind = super+ctrl+h=goto_split:left
+keybind = super+ctrl+l=goto_split:right
+
+# Scroll
+keybind = super+u=scroll_page_fractional:-0.5
+keybind = super+d=scroll_page_fractional:0.5
+keybind = page_up=scroll_page_fractional:-0.75
+keybind = page_down=scroll_page_fractional:0.75
+
+# Copy/Paste
+keybind = ctrl+shift+c=copy_to_clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+
+# Fullscreen
+keybind = f11=toggle_fullscreen
