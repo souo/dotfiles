@@ -51,5 +51,6 @@ java = "openjdk-21"
 "npm:@agentmemory/agentmemory" = "latest"
 "npm:uipro-cli" = "latest"
 "npm:@alibaba-group/open-code-review" = "latest"
-"npm:gitnexus" = "latest"
+"npm:gitnexus" = { version = "latest", bun_args = "--trust"}
 "pipx:beads-mcp" = "latest"
+"npm:openwiki" = "latest"
