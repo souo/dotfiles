@@ -50,6 +50,7 @@ luac.out
 
 # Qwen Code local config
 .qwen/
+.agents/
 
 # Hammerspoon runtime logs
 config/hammerspoon/logs/

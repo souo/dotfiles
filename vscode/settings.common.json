@@ -57,11 +57,11 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "window.zoomLevel": 1,
-  "godotTools.editorPath.godot4": "${env:GODOT_PATH}",
+  "godotTools.editorPath.godot4": "/Users/2z/Applications/Godot-4.7.1-stable.app/Contents/MacOS/Godot",
   "explorer.confirmDelete": false,
   "json.schemaDownload.trustedDomains": {
     "https://opencode.ai/": true
   },
   "godotFormatter.linterMaxLineLength": 120,
-  "godotTools.editorPath.godot3": "",
+  "godotTools.lsp.serverPort": 6008,
 }

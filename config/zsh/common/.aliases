@@ -77,6 +77,25 @@ if command -v fdfind >/dev/null; then
     alias fd='fdfind'
 fi
 
+# Herdr (terminal workspace manager)
+if command -v herdr >/dev/null; then
+    alias hr='herdr'
+    alias hsa='herdr session attach'
+    alias hsl='herdr session list'
+    alias hsd='herdr session delete'
+    alias hst='herdr status'
+    alias hu='herdr update'
+    alias hss='herdr server stop'
+    alias hsr='herdr server reload-config'
+    alias hcs='herdr channel set'
+    alias hcr='herdr config reset-keys'
+    alias ha='herdr agent'
+    alias ht='herdr tab'
+    alias hp='herdr pane'
+    alias hwt='herdr worktree'
+    alias hi='herdr integration'
+fi
+
 # Zellij
 command -v zellij >/dev/null && alias vibe='zellij --layout vibe'
 

@@ -70,8 +70,6 @@ elif command -v rg >/dev/null 2>&1; then
 fi
 
 # --- 🇨🇳 Mirror Settings (Tsinghua/NPM Mirror) ---
-export NODE_MIRROR="https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/"
-
 export PYTHON_BUILD_MIRROR_URL="https://registry.npmmirror.com/-/binary/python"
 export PYTHON_BUILD_MIRROR_URL_SKIP_CHECKSUM=1
 export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"

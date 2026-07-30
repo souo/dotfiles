@@ -135,8 +135,8 @@ position = "bottom-right"
 # path = "sounds/notification.mp3"
 
 [ui.sound.agents]
-claude = "on"
-droid = "off"
+agy = "off"
+
 
 # ===== Session =====
 [session]

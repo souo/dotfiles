@@ -47,6 +47,10 @@ macos-titlebar-style = tabs
 window-save-state = always
 window-theme = ghostty
 
+# ===== Title bar =====
+macos-titlebar-proxy-icon = hidden
+macos-titlebar-style = hidden
+
 # ===== Tab bar =====
 gtk-tabs-location = bottom
 
