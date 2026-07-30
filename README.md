@@ -4,10 +4,6 @@ My personal dotfiles, meticulously managed with **Dotbot** and powered by **just
 
 ---
 
-[![CI](https://github.com/souo/dotfiles/actions/workflows/ci.yml/badge.svg)](https://github.com/souo/dotfiles/actions/workflows/ci.yml)
-
-![Project Screenshot](screenshot.png)
-
 ## 🚀 Quick Start
 
 ### 1. Prerequisites
@@ -68,6 +64,16 @@ A pre-configured development environment for Zellij:
 
 - **`vibe`**: Launch a multi-tab workspace (Coding, Planning, Review, Terminal).
 - **Auto-tools**: Automatically opens `nvim`, `lazygit`, and AI helpers (`gemini`, `claude`) in a single organized view.
+
+### 🧬 Herdr — Modern Terminal Multiplexer
+
+A next-gen terminal multiplexer designed for the AI era:
+
+- **Worktree-aware**: Built-in git worktree management for parallel development.
+- **AI Agent Sidebar**: Monitor and manage AI coding agent sessions (Claude, Codex, etc.) directly in the sidebar.
+- **tmux-style keybindings**: Familiar `Ctrl+b` prefix with vim-like pane navigation.
+- **Integrated Popups**: Floating overlays for `lazygit`, `nvim`, and more — no extra tmux pane needed.
+- **Session Persistence**: Restore sessions with automatic agent resumption.
 
 ### 📂 Yazi "CD on Quit"
 
@@ -138,6 +144,12 @@ A tiling window management system combined with a highly dynamic status bar:
 - **Custom App Icons**: Automated system to build `sketchybar-app-font` from custom SVGs. Add an SVG to `assets/svgs/` and run `setup.sh` to update your icons.
 - **JankyBorders**: Visual window borders to identify the active pane.
 
+### 🔨 Hammerspoon
+
+Lua-powered macOS automation with custom Spoon plugins:
+
+- **SSDBackup**: Automatic SSD backup spoon for data safety.
+
 ---
 
 ## 🛡️ Security & Privacy
@@ -147,9 +159,12 @@ To keep your sensitive information safe and secure, this repository uses **SOPS 
 1. **`~/.dotfiles/config/zsh/common/.env.secret.sops`**: Encrypted API keys and tokens safely tracked by Git.
    - Run `just secret-edit` to securely modify secrets.
    - Run `just secret-sync` to decrypt them locally to `~/.zsh_secret`.
-2. **`~/.localrc`**: For machine-specific environment overrides or private aliases.
-3. **`~/.gitconfig.local`**: For Git user information (`name`, `email`).
-4. **VSCode Local Settings**: Machine-specific settings in `settings.local.json`.
+2. **`~/.dotfiles/config/claude/settings.json.sops`**: Encrypted Claude Code settings (MCP servers, API keys).
+   - Run `just claude-secret-edit` to modify.
+   - Run `just claude-secret-sync` to decrypt to `~/.claude/settings.json`.
+3. **`~/.localrc`**: For machine-specific environment overrides or private aliases.
+4. **`~/.gitconfig.local`**: For Git user information (`name`, `email`).
+5. **VSCode Local Settings**: Machine-specific settings in `settings.local.json`.
 
 ---
 
@@ -181,8 +196,10 @@ This repository uses a **Fragmented Dotbot System** to scale cleanly:
 | **Launcher** | [Raycast](https://www.raycast.com/) | Advanced launcher with script commands and deep integrations. |
 | **Prompt** | [Oh My Posh](https://ohmyposh.dev/) | Cross-shell theme engine for consistent aesthetics. |
 | **Editor** | [Neovim](https://neovim.io/) + [rafi/vim-config](https://github.com/rafi/vim-config) | Modern Lua-based Neovim distribution with LSP, autocomplete, and file explorer. |
-| **Terminal** | [WezTerm](https://wezfurlong.org/wezterm/) + [Zellij](https://zellij.dev/) | GPU terminal & terminal workspace with "Vibe" layouts. |
+| **Terminal** | [WezTerm](https://wezfurlong.org/wezterm/) + [Ghostty](https://ghostty.org/) | GPU-accelerated terminal emulators. |
+| **Multiplexer** | [Zellij](https://zellij.dev/) + [Herdr](https://herdr.dev/) | Terminal workspaces with "Vibe" layouts and AI agent integration. |
 | **Window Mgmt** | [Aerospace](https://github.com/nikitabobko/AeroSpace) + [Borders](https://github.com/FelixKratz/JankyBorders) | (macOS) Tiling window management with visible borders. |
+| **Automation** | [Hammerspoon](https://www.hammerspoon.org/) | (macOS) Desktop automation, custom Spoon plugins (e.g. SSDBackup). |
 | **Status Bar** | [SketchyBar](https://felixkratz.github.io/SketchyBar/) | (macOS) Highly customizable Lua-based status bar. |
 | **File Manager** | [Yazi](https://yazi-rs.github.io/) | Blazing fast Rust-based terminal file manager. |
 | **Navigation** | [fzf](https://github.com/junegunn/fzf) + [zoxide](https://github.com/ajeetdsouza/zoxide) + [Atuin](https://github.com/atuinsh/atuin) | Fuzzy finder, smarter `cd`, and magical shell history. |
