@@ -9,10 +9,10 @@ disable = [
     "uv",
     "rustup",
     "pip3",
-    "npm",
+    "node",
     "yarn",
     # Disabled
-    "git",
+    "git_repos",
     "yazi",
 ]
 
