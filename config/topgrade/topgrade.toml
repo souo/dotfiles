@@ -1,7 +1,20 @@
 [misc]
 
 # Disable specific steps - same options as the command line flag
-disable = ["containers"]
+disable = [
+    "containers",
+    # Managed by mise
+    "bun",
+    "pipx",
+    "uv",
+    "rustup",
+    "pip3",
+    "npm",
+    "yarn",
+    # Disabled
+    "git",
+    "yazi",
+]
 
 # Cleanup temporary or old files (default: false)
 cleanup = true
