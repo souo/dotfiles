@@ -3,7 +3,7 @@
 # https://yamllint.readthedocs.io/en/stable/configuration.html
 extends: default
 yaml-files: ["*.yaml", "*.yml", .yamllint, .yamllint.yaml]
-ignore: [.venv/, node_modules/, dotbot/]
+ignore: [.venv/, node_modules/, dotbot/, .serena/]
 rules:
   document-start: disable
   braces:
