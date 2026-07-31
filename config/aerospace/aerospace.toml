@@ -3,12 +3,9 @@ config-version = 2
 
 after-startup-command = [
   'exec-and-forget brew services restart borders',
-#  'exec-and-forget brew services restart sketchybar'
 ]
 
 exec-on-workspace-change = [
-#    '/bin/zsh', '-c',
-#    '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 ]
 
 start-at-login = true
@@ -31,7 +28,6 @@ persistent-workspaces = ["1", "2", "3", "4", "5", "6", "Q", "W", "E", "R"]
 
 # Callback for mode changes
 on-mode-changed = [
-#    'exec-and-forget sketchybar --trigger aerospace_mode_change'
 ]
 
 # Monitor Workspace Assignment

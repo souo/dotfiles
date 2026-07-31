@@ -107,3 +107,5 @@
 [credential "https://code.remount.work"]
 	helper = 
 	helper = !tea login helper
+[lfs]
+	locksverify = false
