@@ -77,22 +77,22 @@ export RUSTUP_DIST_SERVER="https://rsproxy.cn"
 export GO111MODULE=on
 export GOPROXY=https://goproxy.cn
 
-export PATH="$PATH:/Users/2z/.dotnet/tools"
+export PATH="$PATH:$HOME/.dotnet/tools"
 export PATH="$HOME/.agentmemory/bin:$HOME/.local/bin:$PATH"
 
 
 # Added by Antigravity
-export PATH="/Users/2z/.antigravity/antigravity/bin:$PATH"
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 
 # Added by Antigravity CLI installer
-export PATH="/Users/2z/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Added by Antigravity IDE
-export PATH="/Users/2z/.antigravity-ide/antigravity-ide/bin:$PATH"
+export PATH="$HOME/.antigravity-ide/antigravity-ide/bin:$PATH"
 
 # pnpm
-export PNPM_HOME="/Users/2z/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME/bin:"*) ;;
   *) export PATH="$PNPM_HOME/bin:$PATH" ;;
