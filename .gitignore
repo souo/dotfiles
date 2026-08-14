@@ -41,6 +41,10 @@ build/
 out/
 
 
+# Documentation & Specs
+docs/*
+!docs/superpowers/
+
 ### Lua ###
 # Compiled Lua sources
 luac.out
@@ -54,4 +58,3 @@ luac.out
 
 # Hammerspoon runtime logs
 config/hammerspoon/logs/
-
