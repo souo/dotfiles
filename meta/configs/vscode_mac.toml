@@ -1,3 +1,2 @@
 [dotfiles]
-"~/Library/Application Support/Code/User/keybindings.json" = { source = "~/.dotfiles/vscode/keybindings.json" }
 "~/Library/Application Support/Code/User/settings.json" = { source = "~/.dotfiles/vscode/settings.common.json" }

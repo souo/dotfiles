@@ -1,3 +1,2 @@
 [dotfiles]
 "~/.config/bat/config" = { source = "~/.dotfiles/config/bat/config" }
-"~/.config/bat/themes/" = { source = "~/.dotfiles/config/bat/themes/*.tmTheme" }
