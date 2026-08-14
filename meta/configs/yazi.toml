@@ -1,0 +1,2 @@
+[dotfiles]
+"~/.config/yazi/" = { source = "~/.dotfiles/config/yazi/*.toml" }

@@ -1,0 +1,5 @@
+[dotfiles]
+"~/.gitattributes" = { source = "~/.dotfiles/config/git/.gitattributes" }
+"~/.gitconfig" = { source = "~/.dotfiles/config/git/.gitconfig" }
+"~/.gitconfig.local" = { source = "~/.dotfiles/config/git/windows/.gitconfig.local" }
+"~/.gitignore" = { source = "~/.dotfiles/config/git/.gitignore" }

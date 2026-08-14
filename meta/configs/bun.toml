@@ -1,0 +1,2 @@
+[dotfiles]
+"~/.bunfig.toml" = { source = "~/.dotfiles/config/bun/bunfig.toml" }

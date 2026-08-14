@@ -1,0 +1,4 @@
+[dotfiles]
+"~/.fzf.bash" = { source = "~/.dotfiles/config/fzf/.fzf.bash" }
+"~/.fzf.zsh" = { source = "~/.dotfiles/config/fzf/.fzf.zsh" }
+"~/.fzfrc" = { source = "~/.dotfiles/config/fzf/.fzfrc" }

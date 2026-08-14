@@ -1,0 +1,2 @@
+[dotfiles]
+"~/.ideavimrc" = { source = "~/.dotfiles/config/JetBrainIDEs/ideavim/.ideavimrc" }

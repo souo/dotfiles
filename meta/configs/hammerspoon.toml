@@ -1,0 +1,2 @@
+[dotfiles]
+"~/.hammerspoon" = { source = "~/.dotfiles/config/hammerspoon" }

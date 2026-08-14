@@ -1,0 +1,2 @@
+[dotfiles]
+"~/.config/lazygit/config.yml" = { source = "~/.dotfiles/config/lazygit/config.yml" }

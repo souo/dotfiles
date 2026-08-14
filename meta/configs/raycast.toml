@@ -1,0 +1,3 @@
+[dotfiles]
+"~/.config/raycast/scripts/dot-doctor.sh" = { source = "~/.dotfiles/bin/doctor.sh" }
+"~/.config/raycast/scripts/dot-rebuild.sh" = { source = "~/.dotfiles/bin/dot-rebuild.sh" }

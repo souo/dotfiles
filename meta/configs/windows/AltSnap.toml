@@ -1,0 +1,2 @@
+[dotfiles]
+"~/AppData/Roaming/AltSnap/AltSnap.ini" = { source = "~/.dotfiles/Windows/AltSnap/AltSnap.ini" }

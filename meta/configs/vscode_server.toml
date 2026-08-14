@@ -1,0 +1,2 @@
+[dotfiles]
+"~/.vscode-server/data/Machine/settings.json" = { source = "~/.dotfiles/vscode/settings_server.json" }

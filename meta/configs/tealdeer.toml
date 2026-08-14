@@ -1,0 +1,2 @@
+[dotfiles]
+"~/.config/tealdeer/config.toml" = { source = "~/.dotfiles/config/tealdeer/config.toml" }

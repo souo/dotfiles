@@ -1,0 +1,2 @@
+[dotfiles]
+"~/.config/sketchybar/" = { source = "~/.dotfiles/config/sketchybar/*" }

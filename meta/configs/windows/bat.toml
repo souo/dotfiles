@@ -1,0 +1,3 @@
+[dotfiles]
+"~/Appdata/Roaming/bat.config/themes/" = { source = "~/.dotfiles/config/bat/themes/*.tmTheme" }
+"~/Appdata/Roaming/bat/config" = { source = "~/.dotfiles/config/bat/config" }

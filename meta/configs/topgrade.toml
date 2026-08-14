@@ -1,0 +1,2 @@
+[dotfiles]
+"~/.config/topgrade/topgrade.toml" = { source = "~/.dotfiles/config/topgrade/topgrade.toml" }

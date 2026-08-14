@@ -1,0 +1,5 @@
+[dotfiles]
+"~/.aliases" = { source = "~/.dotfiles/config/zsh/common/.aliases" }
+"~/.env.zsh" = { source = "~/.dotfiles/config/zsh/common/.env.zsh" }
+"~/.zsh_functions" = { source = "~/.dotfiles/config/zsh/functions/" }
+"~/.zshrc" = { source = "~/.dotfiles/config/zsh/zshrc" }

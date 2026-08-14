@@ -1,0 +1,2 @@
+[dotfiles]
+"~/.luarocks/config-5.4.lua" = { source = "~/.dotfiles/config/luarocks/config-5.4.lua" }

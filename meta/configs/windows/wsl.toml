@@ -1,0 +1,2 @@
+[dotfiles]
+"~/.wslconfig" = { source = "~/.dotfiles/Windows/wsl/.wslconfig" }

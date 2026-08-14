@@ -1,0 +1,2 @@
+[dotfiles]
+"~/.config/karabiner/karabiner.json" = { source = "~/.dotfiles/config/karabiner/karabiner.json" }

@@ -1,0 +1,2 @@
+[dotfiles]
+"~/.config/borders/bordersrc" = { source = "~/.dotfiles/config/borders/bordersrc" }
