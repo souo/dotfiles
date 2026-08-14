@@ -1,6 +1,6 @@
 # 🛠️ dotfiles
 
-My personal dotfiles, meticulously managed with **Mise `[dotfiles]`** and powered by **just**. This repository is designed to be modular, cross-platform, and highly automated, supporting macOS, Linux (Arch/Ubuntu/WSL2), and Windows.
+My personal dotfiles, meticulously managed with **Mise `[dotfiles]`** and powered by **just**. This repository is designed to be modular, cross-platform, and highly automated, supporting macOS, Linux (Arch/Server/WSL), and Windows.
 
 ---
 
