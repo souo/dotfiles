@@ -1,0 +1,25 @@
+[settings]
+dotfiles.root = "~/.dotfiles"
+dotfiles.default_mode = "symlink"
+
+[dotfiles]
+"~/.editorconfig" = { source = "~/.dotfiles/config/editorconfig/.editorconfig" }
+"~/.gitattributes" = { source = "~/.dotfiles/config/git/.gitattributes" }
+"~/.gitconfig" = { source = "~/.dotfiles/config/git/.gitconfig" }
+"~/.gitconfig.local" = { source = "~/.dotfiles/config/git/gitconfig.local" }
+"~/.gitignore" = { source = "~/.dotfiles/config/git/.gitignore" }
+"~/.cargo/config.toml" = { source = "~/.dotfiles/config/cargo/config.toml" }
+"~/.ideavimrc" = { source = "~/.dotfiles/config/JetBrainIDEs/ideavim/.ideavimrc" }
+"~/.config/eza/theme.yml" = { source = "~/.dotfiles/config/eza/catppuccin-mocha.yml" }
+"~/.config/wezterm" = { source = "~/.dotfiles/config/terminals/wezterm" }
+"~/.wslconfig" = { source = "~/.dotfiles/Windows/wsl/.wslconfig" }
+"~/Documents/PowerShell/Profile.ps1" = { source = "~/.dotfiles/Windows/PowerShell/Profile.ps1" }
+"~/Appdata/Roaming/bat/config" = { source = "~/.dotfiles/config/bat/config" }
+"~/Appdata/Local/fastfetch/config.jsonc" = { source = "~/.dotfiles/config/fastfetch/config.jsonc" }
+"~/Appdata/Local/fastfetch/logos" = { source = "~/.dotfiles/config/fastfetch/logos" }
+"~/Appdata/Local/lazygit/config.yml" = { source = "~/.dotfiles/config/lazygit/config.yml" }
+"~/Appdata/Roaming/tealdeer/tealdeer/config.toml" = { source = "~/.dotfiles/config/tealdeer/config.toml" }
+"~/Appdata/Roaming/uv/uv.toml" = { source = "~/.dotfiles/config/uv/uv.toml" }
+"~/AppData/Roaming/Code/User/settings.json" = { source = "~/.dotfiles/vscode/settings.common.json" }
+"~/Appdata/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json" = { source = "~/.dotfiles/config/terminals/windowsterminal/settings.json" }
+"~/AppData/Roaming/AltSnap/AltSnap.ini" = { source = "~/.dotfiles/Windows/AltSnap/AltSnap.ini" }

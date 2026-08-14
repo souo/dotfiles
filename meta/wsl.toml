@@ -1,0 +1,28 @@
+[settings]
+dotfiles.root = "~/.dotfiles"
+dotfiles.default_mode = "symlink"
+
+[dotfiles]
+"~/.aliases" = { source = "~/.dotfiles/config/zsh/common/.aliases" }
+"~/.env.zsh" = { source = "~/.dotfiles/config/zsh/common/.env.zsh" }
+"~/.zsh_functions" = { source = "~/.dotfiles/config/zsh/functions/" }
+"~/.zshrc" = { source = "~/.dotfiles/config/zsh/zshrc" }
+"~/.fzf.bash" = { source = "~/.dotfiles/config/fzf/.fzf.bash" }
+"~/.fzf.zsh" = { source = "~/.dotfiles/config/fzf/.fzf.zsh" }
+"~/.fzfrc" = { source = "~/.dotfiles/config/fzf/.fzfrc" }
+"~/.config/atuin/config.toml" = { source = "~/.dotfiles/config/atuin/config.toml" }
+"~/.config/bat/config" = { source = "~/.dotfiles/config/bat/config" }
+"~/.editorconfig" = { source = "~/.dotfiles/config/editorconfig/.editorconfig" }
+"~/.config/fastfetch/config.jsonc" = { source = "~/.dotfiles/config/fastfetch/config.jsonc" }
+"~/.config/fastfetch/logos" = { source = "~/.dotfiles/config/fastfetch/logos" }
+"~/.gitattributes" = { source = "~/.dotfiles/config/git/.gitattributes" }
+"~/.gitconfig" = { source = "~/.dotfiles/config/git/.gitconfig" }
+"~/.gitignore" = { source = "~/.dotfiles/config/git/.gitignore" }
+"~/.config/htop/htoprc" = { source = "~/.dotfiles/config/htop/htoprc" }
+"~/.config/lazygit/config.yml" = { source = "~/.dotfiles/config/lazygit/config.yml" }
+"~/.config/nvim/lua/plugins/user-plugins.lua" = { source = "~/.dotfiles/config/nvim/user-plugins.lua" }
+"~/.config/tealdeer/config.toml" = { source = "~/.dotfiles/config/tealdeer/config.toml" }
+"~/.cargo/config.toml" = { source = "~/.dotfiles/config/cargo/config.toml" }
+"~/.config/uv/uv.toml" = { source = "~/.dotfiles/config/uv/uv.toml" }
+"~/.config/mise/config.toml" = { source = "~/.dotfiles/config/mise/config.toml" }
+"~/.vscode-server/data/Machine/settings.json" = { source = "~/.dotfiles/vscode/settings_server.json" }
