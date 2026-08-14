@@ -11,20 +11,89 @@ default:
 
 # --- 🚀 Installation ---
 
+# 初始化工作区基础空目录 (替代 Dotbot create:)
+[private]
+init-dirs:
+    @mkdir -p ~/.local/share ~/.config ~/code/projects ~/code/clones ~/code/templates ~/code/workspaces ~/code/assets_library
+
+# 执行 Profile 对应的后置构建钩子 (替代 Dotbot shell:)
+[private]
+post-install profile:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    DOTFILES="{{justfile_directory()}}"
+
+    # 1. Bat cache 构建
+    case "{{profile}}" in
+      mac|server|wsl)
+        command -v bat >/dev/null 2>&1 && bat cache --build || true
+        ;;
+      ubuntu)
+        command -v batcat >/dev/null 2>&1 && batcat cache --build || true
+        ;;
+    esac
+
+    # 2. Tmux 插件初始化
+    case "{{profile}}" in
+      mac|server|ubuntu|wsl)
+        if command -v tmux >/dev/null 2>&1 && [ -f "$DOTFILES/config/tmux/config.sh" ]; then
+          bash "$DOTFILES/config/tmux/config.sh" || true
+        fi
+        ;;
+    esac
+
+    # 3. Yazi 插件同步
+    if command -v ya >/dev/null 2>&1 && [ -d "$HOME/.config/yazi" ]; then
+      (cd "$HOME/.config/yazi" && ya pack -i) || true
+    fi
+
+    # 4. Zellij 环境初始化
+    if command -v zellij >/dev/null 2>&1 && [ -f "$DOTFILES/config/zellij/setup.sh" ]; then
+      bash "$DOTFILES/config/zellij/setup.sh" || true
+    fi
+
 # Deploy a system profile (e.g., just install mac)
 [group('install')]
-install profile="mac":
-    {{ if os() == "windows" { "powershell -File ./install-profile.ps1 " + profile } else { "./install-profile.sh " + profile } }}
+install profile="mac": init-dirs
+    #!/usr/bin/env bash
+    set -euo pipefail
+    DOTFILES="{{justfile_directory()}}"
+    CONFIGS=$(grep -vE '^\s*(#|$)' "$DOTFILES/meta/profiles/{{profile}}" \
+      | sed "s|^|$DOTFILES/meta/configs/|" \
+      | sed 's|$|.toml|' \
+      | tr '\n' ':' \
+      | sed 's/:$//')
+    MISE_OVERRIDE_CONFIG_FILENAMES="$DOTFILES/meta/base.toml:${CONFIGS}" \
+      mise bootstrap dotfiles apply --yes
+    just post-install {{profile}}
+    just check-links
 
-# Dry-run a system profile deployment
+# Dry-run a system profile deployment (no hooks, no side effects)
 [group('install')]
 dry-run profile="mac":
-    {{ if os() == "windows" { "powershell -File ./install-profile.ps1 " + profile + " -DryRun" } else { "./install-profile.sh --dry-run " + profile } }}
+    #!/usr/bin/env bash
+    set -euo pipefail
+    DOTFILES="{{justfile_directory()}}"
+    CONFIGS=$(grep -vE '^\s*(#|$)' "$DOTFILES/meta/profiles/{{profile}}" \
+      | sed "s|^|$DOTFILES/meta/configs/|" \
+      | sed 's|$|.toml|' \
+      | tr '\n' ':' \
+      | sed 's/:$//')
+    MISE_OVERRIDE_CONFIG_FILENAMES="$DOTFILES/meta/base.toml:${CONFIGS}" \
+      mise bootstrap dotfiles apply --dry-run --verbose
 
 # Install standalone configurations (e.g., just standalone nvim zsh)
 [group('install')]
 standalone *configs:
-    {{ if os() == "windows" { "powershell -File ./install-standalone.ps1 " + configs } else { "./install-standalone.sh " + configs } }}
+    #!/usr/bin/env bash
+    set -euo pipefail
+    DOTFILES="{{justfile_directory()}}"
+    CONFIG_LIST=""
+    for cfg in {{configs}}; do
+      CONFIG_LIST="${CONFIG_LIST}:$DOTFILES/meta/configs/${cfg}.toml"
+    done
+    MISE_OVERRIDE_CONFIG_FILENAMES="$DOTFILES/meta/base.toml${CONFIG_LIST}" \
+      mise bootstrap dotfiles apply --yes
 
 # --- 🧪 Testing ---
 
@@ -51,7 +120,20 @@ lint:
 # Check for orphaned symbolic links in home directory
 [group('maint')]
 check-links:
-    @{{ if os() == "windows" { "powershell -File ./bin/check-dead-links.ps1" } else { "./install-profile.sh --dry-run base | grep 'dead link' || echo 'No dead links found.'" } }}
+    #!/usr/bin/env bash
+    set -euo pipefail
+    DOTFILES="{{justfile_directory()}}"
+    echo "🔍 Checking for orphaned dotfile links in ~ ..."
+    found_dead=false
+    while read -r link; do
+      if [ ! -e "$link" ]; then
+        echo "⚠️  Dead link: $link"
+        found_dead=true
+      fi
+    done < <(find ~ -maxdepth 2 -type l -lname "*$DOTFILES*" 2>/dev/null || true)
+    if [ "$found_dead" = false ]; then
+      echo "✅ No dead links found."
+    fi
 
 # --- 📝 Development ---
 
