@@ -57,3 +57,7 @@ luac.out
 
 # Hammerspoon runtime logs
 config/hammerspoon/logs/
+
+
+.serena/
+.superpowers/
