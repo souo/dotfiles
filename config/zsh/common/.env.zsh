@@ -91,6 +91,10 @@ export PATH="$HOME/.local/bin:$PATH"
 # Added by Antigravity IDE
 export PATH="$HOME/.antigravity-ide/antigravity-ide/bin:$PATH"
 
+# disable sandbox
+export SCCACHE_DISABLE_SANDBOX=1
+
+export FIRECRAWL_API_URL="http://localhost:3002"
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
