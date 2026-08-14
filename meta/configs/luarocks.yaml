@@ -1,4 +1,0 @@
-- link:
-    ~/.luarocks/config-5.4.lua:
-      force: true
-      path: config/luarocks/config-5.4.lua

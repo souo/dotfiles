@@ -1,6 +1,0 @@
-- create:
-      - ~/.config/htop # htop config
-- link:
-      ~/.config/htop/htoprc:
-          force: true
-          path: config/htop/htoprc

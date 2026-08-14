@@ -1,6 +1,0 @@
-- create:
-      - ~/.config/lazygit # lazygit config
-- link:
-      ~/.config/lazygit/config.yml:
-          force: true
-          path: config/lazygit/config.yml

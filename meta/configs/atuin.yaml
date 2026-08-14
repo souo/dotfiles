@@ -1,4 +1,0 @@
-- link:
-    ~/.config/atuin/config.toml:
-      create: true
-      path: config/atuin/config.toml

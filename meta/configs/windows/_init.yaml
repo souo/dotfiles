@@ -1,8 +1,0 @@
----
-# Create commands specify empty directories to be created.
-- create:
-    - ~/.config  # configuration files
-    - ~/dev/code/Projects  # my projects
-    - ~/dev/code/Clones  # read-only git clones
-    - ~/dev/code/Templates  # read-only projects boilerplates
-    - ~/dev/code/Workspaces  # code-station to try new stuff

@@ -1,6 +1,0 @@
-- create:
-    - ~/.config/aerospace # aerospace config
-- link:
-    ~/.config/aerospace/aerospace.toml:
-      force: true
-      path: config/aerospace/aerospace.toml

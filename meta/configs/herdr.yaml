@@ -1,5 +1,0 @@
-- link:
-    ~/.config/herdr/config.toml:
-      path: config/herdr/config.toml
-      create: true
-      force: true

@@ -1,5 +1,0 @@
-- link:
-    ~/.config/eza/theme.yml:
-      create: true
-      force: true
-      path: config/eza/catppuccin-mocha.yml

@@ -1,5 +1,0 @@
-- link:
-    ~/.config/nvim/lua/plugins/user-plugins.lua:
-      force: true
-      path: config/nvim/user-plugins.lua
-      create: true

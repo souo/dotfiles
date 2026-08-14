@@ -1,4 +1,0 @@
-- link:
-    ~/.npmrc:
-      force: true
-      path: config/.npmrc

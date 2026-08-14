@@ -1,9 +1,0 @@
-- create:
-    - ~/.config/sketchybar # sketchybar config
-- link:
-    ~/.config/sketchybar/:
-      glob: true
-      force: true
-      relink: true
-      path: config/sketchybar/*
-      exclude: [config/sketchybar/README.md]

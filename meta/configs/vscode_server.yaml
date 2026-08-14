@@ -1,6 +1,0 @@
-- create:
-          - ~/.vscode-server/data/Machine/ # fastfetch config
-- link:
-          ~/.vscode-server/data/Machine/settings.json:
-                  force: true
-                  path: vscode/settings_server.json

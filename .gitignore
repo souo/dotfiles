@@ -43,7 +43,6 @@ out/
 
 # Documentation & Specs
 docs/*
-!docs/superpowers/
 
 ### Lua ###
 # Compiled Lua sources
