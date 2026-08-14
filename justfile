@@ -11,12 +11,12 @@ default:
 
 # --- 🚀 Installation ---
 
-# 初始化工作区基础空目录 (替代 Dotbot create:)
+# 初始化工作区基础空目录 (替代 Dotfiles create:)
 [private]
 init-dirs:
     @mkdir -p ~/.local/share ~/.config ~/code/projects ~/code/clones ~/code/templates ~/code/workspaces ~/code/assets_library
 
-# 执行 Profile 对应的后置构建钩子 (替代 Dotbot shell:)
+# 执行 Profile 对应的后置构建钩子 (替代 Dotfiles shell:)
 [private]
 post-install profile:
     #!/usr/bin/env bash
@@ -104,7 +104,7 @@ test-ubuntu:
         -v {{justfile_directory()}}:/root/.dotfiles \
         -w /root/.dotfiles \
         ubuntu:latest \
-        bash -c "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y git sudo curl python3 tzdata ca-certificates && ./setups/setup.sh ubuntu && ./install-profile.sh ubuntu && zsh"
+        bash -c "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y git sudo curl python3 tzdata ca-certificates && ./setups/setup.sh ubuntu && just install ubuntu && zsh"
 
 # Update all submodules and perform full system maintenance (Topgrade)
 [group('maint')]

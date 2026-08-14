@@ -1,6 +1,6 @@
 # 🛠️ dotfiles
 
-My personal dotfiles, meticulously managed with **Dotbot** and powered by **just**. This repository is designed to be modular, cross-platform, and highly automated, supporting macOS, Linux (Arch/Ubuntu/WSL2), and Windows.
+My personal dotfiles, meticulously managed with **Mise `[dotfiles]`** and powered by **just**. This repository is designed to be modular, cross-platform, and highly automated, supporting macOS, Linux (Arch/Ubuntu/WSL2), and Windows.
 
 ---
 
@@ -9,8 +9,7 @@ My personal dotfiles, meticulously managed with **Dotbot** and powered by **just
 ### 1. Prerequisites
 
 - **Git** (for cloning)
-- **Python 3** (for Dotbot)
-- **[mise](https://mise.jdx.dev/)** (highly recommended for managing `just`, `node`, `python`, etc.)
+- **[mise](https://mise.jdx.dev/)** (manages `just`, toolchains, and dotfiles deployment)
 - **[just](https://github.com/casey/just)** (task runner)
 - **zsh** (preferred shell)
 
@@ -129,7 +128,7 @@ just nvim-health      # Check health status
 
 ### ⚡ Unified Configuration
 
-The deployment scripts (`install-profile.sh` and `install-standalone.sh`) have been optimized to merge all YAML fragments into a single execution, making the installation **up to 10x faster** than traditional sequential Dotbot runs.
+The `justfile` recipes merge the baseline (`meta/base.toml`) with profile-specific TOML fragments into a single Mise execution, making deployment fast and atomic.
 
 ---
 
@@ -170,18 +169,20 @@ To keep your sensitive information safe and secure, this repository uses **SOPS 
 
 ## 🏗️ Modular Architecture
 
-This repository uses a **Fragmented Dotbot System** to scale cleanly:
+This repository uses a **Fragmented Mise System** to scale cleanly:
 
 ```text
 ├── meta/
-│   ├── configs/   # Isolated YAML fragments (e.g., nvim.yaml, zsh.yaml)
-│   └── profiles/  # OS profiles combining fragments (mac, ubuntu, wsl)
+│   ├── base.toml      # Baseline [dotfiles] settings (symlink directory)
+│   ├── configs/       # Isolated TOML fragments (e.g., nvim.toml, zsh.toml)
+│   └── profiles/      # OS profiles combining fragments (mac, ubuntu, wsl)
 ├── config/        # Source dotfiles symlinked to your system
 ├── bin/           # Custom CLI utilities
 └── setups/        # Bootstrap OS-level dependency installers
 ```
 
-- **`meta/configs/`**: Standalone YAML fragments for individual tools (e.g., `nvim.yaml`, `zsh.yaml`).
+- **`meta/base.toml`**: Baseline Mise `[dotfiles]` settings shared across all profiles.
+- **`meta/configs/`**: Standalone TOML fragments for individual tools (e.g., `nvim.toml`, `zsh.toml`).
 - **`meta/profiles/`**: Environment definitions that list which fragments to apply.
 - **`justfile`**: The cross-platform command center for all maintenance tasks.
 

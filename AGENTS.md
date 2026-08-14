@@ -1,16 +1,17 @@
 # GEMINI.md - Dotfiles Context & Instructions
 
-This repository contains a modular, cross-platform **dotfiles** system managed with **Dotbot** and automated via **just**. It supports macOS, Arch Linux, Ubuntu/WSL, and Windows.
+This repository contains a modular, cross-platform **dotfiles** system managed with **Mise `[dotfiles]`** and automated via **just**. It supports macOS, Arch Linux, Ubuntu/WSL, and Windows.
 
 ---
 
 ## 🎯 Project Overview
 
-- **Core Tool**: [Dotbot](https://github.com/anishathalye/dotbot) (git submodule).
+- **Core Tool**: [Mise `[dotfiles]`](https://mise.jdx.dev/) — built-in dotfiles manager that creates symlinks and runs hooks from TOML config fragments.
 - **Architecture**: **Fragmented Configuration**.
-  - **Fragments**: Individual tool configs in `meta/configs/*.yaml`.
-  - **Profiles**: Environment-specific lists in `meta/profiles/` (e.g., `mac`, `server`, `ubuntu`, `wsl`).
-  - **Unified Deployment**: `install-profile.sh` merges fragments into a single Dotbot execution for speed.
+  - **Baseline**: `meta/base.toml` provides default settings (e.g., symlink directory).
+  - **Fragments**: Individual tool configs in `meta/configs/*.toml`.
+  - **Profiles**: Environment-specific lists in `meta/profiles/` (e.g., `mac`, `server`, `ubuntu`, `wsl`, `windows`).
+  - **Unified Deployment**: `just install <profile>` merges baseline + profile fragments into a single Mise execution.
 - **Tech Stack Highlights**:
   - **Shell**: Zsh managed by **Antidote**.
   - **Editor**: Neovim (rafi/vim-config distribution).
@@ -45,7 +46,7 @@ This repository contains a modular, cross-platform **dotfiles** system managed w
 
 ### 3. Development
 
-- **New Config**: Add a YAML fragment to `meta/configs/` and add its name to relevant profiles in `meta/profiles/`.
+- **New Config**: Add a TOML fragment to `meta/configs/` and add its name to relevant profiles in `meta/profiles/`.
 - **Commits**: Use `just commit` for interactive conventional commit prompts.
 - **Versioning**:
   - `just change`: Create a new changeset.
@@ -66,8 +67,9 @@ This repository contains a modular, cross-platform **dotfiles** system managed w
 
 ## 📂 Directory Structure
 
-- `config/`: Source configuration files (symlinked by Dotbot).
-- `meta/configs/`: Dotbot YAML fragments for specific tools.
+- `config/`: Source configuration files (symlinked by Mise).
+- `meta/base.toml`: Baseline Mise `[dotfiles]` settings (e.g., symlink directory).
+- `meta/configs/`: Mise TOML fragments for specific tools.
 - `meta/profiles/`: Definitions of system-wide profiles.
 - `setups/`: OS-specific bootstrap and package installation scripts.
 - `bin/`: Custom helper scripts and CLI utilities.
@@ -77,8 +79,8 @@ This repository contains a modular, cross-platform **dotfiles** system managed w
 
 ## 💡 Agent Instructions
 
-- **Adding Fragments**: Always check `meta/configs/` first. Follow the pattern in `meta/configs/nvim.yaml`.
+- **Adding Fragments**: Always check `meta/configs/` first. Follow the pattern in `meta/configs/nvim.toml`.
 - **Shell Scripts**: Must include `set -euo pipefail` and pass `shellcheck`.
 - **Modularity**: Prefer small, reusable fragments over large, monolithic files.
-- **Verification**: When suggesting changes to deployment logic, use `./install-profile.sh --dry-run` to verify.
-- **Submodules**: Remember that `dotbot` and some configs are submodules; use `git submodule` commands when necessary.
+- **Verification**: When suggesting changes to deployment logic, use `just dry-run <profile>` to verify.
+- **Submodules**: Some configs are submodules; use `git submodule` commands when necessary.
