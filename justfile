@@ -25,17 +25,14 @@ post-install profile:
 
     # 1. Bat cache 构建
     case "{{profile}}" in
-      mac|server|wsl)
+      mac|server|wsl|arch)
         command -v bat >/dev/null 2>&1 && bat cache --build || true
-        ;;
-      ubuntu)
-        command -v batcat >/dev/null 2>&1 && batcat cache --build || true
         ;;
     esac
 
     # 2. Tmux 插件初始化
     case "{{profile}}" in
-      mac|server|ubuntu|wsl)
+      mac|server|arch|wsl)
         if command -v tmux >/dev/null 2>&1 && [ -f "$DOTFILES/config/tmux/config.sh" ]; then
           bash "$DOTFILES/config/tmux/config.sh" || true
         fi
@@ -52,18 +49,13 @@ post-install profile:
       bash "$DOTFILES/config/zellij/setup.sh" || true
     fi
 
-# Deploy a system profile (e.g., just install mac)
+# Deploy a system profile (e.g., just install mac / just install arch)
 [group('install')]
 install profile="mac": init-dirs
     #!/usr/bin/env bash
     set -euo pipefail
     DOTFILES="{{justfile_directory()}}"
-    CONFIGS=$(grep -vE '^\s*(#|$)' "$DOTFILES/meta/profiles/{{profile}}" \
-      | sed "s|^|$DOTFILES/meta/configs/|" \
-      | sed 's|$|.toml|' \
-      | tr '\n' ':' \
-      | sed 's/:$//')
-    MISE_OVERRIDE_CONFIG_FILENAMES="$DOTFILES/meta/base.toml:${CONFIGS}" \
+    MISE_OVERRIDE_CONFIG_FILENAMES="$DOTFILES/meta/{{profile}}.toml" \
       mise bootstrap dotfiles apply --yes
     just post-install {{profile}}
     just check-links
@@ -74,37 +66,9 @@ dry-run profile="mac":
     #!/usr/bin/env bash
     set -euo pipefail
     DOTFILES="{{justfile_directory()}}"
-    CONFIGS=$(grep -vE '^\s*(#|$)' "$DOTFILES/meta/profiles/{{profile}}" \
-      | sed "s|^|$DOTFILES/meta/configs/|" \
-      | sed 's|$|.toml|' \
-      | tr '\n' ':' \
-      | sed 's/:$//')
-    MISE_OVERRIDE_CONFIG_FILENAMES="$DOTFILES/meta/base.toml:${CONFIGS}" \
+    MISE_OVERRIDE_CONFIG_FILENAMES="$DOTFILES/meta/{{profile}}.toml" \
       mise bootstrap dotfiles apply --dry-run --verbose
 
-# Install standalone configurations (e.g., just standalone nvim zsh)
-[group('install')]
-standalone *configs:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    DOTFILES="{{justfile_directory()}}"
-    CONFIG_LIST=""
-    for cfg in {{configs}}; do
-      CONFIG_LIST="${CONFIG_LIST:+$CONFIG_LIST:}$DOTFILES/meta/configs/${cfg}.toml"
-    done
-    MISE_OVERRIDE_CONFIG_FILENAMES="$DOTFILES/meta/base.toml${CONFIG_LIST:+:$CONFIG_LIST}" \
-      mise bootstrap dotfiles apply --yes
-
-# --- 🧪 Testing ---
-
-# Test the Ubuntu setup in an isolated Docker container
-[group('test')]
-test-ubuntu:
-    docker run --rm -it \
-        -v {{justfile_directory()}}:/root/.dotfiles \
-        -w /root/.dotfiles \
-        ubuntu:latest \
-        bash -c "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y git sudo curl tzdata ca-certificates && ./setups/setup.sh ubuntu && just install ubuntu && zsh"
 
 # Update all submodules and perform full system maintenance (Topgrade)
 [group('maint')]
