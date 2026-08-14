@@ -1,2 +1,0 @@
-[dotfiles]
-"~/.config/htop/htoprc" = { source = "~/.dotfiles/config/htop/htoprc" }

@@ -1,2 +1,0 @@
-[dotfiles]
-"~/.config/nvim/lua/plugins/user-plugins.lua" = { source = "~/.dotfiles/config/nvim/user-plugins.lua" }

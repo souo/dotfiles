@@ -1,2 +1,0 @@
-[dotfiles]
-"~/.config/atuin/config.toml" = { source = "~/.dotfiles/config/atuin/config.toml" }

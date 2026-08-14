@@ -1,2 +1,0 @@
-[dotfiles]
-"~/.config/aerospace/aerospace.toml" = { source = "~/.dotfiles/config/aerospace/aerospace.toml" }

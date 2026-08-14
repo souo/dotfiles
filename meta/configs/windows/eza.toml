@@ -1,2 +1,0 @@
-[dotfiles]
-"~/.config/eza/theme.yml" = { source = "~/.dotfiles/config/eza/catppuccin-mocha.yml" }

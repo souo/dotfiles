@@ -1,2 +1,0 @@
-[dotfiles]
-"~/.config/ghostty/config.ghostty" = { source = "~/.dotfiles/config/terminals/ghostty/config.ghostty" }

@@ -1,3 +1,0 @@
-[dotfiles]
-"~/.config/fastfetch/config.jsonc" = { source = "~/.dotfiles/config/fastfetch/config_mac.jsonc" }
-"~/.config/fastfetch/logos" = { source = "~/.dotfiles/config/fastfetch/logos" }

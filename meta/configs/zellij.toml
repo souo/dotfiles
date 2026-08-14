@@ -1,4 +1,0 @@
-[dotfiles]
-"~/.config/zellij/config.kdl" = { source = "~/.dotfiles/config/zellij/config.kdl" }
-"~/.config/zellij/layouts/vibe.kdl" = { source = "~/.dotfiles/config/zellij/vibe.kdl" }
-"~/.config/zellij/layouts/vibe.swap.kdl" = { source = "~/.dotfiles/config/zellij/vibe.swap.kdl" }

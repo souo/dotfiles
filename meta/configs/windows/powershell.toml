@@ -1,2 +1,0 @@
-[dotfiles]
-"~/Documents/PowerShell/Profile.ps1" = { source = "~/.dotfiles/Windows/PowerShell/Profile.ps1" }

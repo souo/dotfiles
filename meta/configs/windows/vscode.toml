@@ -1,2 +1,0 @@
-[dotfiles]
-"~/AppData/Roaming/Code/User/settings.json" = { source = "~/.dotfiles/vscode/settings.json" }

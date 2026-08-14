@@ -1,2 +1,0 @@
-[dotfiles]
-"~/.npmrc" = { source = "~/.dotfiles/config/.npmrc" }

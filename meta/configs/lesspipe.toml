@@ -1,2 +1,0 @@
-[dotfiles]
-"~/.lessfilter" = { source = "~/.dotfiles/config/lesspipe/lessfilter" }

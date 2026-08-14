@@ -1,2 +1,0 @@
-[dotfiles]
-"~/.editorconfig" = { source = "~/.dotfiles/config/editorconfig/.editorconfig" }

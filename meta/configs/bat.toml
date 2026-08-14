@@ -1,2 +1,0 @@
-[dotfiles]
-"~/.config/bat/config" = { source = "~/.dotfiles/config/bat/config" }

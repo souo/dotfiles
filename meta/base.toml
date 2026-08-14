@@ -1,3 +1,0 @@
-[settings]
-dotfiles.root = "~/.dotfiles"
-dotfiles.default_mode = "symlink"

@@ -1,2 +1,0 @@
-[dotfiles]
-"~/Appdata/Local/volta/hooks.json" = { source = "~/.dotfiles/config/volta/hooks.json" }

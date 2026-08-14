@@ -1,2 +1,0 @@
-[dotfiles]
-"~/.config/wezterm" = { source = "~/.dotfiles/config/terminals/wezterm" }

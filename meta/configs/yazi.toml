@@ -1,4 +1,0 @@
-[dotfiles]
-"~/.config/yazi/package.toml" = { source = "~/.dotfiles/config/yazi/package.toml" }
-"~/.config/yazi/theme.toml" = { source = "~/.dotfiles/config/yazi/theme.toml" }
-"~/.config/yazi/yazi.toml" = { source = "~/.dotfiles/config/yazi/yazi.toml" }

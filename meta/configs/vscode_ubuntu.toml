@@ -1,2 +1,0 @@
-[dotfiles]
-"~/.config/Code/User/settings.json" = { source = "~/.dotfiles/vscode/settings.common.json" }

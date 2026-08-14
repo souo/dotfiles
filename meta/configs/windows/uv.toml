@@ -1,2 +1,0 @@
-[dotfiles]
-"~/Appdata/Roaming/uv/uv.toml" = { source = "~/.dotfiles/config/uv/uv.toml" }
