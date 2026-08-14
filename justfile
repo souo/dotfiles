@@ -90,9 +90,9 @@ standalone *configs:
     DOTFILES="{{justfile_directory()}}"
     CONFIG_LIST=""
     for cfg in {{configs}}; do
-      CONFIG_LIST="${CONFIG_LIST}:$DOTFILES/meta/configs/${cfg}.toml"
+      CONFIG_LIST="${CONFIG_LIST:+$CONFIG_LIST:}$DOTFILES/meta/configs/${cfg}.toml"
     done
-    MISE_OVERRIDE_CONFIG_FILENAMES="$DOTFILES/meta/base.toml${CONFIG_LIST}" \
+    MISE_OVERRIDE_CONFIG_FILENAMES="$DOTFILES/meta/base.toml${CONFIG_LIST:+:$CONFIG_LIST}" \
       mise bootstrap dotfiles apply --yes
 
 # --- 🧪 Testing ---
@@ -104,7 +104,7 @@ test-ubuntu:
         -v {{justfile_directory()}}:/root/.dotfiles \
         -w /root/.dotfiles \
         ubuntu:latest \
-        bash -c "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y git sudo curl python3 tzdata ca-certificates && ./setups/setup.sh ubuntu && just install ubuntu && zsh"
+        bash -c "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y git sudo curl tzdata ca-certificates && ./setups/setup.sh ubuntu && just install ubuntu && zsh"
 
 # Update all submodules and perform full system maintenance (Topgrade)
 [group('maint')]

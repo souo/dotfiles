@@ -5,7 +5,6 @@ lazygit
 editorconfig
 fastfetch
 bat_ubuntu
-tmux
 zsh
 tealdeer
 nvim

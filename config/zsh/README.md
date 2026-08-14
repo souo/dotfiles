@@ -26,10 +26,10 @@ config/zsh/
 
 ## 🛠️ 安装与部署
 
-本配置通过 **Dotbot** 自动管理。在项目根目录下运行以下命令即可：
+本配置通过 **Mise** 自动管理。在项目根目录下运行以下命令即可：
 
 ```bash
-./install-standlore.sh zsh
+just standalone zsh
 ```
 
 ### 插件管理 (Antidote)

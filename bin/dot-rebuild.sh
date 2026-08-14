@@ -16,6 +16,6 @@ DOTFILES_ROOT="$HOME/.dotfiles"
 
 echo "🚀 Running Dotfiles Dry-run (mac profile)..."
 cd "$DOTFILES_ROOT"
-./install-profile.sh --dry-run mac
+just dry-run mac
 
 echo -e "\n✅ Check complete!"

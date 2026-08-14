@@ -27,7 +27,7 @@ just nvim-reinstall
 
 ## How it works
 
-1. **Dotbot** 链接 `user-plugins.lua` 到 `~/.config/nvim/lua/plugins/`
+1. **Mise** 链接 `user-plugins.lua` 到 `~/.config/nvim/lua/plugins/`
 2. **config.sh** 克隆 [rafi/vim-config](https://github.com/rafi/vim-config) 到 `~/.config/nvim`
 3. vim-config 自动加载 `lua/plugins/` 目录下的所有插件配置
 
