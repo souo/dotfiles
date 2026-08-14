@@ -31,18 +31,20 @@ Deploy environment-specific configurations using the unified task runner:
 # macOS
 just install mac
 
-# Arch Linux (Headless/Server)
+# Arch Linux (Desktop)
+just install arch
+
+# Headless / Server (Linux)
 just install server
 
-# Ubuntu / WSL 2
-just install ubuntu
+# WSL (Windows Subsystem for Linux)
 just install wsl
 
 # Windows
 just install windows
 ```
 
-> **Pro Tip**: Use `just dry-run <profile>` to preview changes. Run `just standalone nvim` to install only specific configurations.
+> **Pro Tip**: Use `just dry-run <profile>` to preview changes without applying them.
 
 ---
 
@@ -126,9 +128,9 @@ just nvim-health      # Check health status
 - `<S-h>/<S-l>` - Previous/Next buffer
 - `<S-q>` - Close buffer
 
-### ⚡ Unified Configuration
+### ⚡ Flat Platform Configuration
 
-The `justfile` recipes merge the baseline (`meta/base.toml`) with profile-specific TOML fragments into a single Mise execution, making deployment fast and atomic.
+The `justfile` recipes deploy self-contained platform configs (`meta/<platform>.toml`) in a single Mise execution, making deployment fast, direct, and transparent.
 
 ---
 
@@ -169,21 +171,21 @@ To keep your sensitive information safe and secure, this repository uses **SOPS 
 
 ## 🏗️ Modular Architecture
 
-This repository uses a **Fragmented Mise System** to scale cleanly:
+This repository uses a **Flat Platform Configuration** with Mise `[dotfiles]`:
 
 ```text
-├── meta/
-│   ├── base.toml      # Baseline [dotfiles] settings (symlink directory)
-│   ├── configs/       # Isolated TOML fragments (e.g., nvim.toml, zsh.toml)
-│   └── profiles/      # OS profiles combining fragments (mac, ubuntu, wsl)
+├── meta/          # Platform-specific Mise [dotfiles] configurations
+│   ├── arch.toml      # Arch Linux desktop configuration
+│   ├── mac.toml       # macOS configuration
+│   ├── server.toml    # Linux server/headless configuration
+│   ├── windows.toml   # Windows native configuration
+│   └── wsl.toml       # WSL configuration
 ├── config/        # Source dotfiles symlinked to your system
 ├── bin/           # Custom CLI utilities
 └── setups/        # Bootstrap OS-level dependency installers
 ```
 
-- **`meta/base.toml`**: Baseline Mise `[dotfiles]` settings shared across all profiles.
-- **`meta/configs/`**: Standalone TOML fragments for individual tools (e.g., `nvim.toml`, `zsh.toml`).
-- **`meta/profiles/`**: Environment definitions that list which fragments to apply.
+- **`meta/<platform>.toml`**: Direct Mise `[dotfiles]` configurations for each operating system / environment.
 - **`justfile`**: The cross-platform command center for all maintenance tasks.
 
 ---

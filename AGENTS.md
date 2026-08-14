@@ -1,17 +1,15 @@
 # GEMINI.md - Dotfiles Context & Instructions
 
-This repository contains a modular, cross-platform **dotfiles** system managed with **Mise `[dotfiles]`** and automated via **just**. It supports macOS, Arch Linux, Ubuntu/WSL, and Windows.
+This repository contains a modular, cross-platform **dotfiles** system managed with **Mise `[dotfiles]`** and automated via **just**. It supports macOS, Arch Linux, Headless/Server Linux, WSL, and Windows.
 
 ---
 
 ## 🎯 Project Overview
 
-- **Core Tool**: [Mise `[dotfiles]`](https://mise.jdx.dev/) — built-in dotfiles manager that creates symlinks and runs hooks from TOML config fragments.
-- **Architecture**: **Fragmented Configuration**.
-  - **Baseline**: `meta/base.toml` provides default settings (e.g., symlink directory).
-  - **Fragments**: Individual tool configs in `meta/configs/*.toml`.
-  - **Profiles**: Environment-specific lists in `meta/profiles/` (e.g., `mac`, `server`, `ubuntu`, `wsl`, `windows`).
-  - **Unified Deployment**: `just install <profile>` merges baseline + profile fragments into a single Mise execution.
+- **Core Tool**: [Mise `[dotfiles]`](https://mise.jdx.dev/) — built-in dotfiles manager that creates symlinks and runs hooks from TOML config files.
+- **Architecture**: **Flat Platform Configuration**.
+  - **Platform Configs**: Self-contained configuration files in `meta/<platform>.toml` (e.g., `mac.toml`, `arch.toml`, `server.toml`, `windows.toml`, `wsl.toml`).
+  - **Unified Deployment**: `just install <profile>` deploys platform configs directly via `MISE_OVERRIDE_CONFIG_FILENAMES`.
 - **Tech Stack Highlights**:
   - **Shell**: Zsh managed by **Antidote**.
   - **Editor**: Neovim (rafi/vim-config distribution).
@@ -28,12 +26,11 @@ This repository contains a modular, cross-platform **dotfiles** system managed w
 - **Bootstrap**: Run `just bootstrap` to install system dependencies and initialize submodules.
 - **Deploy Profile**:
   - macOS: `just install mac`
-  - Arch Linux: `just install server`
-  - Ubuntu: `just install ubuntu`
+  - Arch Linux: `just install arch`
+  - Headless/Server: `just install server`
   - WSL: `just install wsl`
   - Windows: `just install windows`
 - **Dry-run**: `just dry-run <profile>` to preview changes without applying them.
-- **Standalone**: `just standalone <config> [extra...]` (e.g., `just standalone nvim zsh`).
 
 ### 2. Maintenance & Updates
 
@@ -46,7 +43,7 @@ This repository contains a modular, cross-platform **dotfiles** system managed w
 
 ### 3. Development
 
-- **New Config**: Add a TOML fragment to `meta/configs/` and add its name to relevant profiles in `meta/profiles/`.
+- **Config Management**: Add or update link mappings directly within the appropriate platform file in `meta/<platform>.toml`.
 - **Commits**: Use `just commit` for interactive conventional commit prompts.
 - **Versioning**:
   - `just change`: Create a new changeset.
@@ -68,9 +65,7 @@ This repository contains a modular, cross-platform **dotfiles** system managed w
 ## 📂 Directory Structure
 
 - `config/`: Source configuration files (symlinked by Mise).
-- `meta/base.toml`: Baseline Mise `[dotfiles]` settings (e.g., symlink directory).
-- `meta/configs/`: Mise TOML fragments for specific tools.
-- `meta/profiles/`: Definitions of system-wide profiles.
+- `meta/`: Platform-specific Mise `[dotfiles]` configuration files (`mac.toml`, `arch.toml`, `server.toml`, `windows.toml`, `wsl.toml`).
 - `setups/`: OS-specific bootstrap and package installation scripts.
 - `bin/`: Custom helper scripts and CLI utilities.
 - `.lefthook/`: Git hook configurations for quality control.
@@ -79,8 +74,7 @@ This repository contains a modular, cross-platform **dotfiles** system managed w
 
 ## 💡 Agent Instructions
 
-- **Adding Fragments**: Always check `meta/configs/` first. Follow the pattern in `meta/configs/nvim.toml`.
+- **Adding / Updating Configs**: Edit platform files directly in `meta/` (e.g., `meta/mac.toml`, `meta/arch.toml`). Keep symlink definitions clean and relative.
 - **Shell Scripts**: Must include `set -euo pipefail` and pass `shellcheck`.
-- **Modularity**: Prefer small, reusable fragments over large, monolithic files.
 - **Verification**: When suggesting changes to deployment logic, use `just dry-run <profile>` to verify.
 - **Submodules**: Some configs are submodules; use `git submodule` commands when necessary.

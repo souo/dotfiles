@@ -16,7 +16,7 @@ config/nvim/
 运行安装：
 
 ```bash
-just standalone nvim
+just install mac  # 或对应系统 profile: arch, server, wsl, windows
 ```
 
 或重新安装（备份旧配置）：

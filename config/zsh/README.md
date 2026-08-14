@@ -29,7 +29,7 @@ config/zsh/
 本配置通过 **Mise** 自动管理。在项目根目录下运行以下命令即可：
 
 ```bash
-just standalone zsh
+just install mac  # 或对应系统 profile: arch, server, wsl, windows
 ```
 
 ### 插件管理 (Antidote)
