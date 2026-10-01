@@ -1,7 +1,7 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "0be29a913ad6"
-hash = "fbb53c3c04f816d737f9f4b1d29f3310"
+rev = "33dde2872cee"
+hash = "347cc6b190eb0c2fd60513cc7ae37412"
 
 [[plugin.deps]]
 use = "Lil-Dank/lazygit"
@@ -15,8 +15,8 @@ hash = "c238595c801caa4f28553b9af8cf8804"
 
 [[plugin.deps]]
 use = "boydaihungst/mediainfo"
-rev = "e079a001f4fe"
-hash = "8dd8bc3484547390ba50dfa58d7436b0"
+rev = "f1cec0b43a6b"
+hash = "88ff9c34996a06d1e49eedfe50fd33b3"
 
 [flavor]
 deps = []

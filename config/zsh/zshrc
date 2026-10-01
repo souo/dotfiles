@@ -181,3 +181,25 @@ setopt INTERACTIVE_COMMENTS # Allow comments in interactive shell
 #     fastfetch
 # fi
 
+
+# QODERCN_DISPATCHER_PATH v1
+path=("$HOME/.qoder-cn/entry" ${path:#"$HOME/.qoder-cn/entry"})
+export PATH
+# END QODERCN_DISPATCHER_PATH v1
+
+# Qwen Code PATH block begin
+export PATH='/Users/2z/.local/bin':$PATH
+# Qwen Code PATH block end
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/2z/.local/bin:$PATH"
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+zstyle ':completion:*' menu select
+
+# Unity CLI
+. "/Users/2z/.unity/env"

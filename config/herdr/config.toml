@@ -1,7 +1,6 @@
 # Herdr Configuration
 # Docs: https://herdr.dev/zh-cn/docs/configuration/
 
-# 跳过首次运行引导流程
 onboarding = false
 
 # ===== Terminal Defaults =====
@@ -82,13 +81,35 @@ width = "80%"
 height = "80%"
 description = "Open nvim in popup"
 
-# ===== Theme =====
 [theme]
 name = "terminal"
-# 开启跟随终端/系统的明暗自动切换
-auto_switch = true
-light_name = "catppuccin-latte"
-dark_name = "catppuccin"
+
+[theme.custom]
+# 背景与容器（深炭黑）
+panel_bg = "#121417"
+surface0 = "#1e2228"
+surface1 = "#181b20"
+surface_dim = "#0d0e11"
+
+# 主色（克制清爽的薄荷青）
+accent = "#4ebd9e"
+
+# 边框与叠加层
+overlay0 = "#3e4753"
+overlay1 = "#586374"
+
+# 文本层
+text = "#e1e4ea"
+subtext0 = "#a8b1bd"
+
+# 语义与功能色
+mauve = "#b07cd6"
+green = "#4ebd9e"
+yellow = "#e0af68"
+red = "#e06c75"
+blue = "#61afef"
+teal = "#56b6c2"
+peach = "#ff9e64"
 
 # ===== UI =====
 [ui]

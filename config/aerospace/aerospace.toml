@@ -179,6 +179,11 @@ run = 'move-node-to-workspace 6'
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = 'move-node-to-workspace E'
 
+# workspace W: Ghostty
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = 'move-node-to-workspace W'
+
 # workspace E: WeChat
 [[on-window-detected]]
 if.app-id = 'com.tencent.xinWeChat'
